@@ -1,0 +1,78 @@
+doctype html
+head
+    // Title
+    title Ifemad Financials
+    // Required Meta Tag
+    meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='handheldfriendly' content='true')
+    meta(name='MobileOptimized' content='width')
+    meta(name='description' content='Mordenize')
+    meta(name='author' content='')
+    meta(name='keywords' content='Mordenize')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    // Favicon
+    link(rel='shortcut icon' type='image/png' href='/images/logos/favicon.png')
+    // Core Css
+    link#themeColors(rel='stylesheet' href='/css/style.min.css')
+// Preloader
+.preloader
+    img.lds-ripple.img-fluid(src='/images/logos/favicon.png' alt='loader')
+// Preloader
+.preloader
+    img.lds-ripple.img-fluid(src='/images/logos/favicon.png' alt='loader')
+// Body Wrapper
+#main-wrapper.page-wrapper(data-layout='vertical' data-sidebartype='full' data-sidebar-position='fixed' data-header-position='fixed')
+    .position-relative.overflow-hidden.radial-gradient.min-vh-100.d-flex.align-items-center.justify-content-center
+        .d-flex.align-items-center.justify-content-center.w-100
+            .row.justify-content-center.w-100
+                .col-md-8.col-lg-6.col-xxl-3
+                    .card.mb-0
+                        .card-body
+                            a.text-nowrap.logo-img.text-center.d-block.mb-5.w-100(href='/')
+                                img(src='/images/logo.png' wdth='180' alt='')
+                            if newUser 
+                                .alert.alert-success.text-center.mt-4
+                                    i.fa.fa-check-circle.fa-4x
+                                    br/ 
+                                    | Thank you for signing up with Ifemad. 
+                                    br/ A mail has been sent to you to verify your email address
+                            else
+                                form(method="post" action="/signup")
+                                    .row.mb-3
+                                        .col
+                                            label.form-label Firstname
+                                            input.form-control(type='text' name="firstname" aria-describedby='textHelp' Required)
+                                        .col 
+                                            label.form-label Lastname
+                                            input.form-control(type='text' name="lastname" aria-describedby='textHelp' Required)
+                                    .row.mb-3
+                                        .col
+                                            label.form-label(for='exampleInputEmail1') Email
+                                            input#exampleInputEmail1.form-control(type='email' name="email" aria-describedby='emailHelp' Required)
+                                        .col    
+                                            label.form-label Phone
+                                            input.form-control(type='text' name="phone" aria-describedby='textHelp' Required)
+                                    .row.mb-3
+                                        .col-6
+                                            label.form-label(for='') Password
+                                            input#password.form-control(type='password' name="password" Required)
+                                        .col-6
+                                            label.form-label(for='') Confirm Password
+                                            input.form-control(type='password' id='verify-password' Required)
+                                    button.btn.btn-primary.w-100.py-8.mb-4.rounded-2(type='submit') Sign Up
+                                    .d-flex.align-items-center
+                                        p.fs-4.mb-0.text-dark Already have an Account?
+                                        a.text-primary.fw-medium.ms-2(href='/login')
+                                            | Sign
+                                            | In
+// Import Js Files
+script(src='/libs/jquery/dist/jquery.min.js')
+script(src='/libs/simplebar/dist/simplebar.min.js')
+script(src='/libs/bootstrap/dist/js/bootstrap.bundle.min.js')
+// core files
+script(src='/js/app.min.js')
+script(src='/js/app.init.js')
+script(src='/js/app-style-switcher.js')
+script(src='/js/sidebarmenu.js')
+script(src='/js/custom.js')

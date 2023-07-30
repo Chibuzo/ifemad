@@ -1,0 +1,238 @@
+extends layout 
+
+block content 
+
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 Account Setting
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Account Setting
+                .col-3
+                    .text-center.mb-n5
+                        img.img-fluid.mb-n4(src='../../dist/images/breadcrumb/ChatBc.png' alt='')
+    .card
+        ul#pills-tab.nav.nav-pills.user-profile-tab(role='tablist')
+            li.nav-item(role='presentation')
+                button#pills-account-tab.nav-link.position-relative.rounded-0.active.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-account' type='button' role='tab' aria-controls='pills-account' aria-selected='true')
+                    i.ti.ti-user-circle.me-2.fs-6
+                    span.d-none.d-md-block Profile
+            li.nav-item(role='presentation')
+                button#pills-notifications-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-notifications' type='button' role='tab' aria-controls='pills-notifications' aria-selected='false')
+                    i.ti.ti-archive.me-2.fs-6
+                    span.d-none.d-md-block Documents
+            li.nav-item(role='presentation')
+                button#pills-bills-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-bills' type='button' role='tab' aria-controls='pills-bills' aria-selected='false')
+                    i.ti.ti-user.me-2.fs-6
+                    span.d-none.d-md-block Next of Kin
+            li.nav-item(role='presentation')
+                button#pills-security-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-security' type='button' role='tab' aria-controls='pills-security' aria-selected='false')
+                    i.ti.ti-lock.me-2.fs-6
+                    span.d-none.d-md-block Security
+        .card-body
+            #pills-tabContent.tab-content
+                #pills-account.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-account-tab' tabindex='0')
+                    .row
+                        .col-12.mb-5
+                            .card.w-100.position-relative.overflow-hidden.mb-0
+                                .card-body.p-4
+                                    h5.card-title.fw-semibold Personal Details
+                                    p.card-subtitle.mb-4
+                                        | To change your personal detail , edit and
+                                        | save from
+                                        | here
+                                    form(method="post" action="/user/update").form-update
+                                        .row.mb-4
+                                            .col
+                                                label.form-label.fw-semibold First Name
+                                                input.form-control(type='text' name="firstname" value=`${user.firstname}` placeholder='John')
+                                            .col
+                                                label.form-label.fw-semibold Last Name
+                                                input.form-control(type='text' name="lastname" value=`${user.lastname}` placeholder='Doe')
+                                            .col
+                                                label.form-label.fw-semibold Middle Name
+                                                input.form-control(type='text' name="middlename" value=`${user.middlename || ''}` placeholder='Optional')
+
+                                        .row.mb-4
+                                            .col
+                                                label.form-label.fw-semibold Email
+                                                input.form-control(type='email' name="email" value=`${user.email}` disabled)
+                                            .col
+                                                label.form-label.fw-semibold Phone
+                                                input.form-control(type='text' value=`${user.phone}` disabled)
+
+                                        .row.mb-4
+                                            .col 
+                                                label.form-label.fw-semibold(for='exampleInputPassword1') Force
+                                                select.form-select(aria-label='Default select example' name="force")
+                                                    option(value="") - Force -
+                                                    option(value="army") Army
+                                            .col
+                                                label.form-label.fw-semibold Current Rank
+                                                input.form-control(type='text' name="rank" value=`${user.rank}` placeholder='Captain')
+
+                                        .row.mb-4 
+                                            .col
+                                                label.form-label.fw-semibold(for='exampleInputPassword1') Address
+                                                input#exampleInputtext.form-control(type='text' name="address" value=`${user.address}` placeholder='814 Lugbe Street, 120065, FCT')
+
+                                        .col-12
+                                            .d-flex.align-items-center.justify-content-end.mt-4.gap-3
+                                                button.btn.btn-primary(type="submit") Save
+                                                    button.btn.btn-light-danger.text-danger Cancel
+
+                        .col-lg-6.d-flex.align-items-stretch
+                            .card.w-100.position-relative.overflow-hidden
+                                .card-body.p-4
+                                    h5.card-title.fw-semibold Change Profile
+                                    p.card-subtitle.mb-4 Use a photograph in uniform
+                                    .text-center
+                                        img.img-fluid.rounded-circle(src='/images/profile/user-6.jpg' alt='' width='120' height='120')
+                                        .d-flex.align-items-center.justify-content-center.my-4.gap-3
+                                            button.btn.btn-primary Upload
+                                            button.btn.btn-outline-danger Reset
+                                        p.mb-0 Allowed JPG, GIF or PNG.
+                        .col-lg-6.d-flex.align-items-stretch
+                            .card.w-100.position-relative.overflow-hidden
+                                .card-body.p-4
+                                    h5.card-title.fw-semibold Change Password
+                                    p.card-subtitle.mb-4
+                                        | To change your password please confirm
+                                        | here
+                                    form(method="post" action="/user/")
+                                        .mb-4
+                                            label.form-label.fw-semibold(for='exampleInputPassword1')
+                                                | Current
+                                                | Password
+                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                                        .mb-4
+                                            label.form-label.fw-semibold(for='exampleInputPassword1')
+                                                | New
+                                                | Password
+                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                                        div
+                                            label.form-label.fw-semibold(for='exampleInputPassword1')
+                                                | Confirm
+                                                | Password
+                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
+
+                #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
+                    .row.justify-content-center
+                        .col-lg-9
+                            .card
+                                .card-body.p-4
+                                    h4.fw-semibold.mb-3 Official Documents
+                                    form(method="post" enctype="multipart/form-data" action='/user/documents').mb-7
+                                        .row.mb-4
+                                            .col-6
+                                                label.form-label.fw-semibold(for='exampleInputPassword1') Appointment Letter
+                                                input#formFile.form-control(type='file' name='appointmentLetter')
+                                            .col-6
+                                                label.form-label.fw-semibold(for='') Force ID
+                                                input#formFile.form-control(type='file' name='forceId')
+                                        .row.mb-4
+                                            .col-6
+                                                label.form-label.fw-semibold(for='') Birth Certificate
+                                                input#formFile.form-control(type='file' name='birthCertificate')
+                                            .col-6
+                                                label.form-label.fw-semibold(for='') Proof of Address
+                                                input#formFile.form-control(type='file' name='proofOfAddress')
+                                        .col-12
+                                            .d-flex.align-items-center.justify-content-end.gap-3
+                                                button.btn.btn-primary(type='submit') Save
+                                                button.btn.btn-light-danger.text-danger Cancel
+                #pills-bills.tab-pane.fade(role='tabpanel' aria-labelledby='pills-bills-tab' tabindex='0')
+                    .row.justify-content-center
+                        .col-lg-9
+                            .card
+                                .card-body.p-4
+                                    h4.fw-semibold.mb-3 Bio Data
+                                    form(method="post" action="/user/update")#form-beneficiary
+                                        .row.mb-3
+                                            .col
+                                                label.form-label.fw-semibold Full name
+                                                input.form-control(type='text' name='fullname' value=`${beneficiary.fullname}` placeholder='Full name')
+
+                                        .row.mb-3
+                                            .col
+                                                label.form-label.fw-semibold Email
+                                                input.form-control(type='email' name="email" value=`${beneficiary.email}` placeholder='Email')
+                                            .col
+                                                label.form-label.fw-semibold Phone
+                                                input.form-control(type='text' name='phone' value=`${beneficiary.phone}` placeholder='Phone')
+
+                                        .row.mb-3
+                                            .col
+                                                label.form-label.fw-semibold Date of Birth
+                                                input.form-control(type='date' name="dob" value=`${beneficiary.dob}` placeholder='Date of birth')
+                                            .col
+                                                label.form-label.fw-semibold Relationship
+                                                input.form-control(type='text' name='relationship' value=`${beneficiary.relationship}` placeholder='wife')
+
+                                        .row.mb-3 
+                                            .col
+                                                label.form-label.fw-semibold Address
+                                                input.form-control(type='text' name='address' value=`${beneficiary.address}` placeholder='Address')
+
+                                        .row.mb-4
+                                            .col
+                                                label.form-label.fw-semibold Bank
+                                                input.form-control(type='' name="bank" value=`${beneficiary.bank}` placeholder='')
+                                            .col
+                                                label.form-label.fw-semibold Account Number
+                                                input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber}` placeholder='Account Number')
+
+                                        .col-12
+                                            .d-flex.align-items-center.justify-content-end.gap-3
+                                                button(type="submit").btn.btn-primary Save
+                                                button.btn.btn-light-danger.text-danger Cancel
+                #pills-security.tab-pane.fade(role='tabpanel' aria-labelledby='pills-security-tab' tabindex='0')
+                    .row
+                        .col-lg-8
+                            .card
+                                .card-body.p-4
+                                    h4.fw-semibold.mb-3 Two-factor Authentication
+                                    .d-flex.align-items-center.justify-content-between.pb-7
+                                        p.mb-0
+                                            | Lorem ipsum, dolor sit amet consectetur adipisicing
+                                            | elit.
+                                            | Corporis sapiente sunt earum officiis laboriosam ut.
+                                        button.btn.btn-primary Enable
+
+block scriptBlock 
+    script.
+
+        const updateForms = document.getElementsByClassName("form-update");
+        const beneficiaryForm = document.getElementById("form-beneficiary");
+
+        for (let i = 0; i < updateForms.length; i++) {
+            updateForms[i].addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const data = new FormData(this);
+                const formData = serialize(data);
+                const res = await postForm("/user/update", formData);
+                if (res.status.trim() == 'success') {
+                    alert('done!')
+                } else {
+                    alert('wahala')
+                }
+            });
+        }
+
+        beneficiaryForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = new FormData(this);
+            const formData = serialize(data);
+            const res = await postForm("/user/beneficiaries", formData);
+            if (res.status.trim() == 'success') {
+                alert('done!')
+            } else {
+                alert('wahala')
+            }
+        });
+
+

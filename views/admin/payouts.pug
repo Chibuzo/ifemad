@@ -1,0 +1,71 @@
+extends layout 
+
+block content
+    section.content-header
+        h1 Withdrawals
+        
+    // Main content
+    section.content
+        .row
+            .col-md-12
+                .box
+                    .box-header.with-border
+                        h3.box-title Pay Outs
+                    .box-body
+                        table.table.table-striped
+                            thead
+                                tr
+                                    th Date
+                                    th Investor
+                                    th Balance
+                                    th Bank 
+                                    th Account #
+                                    th Amount
+                                    th Status
+                                    th Action
+                            tbody
+                                each trnx in withdrawals 
+                                    tr(id=`${trnx.id}`)
+                                        td= view.formatDate(trnx.createdAt)
+                                        td= trnx.User.fullname
+                                        td= '₦' + view.formatCurrency(trnx.balance)
+                                        td= trnx.bank 
+                                        td= trnx.account_number
+                                        td= '₦' + view.formatCurrency(trnx.amount) 
+                                        td= trnx.status
+                                        td
+                                            a.approve(title="Approve withdrawal" data-toggle="tooltip")
+                                                i.fa.fa-check.fa-lg(style="margin-right: 7px")
+                                            a.cancel(title="Cancel" data-toggle="tooltip")    
+                                                i.fa.fa-times.fa-lg   
+
+block scriptBlock 
+    script.
+        $(document).ready(function() {
+            $(".approve").click(function(e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure you want to approve the payout request?")) {
+                    const id = $(this).parents('tr').attr('id');
+                    $.post('/change-payout-status', { id, status: 'Approved' }, function(d) {
+                        if (d.status === true) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+
+
+            $(".cancel").click(function(e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure you want to cancel this payout request?")) {
+                    const id = $(this).parents('tr').attr('id');
+                    $.post('/change-payout-status', { id, status: 'Cancelled' }, function(d) {
+                        if (d.status === true) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        });

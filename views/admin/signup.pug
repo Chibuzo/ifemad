@@ -1,0 +1,53 @@
+extends ../layout 
+
+block content
+    div.container-fluid.primary-bg.text-white
+        div.row
+            div.col.text-center
+                h1.mt-5 Create New Administrator
+                br
+                br
+        div.row 
+            div.col
+                .container
+                    .row.mb-4.justify-content-md-center
+                        .col-md-7
+                            if newUser 
+                                div.alert.alert-success.text-center
+                                    i.fa.fa-check-circle.fa-4x
+                                    br/ 
+                                    | Thank you for signing up with Invest"N"Farm. 
+                                    br/ A mail has been sent to you to verify your email address
+                            else
+                                form(action="/admin/create", method="post")#signupForm
+                                    div.row.gx-5
+                                        div.col-md-6.col-sm-12.col-xs-12.mb-3
+                                            input.form-control.form-control-lg(type="text" name="fname" placeholder="First name" aria-label="First name" required=true)
+                                        div.col-md-6.col-sm-12.col-xs-12.mb-3
+                                            input.form-control.form-control-lg(type="text" name="lname" placeholder="Last name" aria-label="Last name" required=true)
+                                    div.row.gx-5
+                                        div.col-md-12.col-sm-12.col-xs-12.mb-3
+                                            input.form-control.form-control-lg(type="email" name="email" placeholder="Email" aria-label="Email" required=true)
+                                    div.row.gx-5
+                                        div.col-md-6.col-sm-12.col-xs-12.mb-3
+                                            input.form-control.form-control-lg#password(type="password" name="password" placeholder="Password" aria-label="Password" required=true)
+                                        div.col-md-6.col-sm-12.col-xs-12.mb-3
+                                            input.form-control.form-control-lg#confirm_password(type="password", name="confirm_password" placeholder="Confirm Password" aria-label="Confirm Password" required=true)    
+                                    .row.gy-3.justify-content-md-center.mb-5
+                                        .col-md-5.d-grid 
+                                            br/
+                                            button.btn.btn-success.btn-lg.btn-block(type="submit") Create New Admin 
+
+    script. 
+        document.querySelector("#signupForm").addEventListener("submit", function(e) {
+            const password = document.querySelector("#password").value;
+            const confirm_password = document.querySelector("#confirm_password").value;
+
+            if (password != confirm_password) {
+                e.preventDefault();
+                alert("Paswword doesn't match!");
+                document.querySelector("#confirm_password").focus();
+            }
+            return;
+        });            
+                                  

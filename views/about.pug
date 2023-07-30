@@ -1,0 +1,209 @@
+extends layout
+
+block StylesBlock 
+    style.
+        ul.custom, li.custom { list-style: disc; margin-left: 13px}
+
+block content 
+    section.banner-inner-sec(style="background-image:url('/images/about-bg.jpg')")
+        .banner-table
+            .banner-table-cell
+                .container
+                    .banner-inner-content
+                        h2.banner-inner-title ABOUT US
+
+    .container-fluid.secondary-bg.pt-5(style="margin-top: -7px")  
+        .container 
+            .row
+                .col-md-6.col-xs-12.mt-5
+                    h2 About Us 
+                    p.mb-5 We are an innovative digital agritech platform with focus on arable, pastoral farming and other agricultural operations in Africa.
+                        | We believe strongly that agriculture is one of the most secure and profitable businesses to invest in as we provide opportunities for everyone to engage in Agribusiness anytime and anywhere.
+
+                    h3.mt-4 OUR VALUE PROPOSITION 
+                    ul.custom
+                        li.custom <h5> High return on Investment</h5>
+                            p We offer a very competitive return on investments to our investors, not only offering above what our competitors offer but also offer, realistic returns that make our investors comfortable and loyal to our brand.
+
+                        li.custom <h5>Creative Business Models</h5>
+                            ul.custom 
+                                li.custom #[strong Sponsorship:] This is an innovative way we raise money to finance our projects.Our investors choose any of our products that resonate with them and monies are raised from them to finance the product. Investors get returns on their investment after the holding period which is the end of the lifecycle of the product.
+                                li.custom #[strong Co-Investing:] This is a model we have introduced to allow investors to co-invest on our products with family and friends. This model permits up to 5 investors to co-invest. The investment will be initiated by one of the investors that has an account with investnfarm and invitation to co-invest will be sent to others.
+                                li.custom #[strong Referral:] This business model allows our customers/investors to recommend people through word of mouth or a referral link generated from their dashboard to our brand. We do not only believe that  this is a way to get our loyal investors to help spread the word about our  brand, but we also use this model to reward our investors and the referred potential investors with incentives.
+                                li.custom #[strong Collective Ownership:] This model qualifies our investors for the ownership of product investment that has been made with us which could be in farm or trading commodities. The ownership can be in a medium or long term investment as the investors want. This model  is only open to our 100 club investors.
+
+                        br/
+                        li.custom <h5>Enhancing Food Production & Value Chain</h5>
+                            p We are not just contributing to food production. We engage in the five level process of food production Value chain, these levels include  #[strong our agricultural production, postharvest handling, processing, distribution/retail/service, and consumption.]
+
+                    //- p Invest”N”farm is an innovative digital agritech sponsorship platform focused on arable, pastoral farming and other agricultural operations in Africa. 
+                    //- p We are registered in Nigeria as Invest”N”farm limited, RC:1607086. We believe strongly that Agriculture is one of the most secured and profitable businesses to invest in as we provide opportunities to everyone to engage in Agribusiness anytime and on the go by investing in farms and trading in commodities. 
+                    //- p We make it very simple for our investors in Nigeria and all over the world to be able to invest in as little as possible and watch your investment grow. 
+                    //- p Our investments are 100% safe and risk free as we are fully insured. Join us on this journey as we build the economy together and make you smile to the bank. Welcome to a world of great Agricultural experience with Invest”N”farm!
+                    //- p Our agritech investment platform enables investors to invest through diverse creative investment models.
+
+                .col-md-6.col-xs-12.text-end.mt-5.pt-3
+                    img(src="images/partner.png" style="width: 100%")
+
+    //- section.servicev2-sec.section-padding.section-bg
+    //-     .container
+    //-         .row
+    //-             .col-lg-12
+    //-                 .section-title-item.section-title-v2-item
+    //-                     h2.section-title
+    //-                         em Our
+    //-                         |  Goals
+    //-                     h3.hidden-title OUR GOALS
+
+    //-         .row
+    //-             .col-lg-9.wow.fadeInUp(data-wow-duration='1.5s' data-wow-delay='400ms' style='visibility: visible; animation-duration: 1.5s; animation-delay: 400ms; animation-name: fadeInUp;')
+    //-                 .row
+    //-                     .col-md-6
+    //-                         .single-services-item
+    //-                             span.lnr.lnr-dinner
+    //-                             h3.xs-service-title Food Production
+    //-                             p To contribute to the existing collaborative food production in Africa and enhance participation in the achievement of global food security.
+    //-                     .col-md-6
+    //-                         .single-services-item
+    //-                             span.lnr.lnr-leaf
+    //-                             h3.xs-service-title Empower Farmers
+    //-                             p To empower and improve farmer’s efficiency and income with the use of tech-based input.
+    //-                     .col-md-6
+    //-                         .single-services-item
+    //-                             span.lnr.lnr-chart-bars
+    //-                             h3.xs-service-title Economic Growth
+    //-                             p To be a source of economic growth and financial income for investors through a realistic return on their Investment.
+    //-                     .col-md-6
+    //-                         .single-services-item
+    //-                             span.lnr.lnr-briefcase
+    //-                             h3.xs-service-title Job Creation
+    //-                             p To contribute to job creation, strengthen food security for nations in Africa and encourage participation and investment in agriculture.
+    //-             .col-lg-3.align-self-center.wow.fadeInUp(data-wow-duration='1.5s' data-wow-delay='500ms' style='visibility: visible; animation-duration: 1.5s; animation-delay: 500ms; animation-name: fadeInUp;')
+    //-                 .why-choose-inner-img
+    //-                 img(src='/images/why-choose-us-inner.png' alt='')
+
+    section.team-sec.section-padding
+        .container
+            .row
+                .col-lg-12
+                    .section-title-item.section-title-v2-item
+                        h2.section-title
+                            | Meet The Team
+                        h3.hidden-title experts
+            .row
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/Oluyemi_Olu_Adeniran.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Oluyemi Olu-Adeniran 
+                        p Chief Executive Director
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/vicky.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Victorine Nonjang
+                        p Product Lead
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/Wasilat_Elegbede.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Wasilat Elegbede
+                        p Finance Lead
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/damilola.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Damilola Ademiju
+                        p Business Development Lead   
+
+            .row.mt-5
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/Romana_Munyavi.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Romana Munyavi
+                        p Logistics & Planning Lead
+
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/Collins_Akalonu.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Collins Akalonu
+                        p Product Process & Operations Lead
+
+                //- .col-lg-3.col-sm-6
+                //-     .single-team
+                //-         .team-img
+                //-             img(src='/images/Roseline_Adekunle.jpg' alt='')
+                //-             .team-social
+                //-                 a(href='#')
+                //-                     i.fa.fa-twitter
+                //-                 a(href='#')
+                //-                     i.fa.fa-linkedin
+                //-         h3 Roseline Adekunle
+                //-         p Marketing Lead
+
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/oludare.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Oludare Olorufemi 
+                        p Privacy & GDPR SME
+
+                .col-lg-3.col-sm-6
+                    .single-team
+                        .team-img
+                            img(src='/images/victor.jpg' alt='')
+                            .team-social
+                                a(href='#')
+                                    i.fa.fa-twitter
+                                a(href='#')
+                                    i.fa.fa-linkedin
+                        h3 Victor Ojetayo
+                        p Legal Advisor
+
+
+
+
+    section.ready-to-contact.section-padding(style='background: url(./images/ready-to-contact.jpg) no-repeat center center /cover')
+        .container
+            .col-lg-8.offset-lg-2
+                .ready-to-contact-content
+                    h2 Are you ready to start investing?
+                    p Sign up right away and choose from our carefully selected farm projects and invest, while we take care of your investments and profit
+                    a.xs-btn.fill(href='/signup') SIGN UP

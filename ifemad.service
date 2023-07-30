@@ -1,0 +1,19 @@
+[Unit]
+Description=Node.js INF Service   	#inf-server service
+After=network.target
+Requires=After=mysql.service       # Requires the mysql service to run first
+
+[Service]
+WorkingDirectory=/home/ubuntu/investNfarm
+ExecStart=npm start
+Restart=on-failure
+
+Environment=NODE_ENV=development PORT=80 DB_USER=chibuzo DB_PASSWORD=+Inf@invest1 DB_HOST=localhost DB_NAME=investnfarmDB
+
+
+[Install]
+WantedBy=multi-user.target
+
+#sudo nano /lib/systemd/system/farm.service
+#sudo systemctl daemon-reload
+# systemctl enable farm

@@ -1,0 +1,191 @@
+extends layout
+
+block content
+  section.xs-banner-sec.owl-carousel.banner-slider
+    .banner-slider-item.banner-item1(style='background-image: url(/images/banner-slider/slider_1.jpg);')
+      .slider-table
+        .slider-table-cell
+          .container
+            .row.align-items-center
+              .col-lg-10.offset-lg-1
+                .banner-content.text-center
+                  h2(style="font-size: 53px") A DIGITAL PLATFORM FOR AGRIBUSINESS
+                  p
+                    | Invest”N”farm is an innovative digital agritech sponsorship platform focused on arable, pastoral farming and other agricultural operations in Africa
+                  .xs-btn-wraper
+                    a.xs-btn(href='/signup')
+                      | Sign Up
+    .banner-slider-item.banner-item1(style='background-image: url(/images/banner-slider/slider_2.jpg);')
+      .slider-table
+        .slider-table-cell
+          .container
+            .row.align-items-center
+              .col-lg-10.offset-lg-1
+                .banner-content.text-center
+                  h2(style="font-size: 55px") INVEST IN FARMS...
+                  h3.text-white
+                    | Trade in Commodities           
+
+
+  section.about-sec.section-padding
+    .container
+      .row
+        .col-md-5.wow.fadeInUp.align-self-center(data-wow-delay='300ms' data-wow-duration='1.5s')
+          .about-content
+            h2.column-title
+              span.xs-title Overview
+              | Welcome to InvestNFarm!
+              p We are an innovative digital agritech platform with focus on arable, pastoral farming and other agricultural operations in Africa. 
+                | We believe strongly that agriculture is one of the most secure and profitable business to invest in, as we provide opportunities for everyone to engage in Agribusiness anytime and anywhere. We take the burden off our investors by managing all aspects of farming whilst they sit back and watch their money grow.
+
+
+        .col-md-7.align-self-center.wow.fadeInUp.d-none.d-sm-block(data-wow-delay='400ms' data-wow-duration='1.5s')
+          .about-video-item
+            .about-video-img
+              img(src='/images/corn.jpg' alt='')
+            img.about-img2(src='/images/about_back.jpg' alt='')
+
+  section.service-sec
+    .service-sec-wrapper.section-padding(style="background-color: rgba(255, 255, 255, 0.7);")
+      .container
+        .row
+          .col-lg-12
+            .section-title-item
+              h2.section-title
+                | HOW IT WORKS
+        .row.mt-4
+          .col-lg-3.col-sm-6.wow.fadeInUp(data-wow-delay='300ms' data-wow-duration='1.5s')
+            .single-service
+              .service-img
+                i.fa.fa-user-plus
+              h3.xs-service-title
+                a(href='/signup') SIGN UP
+              p
+                | Sign up for a complimentary Invest”N”Farm account to gain full access through profitable farmland investment opportunities in our user friendly portal.
+
+          .col-lg-3.col-sm-6.wow.fadeInUp(data-wow-delay='400ms' data-wow-duration='1.5s')
+            .single-service
+              .service-img
+                i.fa.fa-usd
+              h3.xs-service-title
+                a(href='/signup') INVEST
+              p
+                | Determine what best models fits your investment portfolio and invest. All opportunities have been carefully selected and offer high return possibilities.
+          .col-lg-3.col-sm-6.wow.fadeInUp(data-wow-delay='500ms' data-wow-duration='1.5s')
+            .single-service
+              .service-img
+                i.fa.fa-bullseye
+              h3.xs-service-title
+                | TRACK
+              p
+                | Congratulations you’re an investor! Invest”N”Farm manages all aspects of the farmland, from planting to harvesting to selling while you simply track your farm's progress online.
+
+          .col-lg-3.col-sm-6.wow.fadeInUp(data-wow-delay='600ms' data-wow-duration='1.5s')
+            .single-service
+              .service-img
+                i.fa.fa-handshake-o
+              h3.xs-service-title
+                | RECEIVE
+              p At the end of the product life cycle investors will receive their capital with their return on investment (ROI)
+
+                i.icon.icon-arrow-right
+
+  section.recent-work-sec.section-padding
+    .container
+      .row
+        .col-lg-12
+          .section-title-item
+            h2.section-title
+              |  PRODUCT PORTFOLIO
+
+      include includes/portfolios.pug
+
+      .row
+        .col-lg-12
+          .load-more-btn
+            a.xs-btn.fill(href='/projects') View More
+  section.why-choose-us-sec.section-bg
+    .why-choose-us-wrapper.section-padding(style="background-color: rgba(255, 255, 255, 0.7);")
+      .container
+        .row
+          .col-lg-12.wow.fadeInUp.align-self-center(data-wow-delay='400ms' data-wow-duration='1.5s')
+            .why-choose-content
+              h2.column-title.text-center
+                | WHY INVEST IN FARMLAND
+
+              .row
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green AN INDUSTRY THAT MATTERS
+                    p Ownership in a farm operation allows investors to learn about the many aspects that go into a real working farm and the hard work that goes into feeding the world.
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green DEMAND FOR FOOD
+                    p By 2050 the world population will grow to over 10 billion people. An additional 3 billion people will enter the middle class causing food demand to sky rocket.
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green MORE STABLE THAN STOCK MARKET
+                    p Since farmland is uncorrelated with most other major asset classes, it has proven to perform well during challenging economic conditions.
+
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green LONG TERM INVESTMENT STRATEGY
+                    p Farmland is an attractive, long-term investment that has the potential to provide relative resiliency to challenging economic conditions.
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green HISTORICAL RESILIENCE & POSITIVE RETURNS
+                    p Historical data reveals that farmland has been an extremely resilient asset class. The industry has seen positive returns generated every year since 1990, proving it to be one of the most stable asset classes over the past few decades.
+                .col-sm-4
+                  .single-why-choose-list
+                    h4.text-green HEDGE AGAINST INFLATION
+                    p Over time, farmland has proven to have a positive correlation with inflation. More so than bonds, the stock market, and even gold. On average, no investment offers a hedge against inflation like farmland.
+
+
+  section.latest-news-sec.section-padding
+    .container
+      .row
+        .col-lg-3.align-self-center.wow.fadeInUp(data-wow-delay='300ms' data-wow-duration='1.5s')
+          .latest-news-content
+            h2.column-title
+              | More reasons why you should invest in farmland
+
+        .col-lg-9
+          .row
+            .col-md-4.wow.fadeInUp(data-wow-delay='400ms' data-wow-duration='1.5s')
+              .single-latest-news
+                .single-news-content
+                  h3.xs-post-title
+                    | Supply & Demand in Favor of Farmland Investing
+                  p With a growing global population and shrinking, the laws of supply and demand are clearly in favor of farmland investing. As a result, farmland has consistently beat other asset classes over time.
+
+            .col-md-4.wow.fadeInUp(data-wow-delay='500ms' data-wow-duration='1.5s')
+              .single-latest-news
+                .single-news-content
+                  h3.xs-post-title
+                    | Social & Economic Benefits
+                  p Investing in farmland benefits the investor more than just in financial gains. An investment in agriculture has social and economical benefits that include keeping farmers in the business of farming, keeping the world fed and clothed, bringing jobs and success to a community and supporting family businesses.
+
+            .col-md-4.wow.fadeInUp(data-wow-delay='400ms' data-wow-duration='1.5s')
+              .single-latest-news
+                .single-news-content
+                  h3.xs-post-title
+                    | Connection to the Industry that Feeds the World
+                  p We believe that farmland is a different kind of asset. It's one that has so many interesting processes and produces a commodity that really matters; food. Visiting your piece of farmland and seeing it for yourself is a unique opportunity that we invite our investors to experience.									
+  section.call-to-action-sec
+    .container-fluid
+      .row
+        .col-lg-6.offset-lg-6.xs-padding-0.call-action-item
+          .call-to-action-content
+            h2.column-title.white
+              span Start Investing
+              br
+              | Now
+            p
+              | Sign up to begin, or view our available products
+            .call-to-btn
+              a.xs-btn.fill(href='/projects') Products
+              a.xs-btn(href='/signup') Sign Up
+  .xs-map-sec
+    .xs-maps-wraper
+      .map
+        iframe(src='https://maps.google.com/maps?width=100&height=600&hl=en&q=7%20Agoro%20Kessington%20Crescent&t=&z=13&ie=UTF8&iwloc=&output=embed')

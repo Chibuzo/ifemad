@@ -1,0 +1,129 @@
+extends layout 
+
+block StylesBlock 
+    style.
+        ol.custom {
+            counter-reset: item;               
+            list-style-type: none;
+            margin-left: -20px
+        }
+
+        li span { margin-left: 12px; }
+
+        ol.custom li::before {
+            counter-increment: item;
+            content: counters(item, ".") " ";
+        }
+        h4 {
+            margin-top: 30px;
+            font-size: 20px !important;
+        }
+
+block content
+    section.banner-inner-sec(style="background-image:url('/images/terms-of-service.jpg')")
+        .banner-table
+            .banner-table-cell
+                .container
+                    .banner-inner-content
+                        h2.banner-inner-title Privacy Policy
+                        ul.xs-breadcumb
+
+    section.xs-faq-sec.section-padding  
+        .container
+            .row
+                .col-md-12.px-5
+                    h4.text-center INVEST “N” FARM BUSINESS RESOURCES LIMITED PRIVACY POLICY
+
+                    p Invest “N” Farm respects your privacy and is committed to protecting your personal data when you visit our website regardless of where you visit it from and tell you about your privacy rights and how the Nigerian Data Protection Regulation (NDPR) protects you.
+
+                    p This Privacy Policy describes a user’s privacy rights regarding our collection, use, storage, sharing and protection of personal information.
+
+                    p This Privacy Policy applies to information collected and used by Invest “N” Farm Business Resources Limited (referred to as “Invest “N” Farm Business Resource Limited” or “We” or “Our” or “Us”). It applies to Our applications, websites, service, tools and other online products and services provided by Invest “N” Farm Business Resources Limited regardless of how they are accessed or used (“the Services”). 
+
+                    ol.custom 
+                        li <span> #[strong Scope and consent]
+                            ol.custom 
+                                li <span> This Privacy Policy applies to persons anywhere in the world who accesses our website or mobile in connection with the Services for all purposes (“Users”).
+                                li <span> As a user, you accept and consent to the terms of this Privacy Policy when you sign up for, access, or use any products, services, information, content, features, technologies or functions offered through Our Services or via the Our website and application.
+                                li <span> This Privacy Policy is intended to govern the use of the Services by Users (including, without limitation those who use these Services in the daily course of their trade, practice or business) unless otherwise agreed through contract.
+                                li <span> We may amend this Privacy Policy at any time by posting a revised version on Our website or as a link on the application. The revised version will become effective as of the published effective date. Furthermore, if any revised version includes a substantial change in terms, users shall be informed via a notice posted on the "Policy Updates" page of Our website or the application. 
+
+                        li <span> #[strong Collecting personal information]
+                            ol.custom
+                                li <span> We collect the following types of personal information in order to provide you with the use of the Services, and to help Us personalize and improve your experience.
+                                li <span> Automatic Information: When you use the Services, We collect and log other information sent to Us by your computer, application, mobile phone or other access device. Information sent to Us includes, but is not limited to, the following: device IP address, access dates and times, app features or pages viewed, app crashes and other system activity, type of browser, the third-party site or service you were using before interacting with Our Services, device ID or unique identifier, device type, geo-location information, computer and connection information, mobile network information, statistics on page views, traffic to and from the sites, referral URL, ad data, and standard web log data and other information. We also collect anonymous information through Our use of cookies and web beacons. 
+                                li <span> Provided Information: We may collect and store any information you provide Us when you use the Services, including when you add information on a web form, add or update your account information, participate in community discussions, chats, or dispute resolutions, or when you otherwise correspond with Us regarding the Services.
+                                li <span> When you use the Services, We also collect information about your interactions, transactions and your activities. In addition, if you open an application or web account or use the Services, We may collect the following types of information:
+                                li <span> Contact information, such as your name, address, phone, email and other similar information.
+                                li <span> Financial information, such as the full bank account numbers and/or credit card numbers that you link to your application or web account or give Us when you use the Services.
+                                li <span> We may also collect information from or about you from other sources, such as through your contact with Us, including Our customer care team, your results when you respond to a survey, your interactions with members of Invest “N” Farm Business Resources Limited or other companies (subject to their privacy policies and applicable law), and from other accounts We have reason to believe you control (whether in part or in whole).
+                                li <span> Additionally, for quality and training purposes or for its own protection, Invest “N” Farm Business Resource Limited may keep records of, or record its telephone conversations with you or anyone acting on your behalf.
+                                li <span> Third Party Sources: We may also obtain information about you from third parties such as credit bureaus and identity verification services.
+                                li <span> Users may also choose to provide Us with access to certain personal information stored by third parties such as social media sites or application stores. However, the information We may receive varies by site and is controlled by that site. By associating a third-party account managed by a third party with your Invest “N” Farm Business Resources Limited account and authorizing Invest “N” Farm Business Resources Limited to have access to this information, you agree that Invest “N” Farm Business Resources Limited may collect, store and use this information in accordance with this Privacy Policy.
+                                li <span> Authentication and Fraud Detection: In order to help protect you from fraud and misuse of your personal information, we may collect information about you and your interactions with the Services.
+                                li <span> Mobile Devices: We may offer you the ability to connect with the Services using a mobile device, either through a mobile application or via a mobile optimized website. The provisions of this Privacy Policy apply to all such mobile access and use of mobile devices.
+                                li <span> If you choose to link, create, or log in to your account with Us using another service  provider or social media service (e.g., Facebook), or if you engage with a separate app or website that uses Our application programming interface (“API”) (or whose API We use), We may receive information about you or your connections from that site or app
+                                li <span> When you download or use Our mobile applications, or access one of Our mobile optimized sites, we may receive information about your location and your mobile device, including a unique identifier for your device. We may use this information to provide you with location-based services, such as advertising, search results, and other personalized content. Most mobile devices allow you to control or disable location services in the device's setting's menu. If you have questions about how to disable your device's location services, we recommend you contact your mobile service carrier or the manufacture of your particular device.
+
+                        li <span> #[strong Using personal information]
+                            ol.custom 
+                                li <span> Invest “N” Farm Business Resources Limited collects personal information in order to provide users with a secure, smooth, efficient, and customized experience. Furthermore, the information collected may also be used to: provide the Services and customer support; process request, complete transactions and send notices about your request or transactions; verify your identity, including during account creation and password reset processes; resolve disputes, collect fees, and troubleshoot problems; manage risk, or to detect, prevent, and/or remediate fraud or other potentially prohibited or illegal activities; detect, prevent or remediate violations of policies or applicable user agreements; improve the Services by customizing your user experience; measure the performance of the Services and improve their content and layout; manage and protect Our information technology infrastructure; provide targeted marketing and advertising, provide service update notices, and deliver promotional offers based on your communication preferences; contact you at any telephone number, by placing a voice call or through text (SMS) or email messaging; perform creditworthiness and solvency checks, and compare information for accuracy and verify it with third parties.
+                                li <span> Additionally, we may contact you via electronic means to notify you regarding your account, to troubleshoot problems with your account, to resolve a dispute, to collect fees 	or monies owed, to poll your opinions through surveys or questionnaires, or as otherwise necessary to service your account. Furthermore, we may contact you to offer coupons, discounts and promotions, and inform you about the Services or its group services.
+                                li <span> Finally, we may contact you as necessary to enforce Our policies, applicable law, or any agreement We may have with you. When contacting you via phone, to reach you as efficiently as possible We may use, and you consent to receive, autodialed or pre-recorded calls and text messages. Where applicable and permitted by law, you may decline to receive certain communications. 
+
+                        li <span> #[strong Marketing]
+                            p We do not sell or rent your personal information to third parties for their marketing purposes without your explicit consent. We may combine your information with information We collect from other companies and use it to improve and personalize the Services, content, and advertising.
+
+                        li <span> #[strong The use of cookies and similar technologies]
+                            ol.custom 
+                                li <span> When you access Our websites or use the Services, we may place small data files on your computer or other device. These data files may be cookies, pixel tags, "Flash cookies," or other local storage provided by your browser or associated applications (collectively referred to as "Cookies"). These technologies are used to recognize users as customers; customize the Services, content, and advertising; measure promotional effectiveness; help ensure that account security is not compromised; mitigate risk and prevent fraud; and to promote trust and safety across the Services and related sites. 
+                                li <span> Users can freely decline Our Cookies if the web browser or browser add-on permits, unless Our Cookies are required to prevent fraud or ensure the security of websites We control. However, declining Our Cookies may interfere with your use of Our websites and the Services.
+
+                        li <span> #[strong Protection and storage of personal information]
+                            ol.custom 
+                                li <span> Throughout this Privacy Policy, we use the term "personal information" to describe information that can be associated with a specific person and can be used to identify that person. We do not consider personal information to include information that has been made anonymous so that it does not identify a specific user.
+                                li <span> We store and process your personal information on Our computers in Nigeria and anywhere else where Our facilities are located. We protect your information using physical, technical, and administrative security measures to reduce the risks of loss, misuse, unauthorized access, disclosure and alteration. Some of the safeguards We use are firewalls and data encryption and information access authorization controls.
+
+                        li <span> #[strong Sharing personal information with other Invest “N” Farm Business Resources Limited users or relevant third parties]
+                            ol.custom 
+                                li <span> When contracting with us or with third parties through our Website of application, you agree and hereby authorize Us to provide those parties with information about you necessary to respond to your request or complete a transaction.
+                                li <span> We work with third parties, including regulatory authorities responsible for identity management, credit bureaus, banks, real estate developers, property owners, realtors etc in connection with the Services. In doing so, a third party may share information about you with Us, such as your email address or mobile phone number. 
+                                li <span> We will not disclose your information to anyone other than in connection with the Services, or with the third parties that offer or use the Services with your express permission or if We are required to do so to comply for a legitimate purpose, a subpoena, or other legal processes.
+
+                        li <span> #[strong Sharing personal information with third parties]
+                            p You agree and hereby authorize Us to share your personal information with:
+                            ol.custom 
+                                li <span> Affiliated entities of the Invest “N” Farm Business Resources Limited who provide manage processes such as registration, request, transactions and customer support, including those engaged by Invest “N” Farm Business Resources Limited to help detect and prevent potentially illegal acts and violations of Our policies, and to guide decisions about Our products, services, and communications. 
+                                li <span> Other third parties such as real estate developers, landlords, realtors, financial institutions that We collaborate with in connection with the Services. 
+                                li <span> Credit bureaus and collection agencies to report account information, as permitted by law. Banking partners as required by credit/debit card association rules.
+                                li <span> Law enforcement, government officials, or other third parties pursuant to the provisions of the applicable laws, a subpoena, court order, or other legal process or requirement applicable to Invest “N” Farm Business Resources Limited or one of its affiliates; when We need to do so to comply with law or credit/debit card rules; or when We believe, in Our sole discretion, that the disclosure of personal information is necessary to prevent physical harm or financial loss, to report suspected illegal activity or to investigate violations of Our User Agreement.
+                                li <span> Other unaffiliated third parties, for the following purposes:
+                                    ol.custom 
+                                        li <span> Fraud Prevention and Risk Management: to help prevent fraud or access and manage risk.
+                                        li <span> Customer Service: for customer service purposes, including to help service your accounts or resolve disputes.
+                                        li <span> Completion: in connection with fulfillment of transactions through or website, application and in connection with the Services.
+                                        li <span> Legal Compliance: to help them comply with all laws, regulations and guidelines in force in Nigeria including anti-money laundering and counter-terrorist financing verification requirements.
+                                        li <span> Service Providers: to enable service providers under contract with Us to support Our business operations, such as fraud prevention, payment processing, marketing, customer service and technology services. Our contracts dictate that these service providers only use your information in connection with the services they perform for Us and not for their own benefit.
+                                li <span> Other third parties with your consent or direction to do so. Please note that these third parties may be in other countries where the laws on processing personal information may be less stringent than in your country.
+
+                        li <span> #[strong Information retention]
+                            ol.custom 
+                                li <span> We will only retain your Personal Information for as long as reasonably necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, regulatory, tax, accounting or reporting requirements. We may retain your personal data for a longer period in the event of a complaint or if we reasonably believe there is a prospect of litigation in respect to our relationship with you.
+                                li <span> To determine the appropriate retention period for personal data, we consider the amount, nature and sensitivity of the personal data, the potential risk of harm from unauthorized use or disclosure of your personal data, the purposes for which we process your personal data and whether we can achieve those purposes through other means, and the applicable legal, regulatory, tax, accounting or other requirements.
+                                li <span> In some circumstances we will anonymize your Personal Information (so that it can no longer be associated with you) for research or statistical purposes, in which case we may use this information indefinitely without further notice to you.
+
+                        li <span> #[strong Security of personal information ]
+                            p The security of your Personal Information is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage, is 100% secure. While We strive to use commercially acceptable means to protect your Personal Information, we cannot guarantee its absolute security.
+
+                        li <span> #[strong Cross border transfers of personal information]
+                            p Invest “N” Farm Business Resources Limited is committed to adequately protecting your personal information regardless of where the data resides and to providing appropriate  technical and organisational measures to safeguard your personal information.
+
+                        li <span> #[strong Contact us about privacy questions and your information]
+                            p If you have questions or concerns regarding this Privacy Policy, or you need information concerning your Personal Information, you should contact Us by using this link – 
+                                a(href="/contact") contact us
+
+                        li <span> #[strong Opting out]
+                            p You can ask us or third parties to stop sending you marketing messages at any time [by logging into the website and checking or unchecking relevant boxes to adjust your marketing preferences OR by following the opt-out links on any marketing message sent to you OR by contacting us at any time].
+                            p Where you opt out of receiving these marketing messages, this will not apply to personal data provided to us as a result of [a product/service purchase, warranty registration, product/service experience or other transactions].
+
+

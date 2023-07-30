@@ -1,0 +1,103 @@
+extends layout
+
+block content 
+
+    section.banner-inner-sec(style="background-image:url('/images/contact-banner.jpg')")
+        .banner-table
+            .banner-table-cell
+                .container
+                    .banner-inner-content
+                        h2.banner-inner-title Contact us
+
+    section.xs-get-in-touch
+        .container
+            .row
+                .col-lg-8.mx-auto
+                    .get-in-touch-cont.text-center
+                        h3
+                            span.light-text Get
+                            |  in touch
+                        p
+                            | Contact Investnfarm today on whatever query you have. Chat online with an investnfarm support,
+                            br
+                            |  or find our addresses and phone numbers to contact us. 
+    section.xs-contact-infomation.xs-contact-infomation-v2
+        .container
+            .row
+                //- .col-lg-3.col-md-6
+                //-     .contact-info-group
+                //-         i.lnr.lnr-apartment
+                //-         h4 Our office
+                //- span 7 Agoro Kessington Crescent, Festac Link Bridge,
+                //- span.text-color Amuwo Odofin, Lagos State, Nigeria
+                .col-lg-4.col-md-6
+                    .contact-info-group
+                        i.lnr-envelope
+                        h4 Email us
+                        a(href="mailto:info@investnfarm.com").text-color info@investnfarm.com
+
+                .col-lg-4.col-md-6
+                    .contact-info-group
+                        i.lnr.lnr-bubble
+                        h4 Lets chat
+                        span 
+                            a(href='https://api.whatsapp.com/send?phone=+447404387475') 
+                                i.fa.fa-whatsapp(style="font-size: 14px; display: inline-block; margin-bottom: 0") 
+                                | &nbsp Message on WhatsApp
+                        span 
+                            a(href='https://telegram.me/InvestNFarmUpdates') 
+                                i.fa.fa-telegram(style="font-size: 14px; display: inline-block; margin-bottom: 0") 
+                                | &nbsp Message on Telegram
+                        //- | +234 8555522262
+                        //- br
+                        //- | +237 7044442222
+                        span (Mon - Fri) 9am - 5pm
+                .col-lg-4.col-md-6
+                    .contact-info-group
+                        i.lnr.lnr-phone
+                        h4 Working hours
+                        span Mon - Fri : 9am - 5pm
+                        span.text-color
+    section.xs-contact-sec.xs-contact-v2-sec
+        .container
+            .row
+                .col-lg-8.mx-auto
+                    .xs-form-group
+                        h4.xs-single-title.text-center
+                            span.light-text Drop
+                            |  your message
+                        form#contact-form.xs-form(action='' method='POST')
+                            .row
+                                .col-lg-6
+                                    input#xs_contact_name.form-control(type='text' name='sender_name' placeholder='Your name' required)
+                                .col-lg-6
+                                    input#xs_contact_email.form-control(type='email' name='sender_email' placeholder='Your email' required)
+                            .row
+                                .col-lg-6
+                                    input#xs_contact_phone.form-control(type='number' name='sender_phone' placeholder='Your phone number' required)
+                                .col-lg-6
+                                    input#xs_contact_subject.form-control(type='text' name='subject' placeholder='Subject' required)
+                            textarea#x_contact_massage.form-control.message-box(name='message' placeholder='Message' cols='30' rows='10' required)
+                            .alert.d-none
+                            .xs-btn-wraper
+                                input.xs-btn(type='submit' value='SEND MESSAGE')
+    .xs-map-sec
+        .xs-maps-wraper
+            .map
+                iframe(src='https://maps.google.com/maps?width=100&height=600&hl=en&q=7%20Agoro%20Kessington%20Crescent&t=&z=13&ie=UTF8&iwloc=&output=embed')
+
+block scriptBlock
+    script.
+        $(document).ready(function() {
+            $("#contact-form").submit(function(e) {
+                e.preventDefault();
+
+                $.post('/send-email', $(this).serialize(), function(d) {
+                    if (d.status.trim() === 'success') {
+                        $(".alert").removeClass('d-none').addClass('alert-success').text('Thank you for writing us, your message has been received. You\'ll hear from us soon.')
+                    } else {
+                        $(".alert").removeClass('d-none').addClass('alert-danger').text('Error: Your message could\'t be delivered at this time, please try again later.');
+                    }
+                });
+            });
+        });

@@ -1,0 +1,37 @@
+extends layout 
+
+block content
+    section.content-header
+        h1 Transactions
+
+    // Main content
+    section.content
+        .row
+            .col-md-12
+                .box
+                    .box-header
+
+                    .box-body
+                        .row 
+                            .col-md-12.table-responsive
+                                table.table.table-striped.table-hover(style="margin-top: 10px")
+                                    thead
+                                        tr
+                                            th Date
+                                            th Investor
+                                            th Description
+                                            th Payment Reference
+                                            th Amount
+                                            th Status
+                                    tbody
+                                        each trnx in payments 
+                                            - let row = ''
+                                            - if (trnx.status === 'pending') row = 'warning'
+                                            - if (trnx.status === 'cancelled') row = 'danger'
+                                            tr(class=`${row}`)
+                                                td= view.formatDate(trnx.createdAt)
+                                                td= trnx.User.fullname
+                                                td= trnx.Investment.investment_name 
+                                                td= trnx.reference
+                                                td= '₦' + view.formatCurrency(trnx.amount) 
+                                                td= trnx.status

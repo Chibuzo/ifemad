@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+    .container-fluid.primary-bg
+        .row.pt-4.mt-3
+            .col-md-12.text-center
+                h3.mt-5 Email Verification Status
+
+        .row.mb-5
+            .col-md-12
+                .container
+                    .row.mb-4.px-5 
+                        .col-md-12 
+                            if user_status === 'inactive'
+                                .alert.alert-info.text-center.mt-4
+                                    i.fa.fa-info-circle.fa-4x
+                                    br/ 
+                                    | Your account is inactive. 
+                                    br/ 
+                                    | You need to click the verify email button in the email sent to you or 
+                                    a(href="#" onclick="resendEmail()") click here  
+                                    | to resend the verification email
+                            else
+                                .alert.alert-success.text-center.mt-4
+                                    i.fa.fa-check-circle.fa-4x
+                                    br/ 
+                                    | Thank you for verifying your email address. 
+                                    br/ 
+                                    | You can 
+                                    a(href="/login") click here to login 
+                                    | to your Dashboard
+
+block scriptBlock
+    script. 
+        function resendEmail() {
+            $.get('/resend-verification-email', function() {
+                alert('Email sent! Please check your email inbox');
+            });
+        }

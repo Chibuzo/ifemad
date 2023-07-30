@@ -1,0 +1,61 @@
+extends auth-layout 
+
+block content
+    .position-relative.text-center.my-4
+        p.mb-0.fs-4.px-3.d-inline-block.bg-white.text-dark.z-index-5.position-relative
+            | Verify OTP
+        span.border-top.w-100.position-absolute.top-50.start-50.translate-middle
+    form(method="post" action="/verify-otp")
+        if message 
+            .alert.alert-danger #{message} 
+        p OTP: #{otp}
+        .form-floating
+            input#floatingInput.form-control(type='text' name="otp" placeholder='OTP' autofocus)
+            label(for='floatingInput') OTP
+        a#request-otp() Request new OTP code in
+        span#time
+
+        button.w-100.btn.btn-lg.btn-primary(type='submit').mt-3 Verify otp
+
+
+block scriptBlock 
+    script. 
+        let resendOTP = false;
+        const otpEle = document.getElementById("request-otp");
+        otpEle.addEventListener("click", function(e) {
+            otpEle.removeAttribute("href");
+            resendOTP && fetch('/resend-otp').then(d => d.json()).then(d => { 
+                initializeTimer();
+                resendOTP = false;
+            });
+        });
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            const timerID = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = " " + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    resendOTP = true;
+                    clearInterval(timerID);
+                    otpEle.href="#"
+                }
+            }, 1000);
+        }
+
+        function initializeTimer() {
+            const fiveMinutes = 60 * 1,
+            display = document.querySelector('#time');
+            startTimer(fiveMinutes, display);
+            console.log('Countdown started...')
+        }
+
+        window.onload = function () {
+            initializeTimer();
+        };

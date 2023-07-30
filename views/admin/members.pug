@@ -1,0 +1,77 @@
+extends layout 
+
+block content
+    section.content-header
+        h1 Members Listing
+
+    // Main content
+    section.content
+        .row
+            .col-md-12
+                .box
+                    .box-header
+                        h3.box-title Investors
+                    .box-body
+                        .row 
+                            .col-md-12.table-responsive
+                                table.table.table-striped(style="margin-top: 10px")
+                                    thead
+                                        tr
+                                            th Date Joined
+                                            th Name
+                                            th Age Group
+                                            th Email
+                                            th Phone
+                                            th Country
+                                            th Active Investments
+                                            th status
+                                            th Action
+                                    tbody
+                                        each user in users 
+                                            - let row = user.status === 'inactive' ? 'active' : ''
+                                            tr(class=`${row}` id=`${user.id}`)
+                                                td= view.formatDate(user.createdAt)
+                                                td= user.fullname 
+                                                td= user.age_group
+                                                td= user.email
+                                                td= user.phone 
+                                                td= user.country
+                                                td= user.investment_count
+                                                td= user.status
+                                                td
+                                                    a(href="/admin/edit-investor" style="margin-right: 7px" title="Edit")
+                                                        i.fa.fa-edit.fa-lg
+                                                    a.delete(href="" style="margin-right: 7px" title="Delete" data-toggle="tooltip")
+                                                        i.fa.fa-trash.fa-lg
+                                                    a.ban(href="" title="Ban Investor" data-toggle="tooltip")
+                                                        i.fa.fa-ban.fa-lg
+
+block scriptBlock 
+    script.
+        $(document).ready(function() {
+            $(".delete").click(function(e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure you want to delete this investor?")) {
+                    const id = $(this).parents('tr').attr('id');
+                    $.post('/update-investor', { id, deleted: true }, function(d) {
+                        if (d.status === true) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+
+            $(".ban").click(function(e) {
+                e.preventDefault();
+
+                if (confirm("Are you sure you want to ban this investor?")) {
+                    const id = $(this).parents('tr').attr('id');
+                    $.post('/update-investor', { id, status: 'banned' }, function(d) {
+                        if (d.status === true) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        }); 
