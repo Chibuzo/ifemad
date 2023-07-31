@@ -1,5 +1,22 @@
 extends layout 
 
+block styleBlock 
+    style. 
+        .doc {
+            position: relative;
+            border: 1px solid #e8e8e8;
+            border-radius: 5px;
+            background: #f9f9f9
+        }
+
+        .doc .ti {
+            position: absolute;
+            right: 17px;
+            top: 14px;
+            font-size: 18px;
+            cursor: pointer
+        }
+
 block content 
 
     .card.bg-light-info.shadow-none.position-relative.overflow-hidden
@@ -129,18 +146,38 @@ block content
                                     form(method="post" enctype="multipart/form-data" action='/user/documents').mb-7
                                         .row.mb-4
                                             .col-6
-                                                label.form-label.fw-semibold(for='exampleInputPassword1') Appointment Letter
-                                                input#formFile.form-control(type='file' name='appointmentLetter')
+                                                if (documents.appointmentLetter)
+                                                    .doc.py-6.px-4.mt-4
+                                                        a(href='#') Appointment Letter 
+                                                        i.ti.ti-trash#appointmentLetter
+                                                else
+                                                    label.form-label.fw-semibold(for='exampleInputPassword1') Appointment Letter
+                                                    input#formFile.form-control(type='file' name='appointmentLetter')
                                             .col-6
-                                                label.form-label.fw-semibold(for='') Force ID
-                                                input#formFile.form-control(type='file' name='forceId')
+                                                if (documents.forceId)
+                                                    .doc.py-6.px-4.mt-4
+                                                        a(href='#') Force ID
+                                                        i.ti.ti-trash#forceId
+                                                else
+                                                    label.form-label.fw-semibold(for='') Force ID
+                                                    input#formFile.form-control(type='file' name='forceId')
                                         .row.mb-4
                                             .col-6
-                                                label.form-label.fw-semibold(for='') Birth Certificate
-                                                input#formFile.form-control(type='file' name='birthCertificate')
+                                                if (documents.birthCertificate)
+                                                    .doc.py-6.px-4.mt-4
+                                                        a(href='#') Birth Certificate
+                                                        i.ti.ti-trash#birthCertificate
+                                                else
+                                                    label.form-label.fw-semibold(for='') Birth Certificate
+                                                    input#formFile.form-control(type='file' name='birthCertificate')
                                             .col-6
-                                                label.form-label.fw-semibold(for='') Proof of Address
-                                                input#formFile.form-control(type='file' name='proofOfAddress')
+                                                if (documents.proofOfAddress)
+                                                    .doc.py-6.px-4.mt-4
+                                                        a(href='#') Proof of Address
+                                                        i.ti.ti-trash#proofOfAddress
+                                                else
+                                                    label.form-label.fw-semibold(for='') Proof of Address
+                                                    input#formFile.form-control(type='file' name='proofOfAddress')
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.gap-3
                                                 button.btn.btn-primary(type='submit') Save
@@ -208,6 +245,7 @@ block scriptBlock
 
         const updateForms = document.getElementsByClassName("form-update");
         const beneficiaryForm = document.getElementById("form-beneficiary");
+        const deleteDoc = document.getElementsByClassName("ti-trash");
 
         for (let i = 0; i < updateForms.length; i++) {
             updateForms[i].addEventListener('submit', async function(e) {
@@ -234,5 +272,17 @@ block scriptBlock
                 alert('wahala')
             }
         });
+
+        for (let i = 0; i < deleteDoc.length; i++) {
+            deleteDoc[i].addEventListener('click', async function(e) {
+                if (confirm('Are you sure you want to delete this document?')) {
+                    const fileName = this.getAttribute('id');
+                    const res = await postForm("/user/delete-document", { documentName: fileName });
+                    if (res.status.trim() == 'success') {
+                        location.reload();
+                    }
+                }
+            });
+        }
 
 

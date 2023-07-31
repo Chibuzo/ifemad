@@ -1,50 +1,55 @@
 extends layout 
 
 block content
-    section.content-header
-        h1 Members Listing
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 User Listing
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Users
+                .col-3
+                    .text-center.mb-n5
+                        img.img-fluid.mb-n4(src='../../dist/images/breadcrumb/ChatBc.png' alt='')
+    .card.w-100.position-relative.overflow-hidden
+        .px-4.py-3.border-bottom
+            .card-title.fw-semibold.mb-0.lh-sm User List
+        .card-body.p-4
+            .table-responsive.rounded-2.mb-4
 
-    // Main content
-    section.content
-        .row
-            .col-md-12
-                .box
-                    .box-header
-                        h3.box-title Investors
-                    .box-body
-                        .row 
-                            .col-md-12.table-responsive
-                                table.table.table-striped(style="margin-top: 10px")
-                                    thead
-                                        tr
-                                            th Date Joined
-                                            th Name
-                                            th Age Group
-                                            th Email
-                                            th Phone
-                                            th Country
-                                            th Active Investments
-                                            th status
-                                            th Action
-                                    tbody
-                                        each user in users 
-                                            - let row = user.status === 'inactive' ? 'active' : ''
-                                            tr(class=`${row}` id=`${user.id}`)
-                                                td= view.formatDate(user.createdAt)
-                                                td= user.fullname 
-                                                td= user.age_group
-                                                td= user.email
-                                                td= user.phone 
-                                                td= user.country
-                                                td= user.investment_count
-                                                td= user.status
-                                                td
-                                                    a(href="/admin/edit-investor" style="margin-right: 7px" title="Edit")
-                                                        i.fa.fa-edit.fa-lg
-                                                    a.delete(href="" style="margin-right: 7px" title="Delete" data-toggle="tooltip")
-                                                        i.fa.fa-trash.fa-lg
-                                                    a.ban(href="" title="Ban Investor" data-toggle="tooltip")
-                                                        i.fa.fa-ban.fa-lg
+                table.table
+                    thead
+                        tr
+                            th Date Joined
+                            th Name
+                            th Email
+                            th Phone
+                            th Force 
+                            th Rank
+                            th status
+                            th Action
+                    tbody
+                        each user in users 
+                            - let row = user.status === 'inactive' ? 'active' : ''
+                            tr(class=`${row}` id=`${user.id}`)
+                                td= view.formatDate(user.createdAt)
+                                td #{user.firstname} #{user.lastname} 
+                                td= user.email
+                                td= user.phone 
+                                td= user.force
+                                td= user.currentRank
+                                td= user.status
+                                td
+                                    a(href="/admin/edit-user" style="margin-right: 7px" title="Edit")
+                                        i.fa.fa-edit.fa-lg
+                                    a.delete(href="" style="margin-right: 7px" title="Delete" data-toggle="tooltip")
+                                        i.fa.fa-trash.fa-lg
+                                    a.ban(href="" title="Ban user" data-toggle="tooltip")
+                                        i.fa.fa-ban.fa-lg
+
 
 block scriptBlock 
     script.
@@ -52,9 +57,9 @@ block scriptBlock
             $(".delete").click(function(e) {
                 e.preventDefault();
 
-                if (confirm("Are you sure you want to delete this investor?")) {
+                if (confirm("Are you sure you want to delete this user?")) {
                     const id = $(this).parents('tr').attr('id');
-                    $.post('/update-investor', { id, deleted: true }, function(d) {
+                    $.post('/update-user', { id, deleted: true }, function(d) {
                         if (d.status === true) {
                             location.reload();
                         }
@@ -65,9 +70,9 @@ block scriptBlock
             $(".ban").click(function(e) {
                 e.preventDefault();
 
-                if (confirm("Are you sure you want to ban this investor?")) {
+                if (confirm("Are you sure you want to ban this user?")) {
                     const id = $(this).parents('tr').attr('id');
-                    $.post('/update-investor', { id, status: 'banned' }, function(d) {
+                    $.post('/update-user', { id, status: 'banned' }, function(d) {
                         if (d.status === true) {
                             location.reload();
                         }

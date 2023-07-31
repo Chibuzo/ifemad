@@ -35,7 +35,17 @@ router.post('/documents', async (req, res, next) => {
         await userService.uploadDocuments(req.files, userId);
         res.redirect('/user/profile');
     } catch (err) {
-        console.log(err)
+        next(err);
+    }
+});
+
+router.post('/delete-document', async (req, res, next) => {
+    try {
+        const userId = req.session.user.id;
+        const { documentName } = req.body;
+        await userService.deleteDocument(documentName, userId);
+        res.json({ status: 'success' });
+    } catch (err) {
         next(err);
     }
 });

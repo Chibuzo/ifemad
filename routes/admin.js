@@ -73,7 +73,7 @@ router.get('/payments', authenticateAdmin, async (req, res, next) => {
     }
 });
 
-router.get('/investors', authenticateAdmin, async (req, res, next) => {
+router.get('/users', async (req, res, next) => {
     try {
         const users = await userService.find({
             order: [

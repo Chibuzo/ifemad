@@ -66,12 +66,22 @@ const login = async ({ email, password }) => {
     return { user, otp };
 }
 
+const findOne = async criteria => {
+    return User.findOne({ where: criteria });
+}
+
+const view = async criteria => {
+    const user = await findOne(criteria);
+    if (!user) throw new ErrorHandler(404, 'User not found');
+    return sanitize(user);
+}
+
 const activateAccount = async (email_hash, hash_string) => {
     if (!email_hash || !hash_string) {
         throw new ErrorHandler(400, 'Email or hash not found');
     }
     const email = Buffer.from(email_hash, 'base64').toString('ascii');
-    const user = await User.findOne({ where: { email } }, { raw: true });
+    const user = await view({ email });
 
     const hash = crypto.createHash('md5').update(user.email + 'okirikwenEE129Okpkenakai').digest('hex');
     if (hash_string !== hash) {
@@ -168,11 +178,15 @@ const uploadDocuments = async (selectedDocuments, userId) => {
     }
 }
 
+const deleteDocument = async (document, userId) => {
+    // delete from aws
+    return Documents.update({ [document]: '' }, { where: { userId } });
+}
+
 const sanitize = user => {
     delete user.password;
     return {
-        ...user.toJSON(),
-        investment_count: user.UserInvestments ? user.UserInvestments.length : null
+        ...user.toJSON()
     };
 }
 
@@ -186,5 +200,6 @@ module.exports = {
     changePassword,
     saveBeneficiaries,
     fetchUserProfileData,
-    uploadDocuments
+    uploadDocuments,
+    deleteDocument
 }

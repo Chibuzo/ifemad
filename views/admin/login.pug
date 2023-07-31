@@ -1,34 +1,80 @@
-extends ../layout 
+doctype html
+head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description' content='')
+    title CaseTrackr
+    // Bootstrap core CSS
+    link(href='/css/style.min.css' rel='stylesheet')
+    meta(name='theme-color' content='#7952b3')
+    style.
+        html,
+        body {
+            height: 100%;
+        }
 
-block content
-    .container-fluid.primary-bg.mt-5
-        .row
-            .col.text-center
-                h3.pt-4.mt-3 Admin Dashboard
-        .row.mb-5 
-            .col
-                .container
-                    .row.justify-content-md-center
-                        .col-md-6.col-sm-12.col-xs-12.mt-4
-                            if message
-                                .alert.alert-warning= message
-                            form(action="/admin/login" method="post")
-                                .row
-                                    .col.mb-3.pe-md-4.ps-md-5
-                                        input.form-control.form-control-lg(type="email" name="email" placeholder="Email" aria-label="Email" required=true)
-                                .row
-                                    .col.mb-3.pe-md-4.ps-md-5    
-                                        input.form-control.form-control-lg(type="password" name="password" placeholder="Password" aria-label="Password", required=true)
-                                .row.gy-2
-                                    .col.d-grid.pe-md-4.ps-md-5
-                                        .form-group.form-check 
-                                            input.form-check-input#checkout-remember-me(type="checkbox" name="remember_me")
-                                            label.form-check-label(for="checkout-remember-me") Remember me 
-                                        button.btn.btn-success.btn-lg.btn-block(type="submit") Login              
-                    .row 
-                        .col.text-center 
-                            br/ <br>
-                            p.title 
-                                a(href="/reset-password") Forgot Password?
-                            br/ 
+        body {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
 
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+main.form-signin.text-center
+    form(method="post" action="/admin/login")
+        h1.h3.mb-3.fw-normal Admin Login
+        .form-floating
+            input#floatingInput.form-control(type='email' name="email" placeholder='name@example.com')
+            label(for='floatingInput') Email address
+        .form-floating
+            input#floatingPassword.form-control(type='password' name="password" placeholder='Password')
+            label(for='floatingPassword') Password
+        .checkbox.mb-3
+            label
+                input(type='checkbox' value='remember-me')
+                |  Remember me
+        button.w-100.btn.btn-lg.btn-secondary(type='submit') Sign in
+        p.mt-5.mb-3.text-muted &copy; 
+            script.
+                document.write(new Date().getFullYear());

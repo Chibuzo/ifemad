@@ -1,109 +1,175 @@
 doctype html
 head
-    meta(charset='utf-8')
+    // Title
+    title Ifemad Admin
+    // Required Meta Tag
+    meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='handheldfriendly' content='true')
+    meta(name='MobileOptimized' content='width')
+    meta(name='description' content='Mordenize')
+    meta(name='author' content='')
+    meta(name='keywords' content='Mordenize')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
-    title InvestNFarm Admin
-    // Tell the browser to be responsive to screen width
-    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport')
-    link(rel='stylesheet' href='/css/bootstrap.min.css')
-    // Font Awesome
-    link(rel='stylesheet' href='/css/font-awesome.min.css')
-    // Ionicons
-    link(rel='stylesheet' href='/css/ionicons.min.css')
-    // Theme style
-    link(rel='stylesheet' href='/css/AdminLTE.min.css')
-    link(rel='stylesheet' href='/css/skin-green.min.css')
-    //if lt IE 9
-        script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
-        script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
-    // Google Font
-    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic')
+    // Favicon
+    link(rel='shortcut icon' type='image/png' href='/images/logos/favicon.png')
+    // Core Css
+    link#themeColors(rel='stylesheet' href='/css/style.min.css')
+    block styleBlock
 
-body.hold-transition.skin-green.sidebar-mini
-    .wrapper
-        // Main Header
-        header.main-header
-            // Logo
-            a.logo(href='/admin/dashboard')
-                // mini logo for sidebar mini 50x50 pixels
-                span.logo-mini
-                    b INF
-                // logo for regular state and mobile devices
-                span.logo-lg
-                    b InvestNFarm
-                // Header Navbar
-            nav.navbar.navbar-static-top(role='navigation')
-                // Sidebar toggle button
-                a.sidebar-toggle(href='#' data-toggle='push-menu' role='button')
-                    span.sr-only Toggle navigation
+body
+    // Preloader
+    .preloader
+        img.lds-ripple.img-fluid(src='/images/logos/favicon.png' alt='loader')
+    // Preloader
+    .preloader
+        img.lds-ripple.img-fluid(src='/images/logos/favicon.png' alt='loader')
+    // Body Wrapper
+    #main-wrapper.page-wrapper(data-layout='vertical' data-sidebartype='full' data-sidebar-position='fixed' data-header-position='fixed')
+        // Sidebar Start
+        aside.left-sidebar
+            // Sidebar scroll
+            div
+                .brand-logo.d-flex.align-items-center.justify-content-between
+                    a.text-nowrap.logo-img(href='index.html')
+                        img.dark-logo(src='/images/logo.png' wdth='180' alt='')
+                        img.light-logo(src='/images/logo.png' wdth='180' alt='')
+                    #sidebarCollapse.close-btn.d-lg-none.d-block.sidebartoggler.cursor-pointer
+                        i.ti.ti-x.fs-8
+                // Sidebar navigation
+                nav.sidebar-nav.scroll-sidebar(data-simplebar='')
+                    ul#sidebarnav
+                        li.sidebar-item
+                            a.sidebar-link(href='/admin/dashboard' aria-expanded='false')
+                                span
+                                    i.ti.ti-activity-heartbeat
+                                span.hide-menu Dashboard
+                        li.sidebar-item
+                            a.sidebar-link(href='/admin/users' aria-expanded='false')
+                                span
+                                    i.ti.ti-users
+                                span.hide-menu Users
+                        li.sidebar-item
+                            a.sidebar-link(href='#' aria-expanded='false')
+                                span
+                                    i.ti.ti-file-text
+                                span.hide-menu Contributions
+                        li.sidebar-item
+                            a.sidebar-link(href='/admin/profile' aria-expanded='false')
+                                span
+                                    i.ti.ti-user-circle
+                                span.hide-menu Profile
+                    .unlimited-access.hide-menu.bg-light-primary.position-relative.my-7.rounded
+                        .d-flex
+                            .unlimited-access-title
+                .fixed-profile.p-3.bg-light-secondary.rounded.sidebar-ad.mt-3
+                    .hstack.gap-3
+                        .john-img
+                            img.rounded-circle(src='/images/profile/user-6.jpg' width='40' height='40' alt='')
+                        .john-title
+                            h6.mb-0.fs-4.fw-semibold Mathew
+                            span.fs-2.text-dark Designer
+                        button.border-0.bg-transparent.text-primary.ms-auto(tabindex='0' type='button' aria-label='logout' data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='logout')
+                            i.ti.ti-power.fs-6
+                // End Sidebar navigation
+                // End Sidebar scroll
+                // Sidebar End
 
-        aside.main-sidebar
-            // sidebar: style can be found in sidebar.less
-            section.sidebar
-                // Sidebar user panel (optional)
-                .user-panel
-                    .pull-left.image
-                        i.fa.fa-user.fa-3x(style="color: #ccc")
-                    .pull-left.info
-                        p #{admin.fullname}
-                        // Status
-                        a(href='#')
-                            i.fa.fa-circle.text-success
-                            |  Online
+        // Main wrapper
+        .body-wrapper
+            // Header Start
+            header.app-header
+                nav.navbar.navbar-expand-lg.navbar-light
+                    ul.navbar-nav
+                        li.nav-item
+                            a#headerCollapse.nav-link.sidebartoggler.nav-icon-hover.ms-n3(href='javascript:void(0)')
+                                i.ti.ti-menu-2
+                    .d-block.d-lg-none
+                        img.dark-logo(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg' width='180' alt='')
+                        img.light-logo(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg' width='180' alt='')
+                    button.navbar-toggler.p-0.border-0(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                        span.p-2
+                            i.ti.ti-dots.fs-7
+                    #navbarNav.collapse.navbar-collapse.justify-content-end
+                        .d-flex.align-items-center.justify-content-between
+                            a.nav-link.d-flex.d-lg-none.align-items-center.justify-content-center(href='javascript:void(0)' type='button' data-bs-toggle='offcanvas' data-bs-target='#mobilenavbar' aria-controls='offcanvasWithBothOptions')
+                                i.ti.ti-align-justified.fs-7
+                            ul.navbar-nav.flex-row.ms-auto.align-items-center.justify-content-center
+                                li.nav-item.dropdown
+                                    a#drop2.nav-link.nav-icon-hover(href='javascript:void(0)' data-bs-toggle='dropdown' aria-expanded='false')
+                                        i.ti.ti-bell-ringing
+                                        .notification.bg-primary.rounded-circle
+                                    .dropdown-menu.content-dd.dropdown-menu-end.dropdown-menu-animate-up(aria-labelledby='drop2')
+                                        .d-flex.align-items-center.justify-content-between.py-3.px-7
+                                            h5.mb-0.fs-5.fw-semibold Notifications
+                                            span.badge.bg-primary.rounded-4.px-3.py-1.lh-sm 2 new
+                                        .message-body(data-simplebar='')
+                                            a.py-6.px-7.d-flex.align-items-center.dropdown-item(href='javascript:void(0)')
+                                                //
+                                                    <span class="me-3">
+                                                    <img src="/images/profile/user-3.jpg" alt="user" class="rounded-circle" width="48"
+                                                    height="48" />
+                                                    </span>
+                                                .w-75.d-inline-block.v-middle
+                                                    h6.mb-1.fw-semibold Contribution Confirmed
+                                                    span.d-block Check your balance
+                                            a.py-6.px-7.d-flex.align-items-center.dropdown-item(href='javascript:void(0)')
+                                                //
+                                                    <span class="me-3">
+                                                    <img src="./dist/images/profile/user-5.jpg" alt="user" class="rounded-circle" width="48"
+                                                    height="48" />
+                                                    </span>
+                                                .w-75.d-inline-block.v-middle
+                                                    h6.mb-1.fw-semibold Payout Approved
+                                                    span.d-block N50,000 deducted from account
+                                        .py-6.px-7.mb-1
+                                            button.btn.btn-outline-primary.w-100
+                                                | See All Notifications
+                                li.nav-item.dropdown
+                                    a#drop1.nav-link.pe-0(href='javascript:void(0)' data-bs-toggle='dropdown' aria-expanded='false')
+                                        .d-flex.align-items-center
+                                            .user-profile-img
+                                                img.rounded-circle(src='/images/profile/user-6.jpg' width='35' height='35' alt='')
+                                    .dropdown-menu.content-dd.dropdown-menu-end.dropdown-menu-animate-up(aria-labelledby='drop1')
+                                        .profile-dropdown.position-relative(data-simplebar='')
+                                            .py-3.px-7.pb-0
+                                                h5.mb-0.fs-5.fw-semibold User Profile
+                                            .d-flex.align-items-center.py-9.mx-7.border-bottom
+                                                img.rounded-circle(src='/images/profile/user-6.jpg' width='80' height='80' alt='')
+                                                .ms-3
+                                                    h5.mb-1.fs-3 Emeka Johnathan
+                                                    span.mb-1.d-block.text-dark Captain
+                                                    p.mb-0.d-flex.text-dark.align-items-center.gap-2
+                                                        i.ti.ti-mail.fs-4
+                                                        |  Johnathan@gmail.com
+                                            .message-body
+                                                a.py-8.px-7.mt-8.d-flex.align-items-center(href='page-user-profile.html')
+                                                    span.d-flex.align-items-center.justify-content-center.bg-light.rounded-1.p-6
+                                                        img(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg' alt='' width='24' height='24')
+                                                    .w-75.d-inline-block.v-middle.ps-3
+                                                        h6.mb-1.bg-hover-primary.fw-semibold  My Profile 
+                                                        span.d-block.text-dark Account Settings
+                                            .d-grid.py-4.px-7.pt-8
+                                                a.btn.btn-outline-primary(href='authentication-login.html')
+                                                    | Log
+                                                    | Out
 
-                // Sidebar Menu
-                ul.sidebar-menu(data-widget='tree')
-                    li.header HEADER
-                    // Optionally, you can add icons to the links
-                    li#link-dashboard
-                        a(href='/admin/dashboard#dashboard')
-                            i.fa.fa-dashboard
-                            span Dashboard
-                    li#link-farms
-                        a(href='/admin/farms#farms')
-                            i.fa.fa-tree
-                            span Farms
-                    li#link-portfolio
-                        a(href='/admin/portfolio#portfolio')
-                            i.fa.fa-briefcase
-                            span Portfolios
-                    li#link-transactions
-                        a(href='/admin/payments#payments')
-                            i.fa.fa-credit-card
-                            span Payments
-                    li#link-investors
-                        a(href='/admin/investors#investors')
-                            i.fa.fa-users
-                            span Investors         
-                    li#link-payouts
-                        a(href='/admin/payouts#payouts')
-                            i.fa.fa-credit-card
-                            span Pay Outs  
-                    li
-                        a(href='/logout')
-                            i.fa.fa-sign-out
-                            span Logout                        
-
-        .content-wrapper      
-            block content
-
-        // Main Footer
-        footer.main-footer
+            // Header End
+            .container-fluid
+                block content 
 
 
-    // ./wrapper
-// REQUIRED JS SCRIPTS
-// jQuery 3
-script(src='/js/jquery.min.js')
-// Bootstrap 3.3.7
-script(src='/js/bootstrap.min.js')
-// AdminLTE App
-script(src='/js/adminlte.min.js')
-
-block scriptBlock
+// Import Js Files
+script(src='/libs/jquery/dist/jquery.min.js')
+script(src='/libs/simplebar/dist/simplebar.min.js')
+script(src='/libs/bootstrap/dist/js/bootstrap.bundle.min.js')
+// core files
+script(src='/js/app.min.js')
+script(src='/js/app.init.js')
+script(src='/js/app-style-switcher.js')
+script(src='/js/sidebarmenu.js')
+script(src='/js/custom.js')
 
 script. 
-    $(document).ready(function() {
-        const link = location.href.split('#')[1];
-        $('#link-' + link).addClass('active');
-    });
+
+block scriptBlock
