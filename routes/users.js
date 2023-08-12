@@ -24,7 +24,7 @@ router.get('/profile', async (req, res, next) => {
     try {
         const user = await userService.view({ id: req.session.user.id });
         const { beneficiary, documents } = await userService.fetchUserProfileData(user.id);
-        res.render('user/profile', { user, documents: documents || {}, beneficiary });
+        res.render('user/profile', { user, documents: documents || {}, beneficiary: beneficiary || {} });
     } catch (err) {
         next(err);
     }
