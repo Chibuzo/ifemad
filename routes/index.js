@@ -3,7 +3,7 @@ const router = express.Router();
 const authenticate = require('../middlewares/authenticate');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 const userService = require('../services/userService');
-const paymentService = require('../services/paymentService');
+// const paymentService = require('../services/paymentService');
 const walletService = require('../services/walletService');
 const authenticateAdmin = require('../middlewares/authenticateAdmin');
 const emailService = require('../services/emailService');
@@ -166,15 +166,15 @@ router.post('/update-user', authenticateAdmin, async (req, res, next) => {
     }
 });
 
-router.get('/confirmation', isAuthenticated, async (req, res, next) => {
-    try {
-        await paymentService.savePaymentDetails(req.query);
-        res.render('confirmation');
-        // emailService.sendPaymentConfirmationEmail(user, investment);
-    } catch (err) {
-        next(err);
-    }
-});
+// router.get('/confirmation', isAuthenticated, async (req, res, next) => {
+//     try {
+//         await paymentService.savePaymentDetails(req.query);
+//         res.render('confirmation');
+//         // emailService.sendPaymentConfirmationEmail(user, investment);
+//     } catch (err) {
+//         next(err);
+//     }
+// });
 
 router.post('/send-email', (req, res, next) => {
     try {

@@ -2,8 +2,19 @@ extends layout
 
 block styleBlock 
 
-
-
+block content 
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 Dashboard
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Dashboard
+                .col-3
+                    .text-center.mb-n5
 
 
 
