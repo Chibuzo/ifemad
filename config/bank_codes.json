@@ -1,0 +1,130 @@
+[
+      {
+            "inst_code": "044",
+            "inst_name": "Access Bank PLC"
+      },
+      {
+            "inst_code": "023",
+            "inst_name": "CitiBank"
+      },
+      {
+            "inst_code": "559",
+            "inst_name": "Coronation Bank"
+      },
+      {
+            "inst_code": "050",
+            "inst_name": "Eco Bank"
+      },
+      {
+            "inst_code": "070",
+            "inst_name": "Fidelity Bank"
+      },
+      {
+            "inst_code": "011",
+            "inst_name": "First Bank"
+      },
+      {
+            "inst_code": "214",
+            "inst_name": "First City Monument Bank (FCMB)"
+      },
+      {
+            "inst_code": "501",
+            "inst_name": "FSDH Group"
+      },
+      {
+            "inst_code": "103",
+            "inst_name": "Globus Bank"
+      },
+      {
+            "inst_code": "562",
+            "inst_name": "Greenwich Merchant Bank"
+      },
+      {
+            "inst_code": "058",
+            "inst_name": "Guaranty Trust Bank PLC"
+      },
+      {
+            "inst_code": "030",
+            "inst_name": "Heritage Bank PLC"
+      },
+      {
+            "inst_code": "301",
+            "inst_name": "Jaiz Bank PLC"
+      },
+      {
+            "inst_code": "082",
+            "inst_name": "Keystone Bank"
+      },
+      {
+            "inst_code": "303",
+            "inst_name": "Lotus Bank"
+      },
+      {
+            "inst_code": "561",
+            "inst_name": "Nova Merchant Bank Limited"
+      },
+      {
+            "inst_code": "104",
+            "inst_name": "Parallex Bank"
+      },
+      {
+            "inst_code": "076",
+            "inst_name": "Polaris Bank"
+      },
+      {
+            "inst_code": "101",
+            "inst_name": "Providus Bank"
+      },
+      {
+            "inst_code": "502",
+            "inst_name": "Rand Merchant Bank"
+      },
+      {
+            "inst_code": "221",
+            "inst_name": "Stanbic IBTC"
+      },
+      {
+            "inst_code": "068",
+            "inst_name": "Standard Chartered"
+      },
+      {
+            "inst_code": "232",
+            "inst_name": "Sterling Bank"
+      },
+      {
+            "inst_code": "100",
+            "inst_name": "SunTrust Bank"
+      },
+      {
+            "inst_code": "302",
+            "inst_name": "Taj Bank"
+      },
+      {
+            "inst_code": "102",
+            "inst_name": "Titan Trust Bank"
+      },
+      {
+            "inst_code": "033",
+            "inst_name": "United Bank for Africa"
+      },
+      {
+            "inst_code": "032",
+            "inst_name": "Union Bank of Nigeria"
+      },
+      {
+            "inst_code": "215",
+            "inst_name": "Unity Bank Plc"
+      },
+      {
+            "inst_code": "035",
+            "inst_name": "Wema Bank PLC"
+      },
+      {
+            "inst_code": "057",
+            "inst_name": "Zenith Bank PLC"
+      },
+      {
+            "inst_code": "800",
+            "inst_name": "Hope PSB"
+      }
+]

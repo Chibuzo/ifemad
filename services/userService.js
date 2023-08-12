@@ -195,6 +195,7 @@ module.exports = {
     login,
     activateAccount,
     find,
+    view,
     updateUser,
     verifyPasswordResetLink,
     changePassword,

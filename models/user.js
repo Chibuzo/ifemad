@@ -60,6 +60,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.associate = function (models) {
+        User.hasMany(models.Payout, { foreignKey: 'userId' });
+        User.hasMany(models.Contribution, { foreignKey: 'userId' });
     };
 
     return User;

@@ -46,10 +46,10 @@ block content
                 button#pills-bills-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-bills' type='button' role='tab' aria-controls='pills-bills' aria-selected='false')
                     i.ti.ti-user.me-2.fs-6
                     span.d-none.d-md-block Next of Kin
-            li.nav-item(role='presentation')
-                button#pills-security-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-security' type='button' role='tab' aria-controls='pills-security' aria-selected='false')
-                    i.ti.ti-lock.me-2.fs-6
-                    span.d-none.d-md-block Security
+            //- li.nav-item(role='presentation')
+            //-     button#pills-security-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-security' type='button' role='tab' aria-controls='pills-security' aria-selected='false')
+            //-         i.ti.ti-lock.me-2.fs-6
+            //-         span.d-none.d-md-block Security
         .card-body
             #pills-tabContent.tab-content
                 #pills-account.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-account-tab' tabindex='0')
@@ -66,10 +66,10 @@ block content
                                         .row.mb-4
                                             .col
                                                 label.form-label.fw-semibold First Name
-                                                input.form-control(type='text' name="firstname" value=`${user.firstname}` placeholder='John')
+                                                input.form-control(type='text' name="firstname" value=`${user.firstname || ''}` placeholder='John')
                                             .col
                                                 label.form-label.fw-semibold Last Name
-                                                input.form-control(type='text' name="lastname" value=`${user.lastname}` placeholder='Doe')
+                                                input.form-control(type='text' name="lastname" value=`${user.lastname || ''}` placeholder='Doe')
                                             .col
                                                 label.form-label.fw-semibold Middle Name
                                                 input.form-control(type='text' name="middlename" value=`${user.middlename || ''}` placeholder='Optional')
@@ -77,10 +77,10 @@ block content
                                         .row.mb-4
                                             .col
                                                 label.form-label.fw-semibold Email
-                                                input.form-control(type='email' name="email" value=`${user.email}` disabled)
+                                                input.form-control(type='email' name="email" value=`${user.email || ''}` disabled)
                                             .col
                                                 label.form-label.fw-semibold Phone
-                                                input.form-control(type='text' value=`${user.phone}` disabled)
+                                                input.form-control(type='text' value=`${user.phone || ''}` disabled)
 
                                         .row.mb-4
                                             .col 
@@ -90,12 +90,12 @@ block content
                                                     option(value="army") Army
                                             .col
                                                 label.form-label.fw-semibold Current Rank
-                                                input.form-control(type='text' name="rank" value=`${user.rank}` placeholder='Captain')
+                                                input.form-control(type='text' name="currentRank" value=`${user.currentRank || ''}` placeholder='Captain')
 
                                         .row.mb-4 
                                             .col
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Address
-                                                input#exampleInputtext.form-control(type='text' name="address" value=`${user.address}` placeholder='814 Lugbe Street, 120065, FCT')
+                                                input#exampleInputtext.form-control(type='text' name="address" value=`${user.address || ''}` placeholder='814 Lugbe Street, 120065, FCT')
 
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.mt-4.gap-3
@@ -113,29 +113,29 @@ block content
                                             button.btn.btn-primary Upload
                                             button.btn.btn-outline-danger Reset
                                         p.mb-0 Allowed JPG, GIF or PNG.
-                        .col-lg-6.d-flex.align-items-stretch
-                            .card.w-100.position-relative.overflow-hidden
-                                .card-body.p-4
-                                    h5.card-title.fw-semibold Change Password
-                                    p.card-subtitle.mb-4
-                                        | To change your password please confirm
-                                        | here
-                                    form(method="post" action="/user/")
-                                        .mb-4
-                                            label.form-label.fw-semibold(for='exampleInputPassword1')
-                                                | Current
-                                                | Password
-                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
-                                        .mb-4
-                                            label.form-label.fw-semibold(for='exampleInputPassword1')
-                                                | New
-                                                | Password
-                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
-                                        div
-                                            label.form-label.fw-semibold(for='exampleInputPassword1')
-                                                | Confirm
-                                                | Password
-                                            input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                        //- .col-lg-6.d-flex.align-items-stretch
+                        //-     .card.w-100.position-relative.overflow-hidden
+                        //-         .card-body.p-4
+                        //-             h5.card-title.fw-semibold Change Password
+                        //-             p.card-subtitle.mb-4
+                        //-                 | To change your password please confirm
+                        //-                 | here
+                        //-             form(method="post" action="/user/")
+                        //-                 .mb-4
+                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
+                        //-                         | Current
+                        //-                         | Password
+                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                        //-                 .mb-4
+                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
+                        //-                         | New
+                        //-                         | Password
+                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                        //-                 div
+                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
+                        //-                         | Confirm
+                        //-                         | Password
+                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
 
                 #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
                     .row.justify-content-center
@@ -148,7 +148,7 @@ block content
                                             .col-6
                                                 if (documents.appointmentLetter)
                                                     .doc.py-6.px-4.mt-4
-                                                        a(href='#') Appointment Letter 
+                                                        a(href=`${documents.appointmentLetter}` target='_blank') Appointment Letter 
                                                         i.ti.ti-trash#appointmentLetter
                                                 else
                                                     label.form-label.fw-semibold(for='exampleInputPassword1') Appointment Letter
@@ -156,7 +156,7 @@ block content
                                             .col-6
                                                 if (documents.forceId)
                                                     .doc.py-6.px-4.mt-4
-                                                        a(href='#') Force ID
+                                                        a(href=`${documents.forceId}` target='_blank') Force ID
                                                         i.ti.ti-trash#forceId
                                                 else
                                                     label.form-label.fw-semibold(for='') Force ID
@@ -165,7 +165,7 @@ block content
                                             .col-6
                                                 if (documents.birthCertificate)
                                                     .doc.py-6.px-4.mt-4
-                                                        a(href='#') Birth Certificate
+                                                        a(href=`${documents.birthCertificate}` target='_blank') Birth Certificate
                                                         i.ti.ti-trash#birthCertificate
                                                 else
                                                     label.form-label.fw-semibold(for='') Birth Certificate
@@ -173,7 +173,7 @@ block content
                                             .col-6
                                                 if (documents.proofOfAddress)
                                                     .doc.py-6.px-4.mt-4
-                                                        a(href='#') Proof of Address
+                                                        a(href=`${documents.proofOfAddress}` target='_blank') Proof of Address
                                                         i.ti.ti-trash#proofOfAddress
                                                 else
                                                     label.form-label.fw-semibold(for='') Proof of Address
@@ -192,36 +192,36 @@ block content
                                         .row.mb-3
                                             .col
                                                 label.form-label.fw-semibold Full name
-                                                input.form-control(type='text' name='fullname' value=`${beneficiary.fullname}` placeholder='Full name')
+                                                input.form-control(type='text' name='fullname' value=`${beneficiary.fullname || ''}` placeholder='Full name')
 
                                         .row.mb-3
                                             .col
                                                 label.form-label.fw-semibold Email
-                                                input.form-control(type='email' name="email" value=`${beneficiary.email}` placeholder='Email')
+                                                input.form-control(type='email' name="email" value=`${beneficiary.email || ''}` placeholder='Email')
                                             .col
                                                 label.form-label.fw-semibold Phone
-                                                input.form-control(type='text' name='phone' value=`${beneficiary.phone}` placeholder='Phone')
+                                                input.form-control(type='text' name='phone' value=`${beneficiary.phone || ''}` placeholder='Phone')
 
                                         .row.mb-3
                                             .col
                                                 label.form-label.fw-semibold Date of Birth
-                                                input.form-control(type='date' name="dob" value=`${beneficiary.dob}` placeholder='Date of birth')
+                                                input.form-control(type='date' name="dob" value=`${beneficiary.dob || ''}` placeholder='Date of birth')
                                             .col
                                                 label.form-label.fw-semibold Relationship
-                                                input.form-control(type='text' name='relationship' value=`${beneficiary.relationship}` placeholder='wife')
+                                                input.form-control(type='text' name='relationship' value=`${beneficiary.relationship || ''}` placeholder='wife')
 
                                         .row.mb-3 
                                             .col
                                                 label.form-label.fw-semibold Address
-                                                input.form-control(type='text' name='address' value=`${beneficiary.address}` placeholder='Address')
+                                                input.form-control(type='text' name='address' value=`${beneficiary.address || ''}` placeholder='Address')
 
                                         .row.mb-4
                                             .col
                                                 label.form-label.fw-semibold Bank
-                                                input.form-control(type='' name="bank" value=`${beneficiary.bank}` placeholder='')
+                                                input.form-control(type='' name="bank" value=`${beneficiary.bank || ''}` placeholder='')
                                             .col
                                                 label.form-label.fw-semibold Account Number
-                                                input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber}` placeholder='Account Number')
+                                                input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber || ''}` placeholder='Account Number')
 
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.gap-3
@@ -256,7 +256,7 @@ block scriptBlock
                 if (res.status.trim() == 'success') {
                     alert('done!')
                 } else {
-                    alert('wahala')
+                    alert('Error')
                 }
             });
         }
@@ -269,7 +269,7 @@ block scriptBlock
             if (res.status.trim() == 'success') {
                 alert('done!')
             } else {
-                alert('wahala')
+                alert('Error')
             }
         });
 

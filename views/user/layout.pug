@@ -45,18 +45,28 @@ body
                                     i.ti.ti-activity-heartbeat
                                 span.hide-menu Dashboard
                         li.sidebar-item
-                            a.sidebar-link(href='#' aria-expanded='false')
+                            a.sidebar-link(href='/user/contributions' aria-expanded='false')
                                 span
                                     i.ti.ti-file-text
                                 span.hide-menu Contributions
+                        li.sidebar-item
+                            a.sidebar-link(href='/user/payouts' aria-expanded='false')
+                                span
+                                    i.ti.ti-cash
+                                span.hide-menu Payouts
                         li.sidebar-item
                             a.sidebar-link(href='/user/profile' aria-expanded='false')
                                 span
                                     i.ti.ti-user-circle
                                 span.hide-menu Profile
-                    .unlimited-access.hide-menu.bg-light-primary.position-relative.my-7.rounded
-                        .d-flex
-                            .unlimited-access-title
+                        li.sidebar-item
+                            a.sidebar-link(href='/logout' aria-expanded='false')
+                                span
+                                    i.ti.ti-logout
+                                span.hide-menu Logout
+                    //- .unlimited-access.hide-menu.bg-light-primary.position-relative.my-7.rounded
+                    //-     .d-flex
+                    //-         .unlimited-access-title
                 .fixed-profile.p-3.bg-light-secondary.rounded.sidebar-ad.mt-3
                     .hstack.gap-3
                         .john-img
@@ -154,6 +164,8 @@ body
                 block content 
 
 
+    block Modals
+
 // Import Js Files
 script(src='/libs/jquery/dist/jquery.min.js')
 script(src='/libs/simplebar/dist/simplebar.min.js')
@@ -162,7 +174,7 @@ script(src='/libs/bootstrap/dist/js/bootstrap.bundle.min.js')
 script(src='/js/app.min.js')
 script(src='/js/app.init.js')
 script(src='/js/app-style-switcher.js')
-script(src='/js/sidebarmenu.js')
+script(src='/js/sidebarmenu.js') 
 script(src='/js/custom.js')
 
 script. 

@@ -1,0 +1,77 @@
+extends layout 
+
+block content
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 Payouts
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Payouts
+                .col-3
+                    .text-center.mb-n5
+                        img.img-fluid.mb-n4(src='../../dist/images/breadcrumb/ChatBc.png' alt='')
+    .card.w-100.position-relative.overflow-hidden
+        .px-4.py-3.border-bottom
+            .card-title.fw-semibold.mb-0.lh-sm Payouts
+                button.btn.btn-danger.float-end(data-bs-toggle="modal" data-bs-target="#withdrawal-modal") New Payout
+        .card-body.p-4
+            .table-responsive.rounded-2.mb-4
+                table.table
+                    thead
+                        tr
+                            th Date
+                            th Description
+                            th Bank
+                            th Account No.
+                            th Amount
+                            th Status
+
+                    tbody
+                        each trnx in payouts 
+
+                            tr
+                                td= view.formatDate(trnx.createdAt)
+                                td Withdrawal 
+                                td= trnx.bank 
+                                td= trnx.account_number
+                                td= '₦' + view.formatCurrency(trnx.amount) 
+                                td= trnx.status
+
+
+block Modals 
+    #withdrawal-modal.modal.fade
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h5.modal-title Withdrawal Form
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                form(action="/user/withdrawal" method="post")   
+                    .modal-body
+                        .form-group.mb-3
+                            .col
+                                label.form-label Bank 
+                                select.form-control#account-type(name="bank" required)
+                                    option(value="") -- Choose Bank --
+                                    each bank in banks
+                                        option(value=`${bank.inst_name}`) #{bank.inst_name}
+
+                        .form-group.mb-3
+                            label.form-label Account Number 
+                            input.form-control(name="account_number" type="text" required)
+                        .form-group.mb-3 
+                            label.form-label Account Name 
+                            input.form-control(name="account_name" type="text" required)
+                        .form-group.mb-3 
+                            label.form-label Amount 
+                            input.form-control#amount(name="amount" type="text" required)  
+
+                        .form-group 
+                            .alert.alert-info.d-none 
+
+                    .modal-footer
+                        button.btn.btn-white.pull-left(type='button' data-bs-dismiss='modal') Close
+                        button.btn.btn-primary#withdrawal-btn(type='submit') Send Request

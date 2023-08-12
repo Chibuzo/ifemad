@@ -1,0 +1,88 @@
+extends layout 
+
+block content
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 Contributions
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Contributions
+                .col-3
+                    .text-center.mb-n5
+
+    .card.w-100.position-relative.overflow-hidden
+        .px-4.py-3.border-bottom
+            .card-title.fw-semibold.mb-0.lh-sm Annual Contributions
+                button.btn.btn-danger.float-end(data-bs-toggle="modal" data-bs-target="#confirmationModal") New Contribution
+        .card-body.p-4
+            .table-responsive.rounded-2.mb-4
+                table.table
+                    thead
+                        tr
+                            th Date
+                            th Reference
+                            th Channel
+                            th Amount
+                            th Status
+
+                    tbody
+                        each trnx in contributions
+                            tr
+                                td= view.formatDate(trnx.createdAt)
+                                td= trnx.reference 
+                                td= trnx.channel 
+                                td= '₦' + view.formatCurrency(trnx.amount) 
+                                td= trnx.status
+
+block Modals 
+    #confirmationModal.modal.fade(tabindex='0' aria-hidden='true')
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    h5.modal-title Confirm Contribution Amount
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close') 
+
+                .modal-body
+                    .card.text-center
+                        .card-header
+                            | #[strong You are about to pay in:]
+                        .card-body
+                            p.mb-1 Total amount to invest:
+                                .form-group.row.justify-content-md-center
+                                    .col-md-2
+                                        input.form-control(type="text" value="12000")
+
+                .modal-footer
+                    button.btn.btn-success(type='button' onClick=`payWithPaystack(10000)`) Continue to Payment 
+
+block scriptBlock
+    //- script(src="https://js.paystack.co/v1/inline.js")
+    //- script. 
+
+    //-     function payWithPaystack(amount) {
+    //-         const handler = PaystackPop.setup({
+    //-             key: !{JSON.stringify(publicKey)},
+    //-             email: !{JSON.stringify(user.email)},
+    //-             amount,
+    //-             currency: 'NGN',
+    //-             callback: function(response) {
+    //-                 const { reference, status } = response;
+
+    //-                 fetch("/complete-payment", {
+    //-                     method: 'POST',
+    //-                     headers: {
+    //-                         "Content-Type": "application/json",
+    //-                     },
+    //-                     body: JSON.stringify({ reference })
+    //-                 }).then((d) => { location.reload() });
+    //-             },
+    //-             onClose: function(){
+    //-                 alert('Payment cancelled');
+    //-             }
+    //-         });
+    //-         handler.openIframe();
+    //-     }
