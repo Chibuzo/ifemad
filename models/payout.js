@@ -5,15 +5,15 @@ const { Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     const Payout = sequelize.define('Payout', {
         bank: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         account_name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(60),
             allowNull: false
         },
         account_number: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(10),
             allowNull: false
         },
         amount: {

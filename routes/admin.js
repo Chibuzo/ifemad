@@ -4,8 +4,8 @@ const adminService = require('../services/adminService');
 const authenticateAdmin = require('../middlewares/authenticateAdmin');
 const walletService = require('../services/walletService');
 const userService = require('../services/userService');
-const paymentService = require('../services/paymentService');
-const { User } = require('../models');
+const contributionService = require('../services/contributionService');
+const { User, sequelize } = require('../models');
 
 
 router.get('/', function (req, res) {
@@ -35,39 +35,37 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.get('/dashboard', authenticateAdmin, async (req, res, next) => {
-    const criteria = {
-        where: {
-            description: 'withdrawal', status: 'pending'
-        },
-        attributes: ['id', 'amount', 'status', 'createdAt'],
-        include: {
-            model: User,
-            attributes: ['id', 'fullname']
-        },
-        order: [
-            ['createdAt', 'DESC']
-        ]
-    };
-    const { transactions: withdrawals } = await walletService.fetchTransactions(criteria);
-    res.render('admin/dashboard', { withdrawals });
+    // const criteria = {
+    //     where: {
+    //         description: 'withdrawal', status: 'pending'
+    //     },
+    //     attributes: ['id', 'amount', 'status', 'createdAt'],
+    //     include: {
+    //         model: User,
+    //         attributes: ['id', 'fullname']
+    //     },
+    //     order: [
+    //         ['createdAt', 'DESC']
+    //     ]
+    // };
+    // const { transactions: withdrawals } = await walletService.fetchTransactions(criteria);
+    res.render('admin/dashboard', {});
 });
 
 
-router.get('/payments', authenticateAdmin, async (req, res, next) => {
+router.get('/contributions', async (req, res, next) => {
     try {
         const criteria = {
             include: [
                 {
                     model: User,
-                    attributes: ['id', 'fullname']
+                    attributes: ['id', [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname']]
                 }
-            ],
-            order: [
-                ['createdAt', 'DESC']
             ]
         };
-        const payments = await paymentService.listPayments(criteria);
-        res.render('admin/payments', { payments });
+        const contributions = await contributionService.list(criteria);
+        console.log({ contributions })
+        res.render('admin/contribution', { contributions });
     } catch (err) {
         next(err);
     }

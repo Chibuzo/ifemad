@@ -51,6 +51,16 @@ router.post('/delete-document', async (req, res, next) => {
     }
 });
 
+router.post('/contribution', async (req, res, next) => {
+    try {
+        const userId = req.session.user.id;
+        const resp = await contributionService.create({ ...req.body, userId });
+        res.json({ status: 'success', reference: resp.reference });
+    } catch (err) {
+        res.json({ status: 'error', message: err.message });
+    }
+});
+
 router.get('/contributions', async (req, res, next) => {
     try {
         const user = req.session.user;

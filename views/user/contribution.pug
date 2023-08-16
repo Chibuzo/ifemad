@@ -51,38 +51,53 @@ block Modals
                         .card-header
                             | #[strong You are about to pay in:]
                         .card-body
-                            p.mb-1 Total amount to invest:
+                            p.mb-1 Minimum amount to pay:
                                 .form-group.row.justify-content-md-center
                                     .col-md-2
-                                        input.form-control(type="text" value="12000")
+                                        input.form-control(type="text" id="amount" value="12000")
 
                 .modal-footer
-                    button.btn.btn-success(type='button' onClick=`payWithPaystack(10000)`) Continue to Payment 
+                    button.btn.btn-success(type='button' onClick=`createContribution()`) Continue to Payment 
 
 block scriptBlock
-    //- script(src="https://js.paystack.co/v1/inline.js")
-    //- script. 
+    script(src="https://js.paystack.co/v1/inline.js")
+    script. 
 
-    //-     function payWithPaystack(amount) {
-    //-         const handler = PaystackPop.setup({
-    //-             key: !{JSON.stringify(publicKey)},
-    //-             email: !{JSON.stringify(user.email)},
-    //-             amount,
-    //-             currency: 'NGN',
-    //-             callback: function(response) {
-    //-                 const { reference, status } = response;
+        function createContribution() {
+            const amount = +document.getElementById("amount").value;
+            fetch("/user/contribution", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ amount })
+            }).then((d) => { return d.json(); }).then(d => {
+                if (d.status.trim() == 'success') {
+                    payWithPaystack(amount * 100, d.reference);
+                }
+            });
+        }
 
-    //-                 fetch("/complete-payment", {
-    //-                     method: 'POST',
-    //-                     headers: {
-    //-                         "Content-Type": "application/json",
-    //-                     },
-    //-                     body: JSON.stringify({ reference })
-    //-                 }).then((d) => { location.reload() });
-    //-             },
-    //-             onClose: function(){
-    //-                 alert('Payment cancelled');
-    //-             }
-    //-         });
-    //-         handler.openIframe();
-    //-     }
+        function payWithPaystack(amount, ref) {
+            const handler = PaystackPop.setup({
+                key: !{JSON.stringify(publicKey)},
+                email: !{JSON.stringify(user.email)},
+                amount,
+                ref,
+                currency: 'NGN',
+                callback: function(response) {
+                    const { reference, status } = response;
+
+                    fetch("/complete-payment?reference=" + reference, {
+                        method: 'GET',
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    }).then((d) => { location.reload() });
+                },
+                onClose: function(){
+                    alert('Payment cancelled');
+                }
+            });
+            handler.openIframe();
+        }

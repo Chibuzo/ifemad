@@ -50,7 +50,7 @@ body
                                     i.ti.ti-users
                                 span.hide-menu Users
                         li.sidebar-item
-                            a.sidebar-link(href='#' aria-expanded='false')
+                            a.sidebar-link(href='/admin/contributions' aria-expanded='false')
                                 span
                                     i.ti.ti-file-text
                                 span.hide-menu Contributions
@@ -59,9 +59,11 @@ body
                                 span
                                     i.ti.ti-user-circle
                                 span.hide-menu Profile
-                    .unlimited-access.hide-menu.bg-light-primary.position-relative.my-7.rounded
-                        .d-flex
-                            .unlimited-access-title
+                        li.sidebar-item
+                            a.sidebar-link(href='/logout' aria-expanded='false')
+                                span
+                                    i.ti.ti-logout
+                                span.hide-menu Logout
                 .fixed-profile.p-3.bg-light-secondary.rounded.sidebar-ad.mt-3
                     .hstack.gap-3
                         .john-img
