@@ -28,7 +28,7 @@ router.post('/create', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         req.session.admin = await adminService.login(req.body);
-        res.redirect('/admin/dashboard');
+        res.redirect('/admin/users');
     } catch (err) {
         next(err);
     }
