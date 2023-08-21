@@ -1,213 +1,213 @@
 extend layout
 
 block content
-    .container-fluid
-        .row
-            .col-12
-                .d-flex.align-items-center.gap-4.mb-4
-                    .position-relative
-                        .border.border-2.border-primary.rounded-circle
-                            img.rounded-circle.m-1(src='/images/profile/user-6.jpg' alt='user1' width='60')
-                            span.visually-hidden 
+  .container-fluid
+    .row
+      .col-12
+        .d-flex.align-items-center.gap-4.mb-4
+          .position-relative
+            .border.border-2.border-primary.rounded-circle
+              img.rounded-circle.m-1(src='/images/profile/user-6.jpg' alt='user1' width='60')
+              span.visually-hidden 
+          div
+            h3.fw-semibold
+              | Hi, 
+              span.text-dark #{user.firstname}
+            span Cheers, and happy activities - #{view.formatDate(Date.now())}
+        .card
+          .card-body
+            .row.pb-4
+              .col-lg-4.d-flex.align-items-stretch
+                .d-flex.flex-column.align-items-start.w-100
+                  .text-start
+                    h5.card-title.fw-semibold Financial Progress
+                    span #{chartData.categories[chartData.categories.length - 1]} - #{chartData.categories[0]}
+                  .mt-lg-auto.mt-4.mb-4
+                    span.text-dark
+                      | Total Contribution 
+                      span.text-success 
+                    h2.mt-2.fw-bold N#{view.formatCurrency(totalContribution)}
+                    //- span Increased 15% from last month
+              .col-lg-8.d-flex.align-items-stretch
+                .w-100
+                  .d-md-flex.align-items-start.gap-3
                     div
-                        h3.fw-semibold
-                            | Hi, 
-                            span.text-dark #{user.firstname}
-                        span Cheers, and happy activities - #{view.formatDate(Date.now())}
-                .card
-                    .card-body
-                        .row.pb-4
-                            .col-lg-4.d-flex.align-items-stretch
-                                .d-flex.flex-column.align-items-start.w-100
-                                    .text-start
-                                        h5.card-title.fw-semibold Financial Progress
-                                        span #{chartData.categories[chartData.categories.length - 1]} - #{chartData.categories[0]}
-                                    .mt-lg-auto.mt-4.mb-4
-                                        span.text-dark
-                                            | Total Contribution 
-                                            span.text-success 
-                                        h2.mt-2.fw-bold N#{view.formatCurrency(totalContribution)}
-                                        //- span Increased 15% from last month
-                            .col-lg-8.d-flex.align-items-stretch
-                                .w-100
-                                    .d-md-flex.align-items-start.gap-3
-                                        div
-                                            h6.mb-0 Contribution Goal Progress
-                                            .d-flex.align-items-center.gap-3
-                                                h2.mt-2.fw-bold 
+                      h6.mb-0 Contribution Goal Progress
+                      .d-flex.align-items-center.gap-3
+                        h2.mt-2.fw-bold 
 
-                                        .ms-auto
-                                        //-   select.form-select
-                                        //-     option(value='1') March 2023
-                                        //-     option(value='2') April 2023
-                                        //-     option(value='3') May 2023
-                                        //-     option(value='4') June 2023
-                                    .mt-4
-                                        #financial
-                    .border-top
-                        .row.gx-0
-                            .col-md-4.border-end
-                                .p-4.py-3.py-md-4
-                                    p.fs-4.text-danger.mb-0
-                                        span.text-danger
-                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1
-                                        | Payouts
-                                    h3.mt-2.mb-0 N#{view.formatCurrency(totalPayouts)}
-                            .col-md-4.border-end
-                                .p-4.py-3.py-md-4
-                                    p.fs-4.text-primary.mb-0
-                                        span.text-primary
-                                            span.round-8.bg-primary.rounded-circle.d-inline-block.me-1
-                                        | Contributions
-                                    h3.mt-2.mb-0 #{totalNumOfContributions}
-                            .col-md-4
-                                .p-4.py-3.py-md-4
-                                    p.fs-4.text-info.mb-0
-                                        span.text-info
-                                            span.round-8.bg-info.rounded-circle.d-inline-block.me-1
-                                        | Payout Requests
-                                    h3.mt-2.mb-0 #{totalNumOfPayouts}
+                    .ms-auto
+                    //-   select.form-select
+                    //-     option(value='1') March 2023
+                    //-     option(value='2') April 2023
+                    //-     option(value='3') May 2023
+                    //-     option(value='4') June 2023
+                  .mt-4
+                    #financial
+          .border-top
+            .row.gx-0
+              .col-md-4.border-end
+                .p-4.py-3.py-md-4
+                  p.fs-4.text-danger.mb-0
+                    span.text-danger
+                      span.round-8.bg-danger.rounded-circle.d-inline-block.me-1
+                    | Payouts
+                  h3.mt-2.mb-0 N#{view.formatCurrency(totalPayouts)}
+              .col-md-4.border-end
+                .p-4.py-3.py-md-4
+                  p.fs-4.text-primary.mb-0
+                    span.text-primary
+                      span.round-8.bg-primary.rounded-circle.d-inline-block.me-1
+                    | Contributions
+                  h3.mt-2.mb-0 #{totalNumOfContributions}
+              .col-md-4
+                .p-4.py-3.py-md-4
+                  p.fs-4.text-info.mb-0
+                    span.text-info
+                      span.round-8.bg-info.rounded-circle.d-inline-block.me-1
+                    | Payout Requests
+                  h3.mt-2.mb-0 #{totalNumOfPayouts}
 
 
-            .col-lg-12
-                .card
-                    .card-body
-                        .d-md-flex.align-items-center.mb-9
-                            div
-                                h5.card-title.fw-semibold Recent Transactions
-                                p.card-subtitle Monthly Contributions
-                            .ms-auto.mt-4.mt-md-0
-                                ul.nav.nav-tabs(role='tablist')
-                                    li.nav-item
-                                        a.nav-link.active(data-bs-toggle='tab' href='#home' role='tab')
-                                            span Contributions
-                                    li.nav-item
-                                        a.nav-link(data-bs-toggle='tab' href='#profile' role='tab')
-                                            span Payouts
-                        // Tab panes
-                        .tab-content.mt-3
-                            #home.tab-pane.active(role='tabpanel')
-                                .table-responsive
-                                    table.table.align-middle.mb-0.text-nowrap
-                                        tbody
-                                            each recent in recentContributions
-                                                tr
-                                                    td.ps-0
-                                                        .d-flex.align-items-center.gap-3
-                                                            div
-                                                                h6.mb-0.fw-semibold #{view.formatDate(recent.createdAt)}
-                                                                span.fs-2 #{view.formatTime(recent.createdAt)}
-                                                    td.ps-0
-                                                        span Monthly Contribution
-                                                    td.ps-0
-                                                        h6.mb-0 N#{view.formatCurrency(recent.amount)}
-                                                    td.ps-0
-                                                        if (recent.status == 'pending') 
-                                                            span.badge.bg-light-warning.text-warning.rounded-pill
-                                                                span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
-                                                                | #{recent.status}
-                                                        else if (recent.status == 'success') 
-                                                            span.badge.bg-light-success.text-success.rounded-pill
-                                                                span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
-                                                                | #{recent.status}
-                                                        else if (recent.status == 'failed') 
-                                                            span.badge.bg-light-danger.text-danger.rounded-pill
-                                                                span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
-                                                                | #{recent.status}
+      .col-lg-12
+        .card
+          .card-body
+            .d-md-flex.align-items-center.mb-9
+              div
+                h5.card-title.fw-semibold Recent Transactions
+                p.card-subtitle Monthly Contributions
+              .ms-auto.mt-4.mt-md-0
+                ul.nav.nav-tabs(role='tablist')
+                  li.nav-item
+                    a.nav-link.active(data-bs-toggle='tab' href='#home' role='tab')
+                      span Contributions
+                  li.nav-item
+                    a.nav-link(data-bs-toggle='tab' href='#profile' role='tab')
+                      span Payouts
+            // Tab panes
+            .tab-content.mt-3
+              #home.tab-pane.active(role='tabpanel')
+                .table-responsive
+                  table.table.align-middle.mb-0.text-nowrap
+                    tbody
+                      each recent in recentContributions
+                        tr
+                          td.ps-0
+                            .d-flex.align-items-center.gap-3
+                              div
+                                h6.mb-0.fw-semibold #{view.formatDate(recent.createdAt)}
+                                span.fs-2 #{view.formatTime(recent.createdAt)}
+                          td.ps-0
+                            span Monthly Contribution
+                          td.ps-0
+                            h6.mb-0 N#{view.formatCurrency(recent.amount)}
+                          td.ps-0
+                            if (recent.status == 'pending') 
+                              span.badge.bg-light-warning.text-warning.rounded-pill
+                                span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                | #{recent.status}
+                            else if (recent.status == 'success') 
+                              span.badge.bg-light-success.text-success.rounded-pill
+                                span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                | #{recent.status}
+                            else if (recent.status == 'failed') 
+                              span.badge.bg-light-danger.text-danger.rounded-pill
+                                span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                | #{recent.status}
 
-                            #profile.tab-pane(role='tabpanel')
-                                .table-responsive
-                                    if (recentPayouts) 
-                                        table.table.align-middle.mb-0.text-nowrap
-                                            tbody
-                                                each recent in recentPayouts
-                                                    tr
-                                                        td.ps-0
-                                                            .d-flex.align-items-center.gap-3
-                                                                div
-                                                                    h6.mb-0.fw-semibold #{view.formatDate(recent.createdAt)}
-                                                                    span.fs-2 #{view.formatTime(recent.createdAt)}
-                                                        td.ps-0
-                                                            span Withdrawal request
-                                                        td.ps-0
-                                                            h6.mb-0 N#{view.formatCurrency(recent.amount)}
-                                                        td.ps-0
-                                                            if (recent.status == 'pending') 
-                                                                span.badge.bg-light-warning.text-warning.rounded-pill
-                                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
-                                                                    | #{recent.status}
-                                                            else if (recent.status == 'paid') 
-                                                                span.badge.bg-light-success.text-success.rounded-pill
-                                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
-                                                                    | #{recent.status}
-                                                            else if (recent.status == 'rejected') 
-                                                                span.badge.bg-light-danger.text-danger.rounded-pill
-                                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
-                                                                    | #{recent.status}
-                                    else
-                                        p No Recent Payouts
+              #profile.tab-pane(role='tabpanel')
+                .table-responsive
+                  if (recentPayouts) 
+                    table.table.align-middle.mb-0.text-nowrap
+                      tbody
+                        each recent in recentPayouts
+                          tr
+                            td.ps-0
+                              .d-flex.align-items-center.gap-3
+                                div
+                                  h6.mb-0.fw-semibold #{view.formatDate(recent.createdAt)}
+                                  span.fs-2 #{view.formatTime(recent.createdAt)}
+                            td.ps-0
+                              span Withdrawal request
+                            td.ps-0
+                              h6.mb-0 N#{view.formatCurrency(recent.amount)}
+                            td.ps-0
+                              if (recent.status == 'pending') 
+                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                  span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                  | #{recent.status}
+                              else if (recent.status == 'paid') 
+                                span.badge.bg-light-success.text-success.rounded-pill
+                                  span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                  | #{recent.status}
+                              else if (recent.status == 'rejected') 
+                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                  span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                  | #{recent.status}
+                  else
+                    p No Recent Payouts
 
 
 block scriptBlock
-    script(src='/libs/apexcharts/dist/apexcharts.min.js')
-    script. 
-        const chart_data = !{JSON.stringify(chartData)};
-        console.log({chart_data})
-        $(function () {
-            var chart = {
-                series: [
-                    {
-                        name: "Selling Product",
-                        data: chart_data.data,
-                    }
-                ],
-                chart: {
-                    toolbar: {
-                        show: false,
-                    },
-                    type: "line",
-                    fontFamily: "DM Sans,sans-serif",
-                    foreColor: "#adb0bb",
-                    height: 200,
-                },
-                colors: ["#fa896b", "#615dff", "#3dd9eb"],
-                dataLabels: {
-                    enabled: false,
-                },
-                legend: {
-                    show: false,
-                },
-                stroke: {
-                    curve: "smooth",
-                    width: 3,
-                },
-                grid: {
-                    borderColor: 'rgba(0,0,0,0.1)' 
-                    ,strokeDashArray: 3,
-                    xaxis: {
-                        lines: {
-                            show: false,
-                        },
-                    },
-                    padding: {
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        left: 0,
-                    },
-                },
-                xaxis: {
-                    categories: chart_data.categories,
-                },
-                yaxis: {
-                    tickAmount: 4,
-                },
-                tooltip: {
-                    theme: "dark",
-                },
-            };
+  script(src='/libs/apexcharts/dist/apexcharts.min.js')
+  script. 
+    const chart_data = !{JSON.stringify(chartData)};
+    console.log({chart_data})
+    $(function () {
+      var chart = {
+        series: [
+          {
+            name: "Selling Product",
+            data: chart_data.data,
+          }
+        ],
+        chart: {
+          toolbar: {
+            show: false,
+          },
+          type: "line",
+          fontFamily: "DM Sans,sans-serif",
+          foreColor: "#adb0bb",
+          height: 200,
+        },
+        colors: ["#fa896b", "#615dff", "#3dd9eb"],
+        dataLabels: {
+          enabled: false,
+        },
+        legend: {
+          show: false,
+        },
+        stroke: {
+          curve: "smooth",
+          width: 3,
+        },
+        grid: {
+          borderColor: 'rgba(0,0,0,0.1)' 
+          ,strokeDashArray: 3,
+          xaxis: {
+            lines: {
+              show: false,
+            },
+          },
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+          },
+        },
+        xaxis: {
+          categories: chart_data.categories,
+        },
+        yaxis: {
+          tickAmount: 4,
+        },
+        tooltip: {
+          theme: "dark",
+        },
+      };
 
-            var chart = new ApexCharts(document.querySelector("#financial"), chart);
-            chart.render();
-        });
+      var chart = new ApexCharts(document.querySelector("#financial"), chart);
+      chart.render();
+    });
 

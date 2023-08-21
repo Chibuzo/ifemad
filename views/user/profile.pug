@@ -17,6 +17,18 @@ block styleBlock
             cursor: pointer
         }
 
+        .notie-container {
+            font-size: 1.1rem;
+        }
+
+        .notie-alert {
+            z-index: 1000 !important;
+        }
+
+        .notie-textbox {
+            padding: 10px
+        }
+
 block content 
 
     .card.bg-light-info.shadow-none.position-relative.overflow-hidden
@@ -262,9 +274,9 @@ block scriptBlock
                 const formData = serialize(data);
                 const res = await postForm("/user/update", formData);
                 if (res.status.trim() == 'success') {
-                    alert('done!')
+                    notify(1, 'Details saved successfully')
                 } else {
-                    alert('Error')
+                    notify(3, 'Operation could not be completed at the moment')
                 }
             });
         }
@@ -275,9 +287,9 @@ block scriptBlock
             const formData = serialize(data);
             const res = await postForm("/user/beneficiaries", formData);
             if (res.status.trim() == 'success') {
-                alert('done!')
+                notify(1, 'Details saved successfully')
             } else {
-                alert('Error')
+                notify(3, 'Operation could not be completed at the moment')
             }
         });
 
@@ -290,6 +302,17 @@ block scriptBlock
                         location.reload();
                     }
                 }
+            });
+        }
+
+
+        function notify(type = 1, text = 'Success') {
+            notie.alert({
+                type, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+                text,
+                stay: false, // optional, default = false
+                time: 5, // optional, default = 3, minimum = 1,
+                position: 'bottom' // optional, default = 'top', enum: ['top', 'bottom']
             });
         }
 
