@@ -32,7 +32,7 @@ const create = async ({ firstname, lastname, email, phone, password }) => {
         password: passwordHash
     };
     const newUser = await User.create(data);
-    // emailService.sendConfirmationEmail(newUser);
+    emailService.sendConfirmationEmail(newUser);
     delete newUser.password;
     return newUser;
 }
@@ -55,10 +55,10 @@ const login = async ({ email, password }) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) throw new ErrorHandler(400, 'Email and password doesn\'t match');
 
-    // if (user.status === 'inactive') {
-    //     // return { status: false, email: user.email };
-    //     throw new ErrorHandler(400, 'Your account is inactive. Check your email for the verification link');
-    // }
+    if (user.status === 'inactive') {
+        // return { status: false, email: user.email };
+        throw new ErrorHandler(400, 'Your account is inactive. Check your email for the verification link');
+    }
 
     // send OTP
     const otp = sendOtp(user);
@@ -88,8 +88,8 @@ const activateAccount = async (email_hash, hash_string) => {
     if (hash_string !== hash) {
         throw new ErrorHandler(400, 'Invalid hash. couldn\'t verify your email');
     }
-    await User.update({ status: 'Active' }, { where: { email } });
-    return { ...user, status: 'Active' };
+    await User.update({ status: 'active' }, { where: { email } });
+    return { ...user, status: 'active' };
 }
 
 const verifyPasswordResetLink = async (email_hash, hash_string) => {
@@ -161,7 +161,7 @@ const uploadDocuments = async (selectedDocuments, userId) => {
         const allowedFileTypes = ['application/pdf', 'image/png', 'image/jpeg'];
         if (!allowedFileTypes.includes(documentFile.mimetype)) {
             errors[objKey] = 'Unsupported file type';
-            return docs;
+            return errors;
         }
         const key = `user-documents/${crypto.randomUUID()}${path.extname(documentFile.name)}`;
         const { Location } = await s3Upload(S3_BUCKET, key, documentFile.data);

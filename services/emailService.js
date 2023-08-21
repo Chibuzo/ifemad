@@ -35,7 +35,7 @@ const SENT_FROM = 'support@dumena.com';
 
 const sendMail = (to, subject, template, data) => {
     let mailOptions = {
-        from: '"Ecoblue Token" <' + SENT_FROM + '>',
+        from: '"Ifemad" <' + SENT_FROM + '>',
         to: to,
         subject: subject,
         template: template,
@@ -52,13 +52,13 @@ const sendMail = (to, subject, template, data) => {
 
 module.exports = {
     sendConfirmationEmail: function (user) {
-        if (user.fullname.length > 60) return;
+        if (user.firstname.length > 60) return;
         const email_b64 = Buffer.from(user.email).toString('base64');
         const crypto = require('crypto');
         const hash = crypto.createHash('md5').update(user.email + 'okirikwenEE129Okpkenakai').digest('hex');
 
         const data = {
-            user: user.fullname,
+            user: user.firstname,
             url: BASE_URL + 'activate/' + email_b64 + '/' + hash,
             base_url: BASE_URL
         };
@@ -78,7 +78,7 @@ module.exports = {
             url: BASE_URL + 'password-reset/' + email_b64 + '/' + hash,
             base_url: BASE_URL
         };
-        const subject = "Ecoblue Password Reset Link";
+        const subject = "Ifemad Password Reset Link";
         const template = 'passwordReset';
         sendMail(user.email, subject, template, data);
     },
@@ -97,8 +97,8 @@ module.exports = {
         sendMail(user.email, subject, template, data);
     },
 
-    emailEcoBlue: function ({ sender_email, sender_name, sender_phone = '', subject = 'From FAQ', message }) {
-        const template = 'ecoblueEmail';
+    emailIfemad: function ({ sender_email, sender_name, sender_phone = '', subject = 'From FAQ', message }) {
+        const template = 'IfemadEmail';
         const data = {
             sender_name,
             sender_email,

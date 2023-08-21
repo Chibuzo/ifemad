@@ -65,7 +65,7 @@ router.post('/contribution', async (req, res, next) => {
 router.get('/contributions', async (req, res, next) => {
     try {
         const user = req.session.user;
-        const contributions = await contributionService.list({ userId: user.id });
+        const contributions = await contributionService.list({ where: { userId: user.id } });
         res.render('user/contribution', { user, contributions, publicKey: process.env.PUBLIC_KEY });
     } catch (err) {
         next(err);
