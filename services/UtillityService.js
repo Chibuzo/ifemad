@@ -7,13 +7,6 @@ const generateUniqueValue = (length = 35, num = false, prefix = null) => {
 }
 
 module.exports = {
-    buildCriteria: (criteria, deleteFlag = true) => {
-        const { where = {} } = criteria;
-        delete criteria.where;
-        if (deleteFlag) where.deleted = false;
-        return { criteria, where };
-    },
-
     generateOTP: () => {
         return chance.string({ length: 6, pool: '0123456789' });
     },
@@ -30,5 +23,7 @@ module.exports = {
 
     generateUniqueValue,
 
-    formatDate: date => new Date(date).toLocaleDateString('en-GB')
+    formatDate: date => new Date(date).toLocaleDateString('en-GB'),
+
+    formatTime: date => new Date(date).toLocaleTimeString('en-US')
 }

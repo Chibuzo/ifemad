@@ -39,7 +39,19 @@ block content
                                 td= trnx.bank 
                                 td= trnx.account_number
                                 td= '₦' + view.formatCurrency(trnx.amount) 
-                                td= trnx.status
+                                td
+                                    if (trnx.status == 'pending') 
+                                        span.badge.bg-light-warning.text-warning.rounded-pill
+                                            span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'paid') 
+                                        span.badge.bg-light-success.text-success.rounded-pill
+                                            span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'rejected') 
+                                        span.badge.bg-light-danger.text-danger.rounded-pill
+                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
 
 
 block Modals 
@@ -73,5 +85,5 @@ block Modals
                             .alert.alert-info.d-none 
 
                     .modal-footer
-                        button.btn.btn-white.pull-left(type='button' data-bs-dismiss='modal') Close
+                        button.btn.btn-secondary.pull-left(type='button' data-bs-dismiss='modal') Close
                         button.btn.btn-primary#withdrawal-btn(type='submit') Send Request

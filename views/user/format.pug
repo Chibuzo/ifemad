@@ -1,0 +1,277 @@
+.container-fluid
+    .row
+        .col-12
+            .d-flex.align-items-center.gap-4.mb-4
+                .position-relative
+                    .border.border-2.border-primary.rounded-circle
+                        img.rounded-circle.m-1(src='./dist/images/profile/user-6.jpg' alt='user1' width='60')
+                    span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-primary
+                        | 3 
+                        span.visually-hidden unread messages
+                div
+                    h3.fw-semibold
+                        | Hi, 
+                        span.text-dark Mary
+                    span Cheers, and happy activities - July 6 2023
+            .card
+                .card-body
+                    .row.pb-4
+                        .col-lg-4.d-flex.align-items-stretch
+                            .d-flex.flex-column.align-items-start.w-100
+                                .text-start
+                                    h5.card-title.fw-semibold Financial Progress
+                                    span Aug 1, 2023 - Nov 1, 2023
+                                .mt-lg-auto.mt-4.mb-4
+                                    span.text-dark
+                                        | Total Contribution 
+                                        span.text-success +9.78%
+                                    h2.mt-2.fw-bold N240,000
+                                    span Increased 15% from last month
+                        .col-lg-8.d-flex.align-items-stretch
+                            .w-100
+                                .d-md-flex.align-items-start.gap-3
+                                    div
+                                        h6.mb-0 Contribution Goal Progress
+                                        .d-flex.align-items-center.gap-3
+                                            h2.mt-2.fw-bold 75%
+                                            span.badge.bg-primary.px-2.py-1.d-flex.align-items-center
+                                                i.ti.ti-chevron-down.fs-4
+                                                | 2.8%
+                                    .ms-auto
+                                        select.form-select
+                                            option(value='1') March 2023
+                                            option(value='2') April 2023
+                                            option(value='3') May 2023
+                                            option(value='4') June 2023
+                                .mt-4
+                                    #financial
+                .border-top
+                    .row.gx-0
+                        .col-md-4.border-end
+                            .p-4.py-3.py-md-4
+                                p.fs-4.text-danger.mb-0
+                                    span.text-danger
+                                        span.round-8.bg-danger.rounded-circle.d-inline-block.me-1
+                                    | Payouts
+                                h3.mt-2.mb-0 N850,000
+                        .col-md-4.border-end
+                            .p-4.py-3.py-md-4
+                                p.fs-4.text-primary.mb-0
+                                    span.text-primary
+                                        span.round-8.bg-primary.rounded-circle.d-inline-block.me-1
+                                    | Contributions
+                                h3.mt-2.mb-0 87
+                        .col-md-4
+                            .p-4.py-3.py-md-4
+                                p.fs-4.text-info.mb-0
+                                    span.text-info
+                                        span.round-8.bg-info.rounded-circle.d-inline-block.me-1
+                                    | Payout Requests
+                                h3.mt-2.mb-0 4
+        .col-lg-5.d-flex.align-items-stretch
+            .card.w-100
+                .card-body
+                    h5.card-title.fw-semibold Recent Activity
+                    p.card-subtitle Keep track of recent activities
+                    .mt-9.py-6.d-flex.align-items-center
+                        .flex-shrink-0.bg-light-primary.rounded-circle.round.d-flex.align-items-center.justify-content-center
+                            i.ti.ti-map-pin.text-primary.fs-6
+                        .ms-3
+                            h6.mb-0.fw-semibold Requested Payout
+                            span.fs-3 School fees
+                        .ms-auto
+                            span.fs-2 N50,000
+                    .py-6.d-flex.align-items-center
+                        .flex-shrink-0.bg-light-danger.rounded-circle.round.d-flex.align-items-center.justify-content-center
+                            i.ti.ti-bookmark.fs-6.text-danger
+                        .ms-3
+                            h6.mb-0.fw-semibold Updated Profile
+                            span.fs-3 Change address
+                        .ms-auto
+                            span.fs-2 3:52 PM
+                    .py-6.d-flex.align-items-center
+                        .flex-shrink-0.bg-light-success.rounded-circle.round.d-flex.align-items-center.justify-content-center
+                            i.ti.ti-microphone.fs-6.text-success
+                        .ms-3
+                            h6.mb-0.fw-semibold Reached Monthy Contribution goals
+                            span.fs-3 Congratulations!
+                        .ms-auto
+                            span.fs-2 N30,000
+                    .py-6.d-flex.align-items-center
+                        .flex-shrink-0.bg-light-warning.rounded-circle.round.d-flex.align-items-center.justify-content-center
+                            i.ti.ti-cast.text-warning.fs-6
+                        .ms-3
+                            h6.mb-0.fw-semibold Payout Rejected
+                            span.fs-3 Insufficient Balance
+                        .ms-auto
+                            span.fs-2 N85,000
+                    .pt-6.d-flex.align-items-center
+                        .flex-shrink-0.bg-light-info.rounded-circle.round.d-flex.align-items-center.justify-content-center
+                            i.ti.ti-mail.text-info.fs-6
+                        .ms-3
+                            h6.mb-0.fw-semibold Verifed Account
+                            span.fs-3 Welcome onbaord
+                        .ms-auto
+                            span.fs-2 6:00 PM
+        .col-lg-7.d-flex.align-items-stretch
+            .card.w-100.bg-light-primary.overflow-hidden
+                .card-body
+                    .d-flex.align-items-center
+                        div
+                            h5.card-title.fw-semibold Daily Contributions
+                            .d-flex.gap-2
+                                span
+                                    span.round-8.bg-primary.rounded-circle.d-inline-block
+                                span Your data updates every 24 hours
+                        .ms-auto.d-flex.align-items-stretch.gap-2
+                            a.btn.btn-primary(href='javascript:void(0)')
+                                i.ti.ti-download.fs-6
+                #activity-status
+        .col-lg-12
+            .card
+                .card-body
+                    .d-md-flex.align-items-center.mb-9
+                        div
+                            h5.card-title.fw-semibold Recent Transactions
+                            p.card-subtitle How to Check Your Order Status Online
+                        .ms-auto.mt-4.mt-md-0
+                            ul.nav.nav-tabs(role='tablist')
+                                li.nav-item
+                                    a.nav-link.active(data-bs-toggle='tab' href='#home' role='tab')
+                                        span Contributions
+                                li.nav-item
+                                    a.nav-link(data-bs-toggle='tab' href='#profile' role='tab')
+                                        span Payouts
+                    // Tab panes
+                    .tab-content.mt-3
+                        #home.tab-pane.active(role='tabpanel')
+                            .table-responsive
+                                table.table.align-middle.mb-0.text-nowrap
+                                    tbody
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    div
+                                                        h6.mb-0.fw-semibold Thursday, 5th
+                                                        span.fs-2 10:00 AM
+                                            td.ps-0
+                                                span Weekly Contribution
+                                            td.ps-0
+                                                h6.mb-0 N5,000
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                    | pending
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    div
+                                                        h6.mb-0.fw-semibold Monday, 20th
+                                                        span.fs-2 2:45 PM
+                                            td.ps-0
+                                                span Monthly Contribution
+                                            td.ps-0
+                                                h6.mb-0 N2,000
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-success.text-success.rounded-pill
+                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1
+                                                    | confirmed
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    div
+                                                        h6.mb-0.fw-semibold Friday, 10th
+                                                        span.fs-2 9:23 AM
+                                            td.ps-0
+                                                span Weekly Contribution
+                                            td.ps-0
+                                                h6.mb-0 N7,900
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1
+                                                    | cancel
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    div
+                                                        h6.mb-0.fw-semibold Monday, 20th
+                                                        span.fs-2 2:45 PM
+                                            td.ps-0
+                                                span Weekly Contribution
+                                            td.ps-0
+                                                h6.mb-0 N5,000
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                    | pending
+                        #profile.tab-pane(role='tabpanel')
+                            .table-responsive
+                                p No Recent Payouts
+                        #messages.tab-pane(role='tabpanel')
+                            .table-responsive
+                                table.table.table-hover.align-middle.mb-0.text-nowrap
+                                    tbody
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    .flex-shrink-0
+                                                        img.rounded(src='./dist/images/products/product-4.jpg' alt='p4' width='80')
+                                                    div
+                                                        h6.mb-0.fw-semibold Irpun Wicaksono
+                                                        span.fs-2 irpun@gmail.com
+                                            td.ps-0
+                                                span React Js - Online Classes
+                                            td.ps-0
+                                                h6.mb-0 $50.00
+                                            td.text-end.ps-0
+                                                a.badge.bg-light-success.text-success.rounded-pill(href='javascript:void(0)')
+                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1
+                                                    | delivered
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    .flex-shrink-0
+                                                        img.rounded(src='./dist/images/products/product-1.jpg' alt='p1' width='80')
+                                                    div
+                                                        h6.mb-0.fw-semibold Irpun Wicaksono
+                                                        span.fs-2 irpun@gmail.com
+                                            td.ps-0
+                                                span React Js - Online Classes
+                                            td.ps-0
+                                                h6.mb-0 $50.00
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                    | progress
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    .flex-shrink-0
+                                                        img.rounded(src='./dist/images/products/product-2.jpg' alt='p2' width='80')
+                                                    div
+                                                        h6.mb-0.fw-semibold Oyhan Ruhiyan
+                                                        span.fs-2 oyhan@gmail.com
+                                            td.ps-0
+                                                span Frontend Dev - Online Classes
+                                            td.ps-0
+                                                h6.mb-0 $49.00
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-success.text-success.rounded-pill
+                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1
+                                                    | delivered
+                                        tr
+                                            td.ps-0
+                                                .d-flex.align-items-center.gap-3
+                                                    .flex-shrink-0
+                                                        img.rounded(src='./dist/images/products/product-3.jpg' alt='p3' width='80')
+                                                    div
+                                                        h6.mb-0.fw-semibold Dayat Santoso
+                                                        span.fs-2 dayat@gmail.com
+                                            td.ps-0
+                                                span UX Research - Power Courses
+                                            td.ps-0
+                                                h6.mb-0 $79.00
+                                            td.text-end.ps-0
+                                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1
+                                                    | cancel

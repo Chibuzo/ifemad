@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const adminService = require('../services/adminService');
 const authenticateAdmin = require('../middlewares/authenticateAdmin');
-const walletService = require('../services/walletService');
+const payoutService = require('../services/payoutService');
 const userService = require('../services/userService');
 const contributionService = require('../services/contributionService');
 const { User, sequelize } = require('../models');
@@ -53,7 +53,7 @@ router.get('/dashboard', authenticateAdmin, async (req, res, next) => {
 });
 
 
-router.get('/contributions', async (req, res, next) => {
+router.get('/contributions', authenticateAdmin, async (req, res, next) => {
     try {
         const criteria = {
             include: [
@@ -64,14 +64,40 @@ router.get('/contributions', async (req, res, next) => {
             ]
         };
         const contributions = await contributionService.list(criteria);
-        console.log({ contributions })
         res.render('admin/contribution', { contributions });
     } catch (err) {
         next(err);
     }
 });
 
-router.get('/users', async (req, res, next) => {
+router.get('/payouts', authenticateAdmin, async (req, res, next) => {
+    try {
+        const criteria = {
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', [sequelize.fn('CONCAT', sequelize.col('firstname'), ' ', sequelize.col('lastname')), 'fullname']]
+                }
+            ]
+        };
+        const payouts = await payoutService.list(criteria);
+        res.render('admin/payouts', { payouts });
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.post('/process-payout', authenticateAdmin, async (req, res) => {
+    try {
+        const { action, payout_id } = req.body;
+        await payoutService.update(payout_id, { status: action });
+        res.json({ status: true });
+    } catch (err) {
+        res.json({ status: false });
+    }
+});
+
+router.get('/users', authenticateAdmin, async (req, res, next) => {
     try {
         const users = await userService.find({
             order: [

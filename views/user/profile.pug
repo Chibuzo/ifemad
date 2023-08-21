@@ -66,10 +66,10 @@ block content
                                         .row.mb-4
                                             .col
                                                 label.form-label.fw-semibold First Name
-                                                input.form-control(type='text' name="firstname" value=`${user.firstname || ''}` placeholder='John')
+                                                input.form-control(type='text' name="firstname" value=`${user.firstname || ''}` placeholder='John' disabled)
                                             .col
                                                 label.form-label.fw-semibold Last Name
-                                                input.form-control(type='text' name="lastname" value=`${user.lastname || ''}` placeholder='Doe')
+                                                input.form-control(type='text' name="lastname" value=`${user.lastname || ''}` placeholder='Doe' disabled)
                                             .col
                                                 label.form-label.fw-semibold Middle Name
                                                 input.form-control(type='text' name="middlename" value=`${user.middlename || ''}` placeholder='Optional')
@@ -77,10 +77,10 @@ block content
                                         .row.mb-4
                                             .col
                                                 label.form-label.fw-semibold Email
-                                                input.form-control(type='email' name="email" value=`${user.email || ''}` disabled)
+                                                input.form-control(type='email' name="email" value=`${user.email || ''}`)
                                             .col
                                                 label.form-label.fw-semibold Phone
-                                                input.form-control(type='text' value=`${user.phone || ''}` disabled)
+                                                input.form-control(type='text' value=`${user.phone || ''}`)
 
                                         .row.mb-4
                                             .col 
@@ -91,6 +91,14 @@ block content
                                             .col
                                                 label.form-label.fw-semibold Current Rank
                                                 input.form-control(type='text' name="currentRank" value=`${user.currentRank || ''}` placeholder='Captain')
+
+                                        .row.mb-4
+                                            .col 
+                                                label.form-label.fw-semibold(for='exampleInputPassword1') Date of Joining Force
+                                                input.form-control(type="date" name="date_joining_force" value=`${user.date_joining_force || ''}`)
+                                            .col
+                                                label.form-label.fw-semibold National Identity Number (NIN)
+                                                input.form-control(type='text' name="nin" value=`${user.nin || ''}` placeholder='NIN')
 
                                         .row.mb-4 
                                             .col

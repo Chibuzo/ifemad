@@ -1,7 +1,7 @@
 doctype html
 head
     // Title
-    title Ifemad
+    title Ifemad Dashboard
     // Required Meta Tag
     meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
@@ -101,36 +101,6 @@ body
                                 i.ti.ti-align-justified.fs-7
                             ul.navbar-nav.flex-row.ms-auto.align-items-center.justify-content-center
                                 li.nav-item.dropdown
-                                    a#drop2.nav-link.nav-icon-hover(href='javascript:void(0)' data-bs-toggle='dropdown' aria-expanded='false')
-                                        i.ti.ti-bell-ringing
-                                        .notification.bg-primary.rounded-circle
-                                    .dropdown-menu.content-dd.dropdown-menu-end.dropdown-menu-animate-up(aria-labelledby='drop2')
-                                        .d-flex.align-items-center.justify-content-between.py-3.px-7
-                                            h5.mb-0.fs-5.fw-semibold Notifications
-                                            span.badge.bg-primary.rounded-4.px-3.py-1.lh-sm 2 new
-                                        .message-body(data-simplebar='')
-                                            a.py-6.px-7.d-flex.align-items-center.dropdown-item(href='javascript:void(0)')
-                                                //
-                                                    <span class="me-3">
-                                                    <img src="/images/profile/user-3.jpg" alt="user" class="rounded-circle" width="48"
-                                                    height="48" />
-                                                    </span>
-                                                .w-75.d-inline-block.v-middle
-                                                    h6.mb-1.fw-semibold Contribution Confirmed
-                                                    span.d-block Check your balance
-                                            a.py-6.px-7.d-flex.align-items-center.dropdown-item(href='javascript:void(0)')
-                                                //
-                                                    <span class="me-3">
-                                                    <img src="./dist/images/profile/user-5.jpg" alt="user" class="rounded-circle" width="48"
-                                                    height="48" />
-                                                    </span>
-                                                .w-75.d-inline-block.v-middle
-                                                    h6.mb-1.fw-semibold Payout Approved
-                                                    span.d-block N50,000 deducted from account
-                                        .py-6.px-7.mb-1
-                                            button.btn.btn-outline-primary.w-100
-                                                | See All Notifications
-                                li.nav-item.dropdown
                                     a#drop1.nav-link.pe-0(href='javascript:void(0)' data-bs-toggle='dropdown' aria-expanded='false')
                                         .d-flex.align-items-center
                                             .user-profile-img
@@ -142,20 +112,20 @@ body
                                             .d-flex.align-items-center.py-9.mx-7.border-bottom
                                                 img.rounded-circle(src='/images/profile/user-6.jpg' width='80' height='80' alt='')
                                                 .ms-3
-                                                    h5.mb-1.fs-3 Emeka Johnathan
-                                                    span.mb-1.d-block.text-dark Captain
+                                                    h5.mb-1.fs-3 #{user.firstname} #{user.lastname}
+                                                    span.mb-1.d-block.text-dark #{user.currentRank}
                                                     p.mb-0.d-flex.text-dark.align-items-center.gap-2
                                                         i.ti.ti-mail.fs-4
-                                                        |  Johnathan@gmail.com
+                                                        |  #{user.email}
                                             .message-body
-                                                a.py-8.px-7.mt-8.d-flex.align-items-center(href='page-user-profile.html')
+                                                a.py-8.px-7.mt-8.d-flex.align-items-center(href='/user/profile')
                                                     span.d-flex.align-items-center.justify-content-center.bg-light.rounded-1.p-6
                                                         img(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg' alt='' width='24' height='24')
                                                     .w-75.d-inline-block.v-middle.ps-3
                                                         h6.mb-1.bg-hover-primary.fw-semibold  My Profile 
                                                         span.d-block.text-dark Account Settings
                                             .d-grid.py-4.px-7.pt-8
-                                                a.btn.btn-outline-primary(href='authentication-login.html')
+                                                a.btn.btn-outline-primary(href='/logout')
                                                     | Log
                                                     | Out
 
@@ -176,6 +146,7 @@ script(src='/js/app.init.js')
 script(src='/js/app-style-switcher.js')
 script(src='/js/sidebarmenu.js') 
 script(src='/js/custom.js')
+
 
 script. 
     function serialize(data) {

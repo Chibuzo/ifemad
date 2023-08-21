@@ -14,7 +14,8 @@ router.get('/', function (req, res) {
 router.get('/dashboard', async (req, res, next) => {
     try {
         const user = req.session.user;
-        res.render('user/dashboard', { user });
+        const data = await userService.fetchDashboardData(user.id);
+        res.render('user/dashboard', { ...data });
     } catch (err) {
         next(err);
     }
@@ -74,7 +75,7 @@ router.get('/contributions', async (req, res, next) => {
 router.get('/payouts', async (req, res, next) => {
     try {
         const user = req.session.user;
-        const payouts = await payoutService.list({ userId: user.id });
+        const payouts = await payoutService.list({ where: { userId: user.id } });
         res.render('user/withdrawal', { user, payouts, banks });
     } catch (err) {
         next(err);

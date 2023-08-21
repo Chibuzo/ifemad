@@ -1,71 +1,77 @@
 extends layout 
 
+block styleBlock
+    style.
+        .align-center { text-align: center }
+
 block content
-    section.content-header
-        h1 Withdrawals
-        
-    // Main content
-    section.content
-        .row
-            .col-md-12
-                .box
-                    .box-header.with-border
-                        h3.box-title Pay Outs
-                    .box-body
-                        table.table.table-striped
-                            thead
-                                tr
-                                    th Date
-                                    th Investor
-                                    th Balance
-                                    th Bank 
-                                    th Account #
-                                    th Amount
-                                    th Status
-                                    th Action
-                            tbody
-                                each trnx in withdrawals 
-                                    tr(id=`${trnx.id}`)
-                                        td= view.formatDate(trnx.createdAt)
-                                        td= trnx.User.fullname
-                                        td= '₦' + view.formatCurrency(trnx.balance)
-                                        td= trnx.bank 
-                                        td= trnx.account_number
-                                        td= '₦' + view.formatCurrency(trnx.amount) 
-                                        td= trnx.status
-                                        td
-                                            a.approve(title="Approve withdrawal" data-toggle="tooltip")
-                                                i.fa.fa-check.fa-lg(style="margin-right: 7px")
-                                            a.cancel(title="Cancel" data-toggle="tooltip")    
-                                                i.fa.fa-times.fa-lg   
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 Payouts
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='index.html') Home
+                            li.breadcrumb-item(aria-current='page') Payouts
+                .col-3
+                    .text-center.mb-n5
+                        img.img-fluid.mb-n4(src='../../dist/images/breadcrumb/ChatBc.png' alt='')
+    .card.w-100.position-relative.overflow-hidden
+        .px-4.py-3.border-bottom
+            .card-title.fw-semibold.mb-0.lh-sm Payouts
+        .card-body.p-4
+            .table-responsive.rounded-2.mb-4
+                table.table
+                    thead
+                        tr
+                            th Date
+                            th Name
+                            th Bank
+                            th Account No.
+                            th Amount
+                            th Status
+                            th Action
 
-block scriptBlock 
-    script.
-        $(document).ready(function() {
-            $(".approve").click(function(e) {
-                e.preventDefault();
+                    tbody
+                        each trnx in payouts 
 
-                if (confirm("Are you sure you want to approve the payout request?")) {
-                    const id = $(this).parents('tr').attr('id');
-                    $.post('/change-payout-status', { id, status: 'Approved' }, function(d) {
-                        if (d.status === true) {
-                            location.reload();
-                        }
-                    });
+                            tr
+                                td= view.formatDate(trnx.createdAt)
+                                td= trnx.User.fullname  
+                                td= trnx.bank 
+                                td= trnx.account_number
+                                td= '₦' + view.formatCurrency(trnx.amount) 
+                                td= trnx.status
+                                td.align-center
+                                    .dropdown
+                                        button.btn.btn-sm.btn-secondary.dropdown-toggle#dropdownMenu(type="button" data-bs-toggle="dropdown" aria-expanded="false") Menu
+
+                                        ul.dropdown-menu(aria-labelledby="dropdownMenu" data-payout_id=`${trnx.id}`) 
+                                            li  
+                                                a.dropdown-item(href="#" data-action="paid") Confirm 
+                                            li 
+                                                a.dropdown-item(href="#" data-action="rejected") Reject
+
+
+block scriptBlock
+    script. 
+        const menus = document.getElementsByClassName("dropdown-item");
+        let action;
+        for (let i = 0; i < menus.length; i++) {
+            menus[i].addEventListener("click", function() {
+                if (confirm("Are you sure you want to continue with this operation?")) {
+                    action = this.dataset.action;
+                    const payout_id = this.closest('ul').dataset.payout_id;
+                    const data = { action, payout_id };
+                    fetch('process-payout', {
+                        method: 'POST', 
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data) 
+                    }).then(d => location.reload());
                 }
             });
-
-
-            $(".cancel").click(function(e) {
-                e.preventDefault();
-
-                if (confirm("Are you sure you want to cancel this payout request?")) {
-                    const id = $(this).parents('tr').attr('id');
-                    $.post('/change-payout-status', { id, status: 'Cancelled' }, function(d) {
-                        if (d.status === true) {
-                            location.reload();
-                        }
-                    });
-                }
-            });
-        });
+        }   

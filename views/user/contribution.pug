@@ -36,28 +36,42 @@ block content
                                 td= trnx.reference 
                                 td= trnx.channel 
                                 td= '₦' + view.formatCurrency(trnx.amount) 
-                                td= trnx.status
+                                td
+                                    if (trnx.status == 'pending') 
+                                        span.badge.bg-light-warning.text-warning.rounded-pill
+                                            span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'success') 
+                                        span.badge.bg-light-success.text-success.rounded-pill
+                                            span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'failed') 
+                                        span.badge.bg-light-danger.text-danger.rounded-pill
+                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
 
 block Modals 
     #confirmationModal.modal.fade(tabindex='0' aria-hidden='true')
         .modal-dialog.modal-lg
             .modal-content
                 .modal-header
-                    h5.modal-title Confirm Contribution Amount
+                    h5.modal-title Monthly Contribution
                     button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close') 
 
                 .modal-body
                     .card.text-center
                         .card-header
-                            | #[strong You are about to pay in:]
+                            | #[strong Confirm contribution amount:]
                         .card-body
-                            p.mb-1 Minimum amount to pay:
-                                .form-group.row.justify-content-md-center
-                                    .col-md-2
-                                        input.form-control(type="text" id="amount" value="12000")
+                            p.mb-1 Minimum amount to pay per month: 1,000 NGN
+                                .row.justify-content-md-center
+                                    .col-md-3
+                                        .input-group
+                                            span.input-group-text#inputGroup-sizing-lg NGN
+                                            input.form-control(type="text" id="amount" placeholder="1000" aria-describedby="inputGroup-sizing-lg")
 
                 .modal-footer
-                    button.btn.btn-success(type='button' onClick=`createContribution()`) Continue to Payment 
+                    button.btn.btn-info(type='button' onClick=`createContribution()`) Continue to Payment 
 
 block scriptBlock
     script(src="https://js.paystack.co/v1/inline.js")

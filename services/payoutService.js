@@ -7,10 +7,15 @@ const create = async (payoutData) => {
 }
 
 const list = async criteria => {
-    return Payout.findAll({ where: criteria, raw: true });
+    return Payout.findAll({ ...criteria, order: [['createdAt', 'DESC']], raw: true, nest: true });
+}
+
+const update = async (payoutId, { status }) => {
+    return Payout.update({ status }, { where: { id: payoutId } });
 }
 
 module.exports = {
     create,
-    list
+    list,
+    update
 }

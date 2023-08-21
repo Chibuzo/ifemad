@@ -1,4 +1,4 @@
-const { User, Beneficiary, Documents } = require('../models');
+const { User, Beneficiary, Documents, Contribution, Payout, sequelize } = require('../models');
 const emailService = require('../services/emailService');
 const bcrypt = require('bcryptjs');
 const { Buffer } = require('buffer');
@@ -184,6 +184,44 @@ const deleteDocument = async (document, userId) => {
     return Documents.update({ [document]: '' }, { where: { userId } });
 }
 
+const fetchDashboardData = async userId => {
+    const [contributions, payouts, [chartdata]] = await Promise.all([
+        Contribution.findAll({ where: { userId }, order: [['createdAt', 'DESC']], raw: true }),
+        Payout.findAll({ where: { userId }, order: [['createdAt', 'DESC']], raw: true }),
+        sequelize.query('SELECT SUM(amount) total, DATE_FORMAT(createdAt, \'%b\') month FROM `contributions` WHERE userId = ? AND status = ? GROUP BY DATE_FORMAT(createdAt, \'%b\') LIMIT 0, 6', { replacements: [userId, 'success'] }),
+    ]);
+
+    let totalNumOfContributions = 0;
+    const totalContribution = contributions.reduce((total, con) => {
+        if (con.status == 'success') {
+            ++totalNumOfContributions;
+            return total + parseInt(con.amount, 10);
+        }
+        return total;
+    }, 0);
+    const totalNumOfPayouts = payouts.length;
+
+    // get recents
+    contributions.length = totalNumOfContributions < 4 ? totalNumOfContributions : 4;
+    payouts.length = totalNumOfPayouts < 4 ? totalNumOfPayouts : 4;
+
+    // chart data
+    const chartData = { data: [], categories: [] };
+    chartdata.forEach(obj => {
+        chartData.data.push(obj.total);
+        chartData.categories.push(obj.month);
+    });
+    return {
+        totalContribution,
+        totalPayouts: payouts.reduce((total, payout) => payout.status == 'paid' ? total + parseInt(payout.amount, 10) : total, 0),
+        totalNumOfContributions,
+        totalNumOfPayouts,
+        recentContributions: contributions,
+        recentPayouts: payouts,
+        chartData
+    }
+}
+
 const sanitize = user => {
     delete user.password;
     return {
@@ -203,5 +241,6 @@ module.exports = {
     saveBeneficiaries,
     fetchUserProfileData,
     uploadDocuments,
-    deleteDocument
+    deleteDocument,
+    fetchDashboardData
 }
