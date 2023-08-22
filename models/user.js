@@ -30,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(15),
         },
         nin: DataTypes.STRING(16),
-        date_joining_force: DataTypes.DATE,
+        date_joining_force: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
         dob: DataTypes.DATE,
         address: DataTypes.STRING,
         force: DataTypes.STRING(20),
