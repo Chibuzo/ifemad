@@ -56,8 +56,7 @@ const login = async ({ email, password }) => {
     if (!match) throw new ErrorHandler(400, 'Email and password doesn\'t match');
 
     if (user.status === 'inactive') {
-        // return { status: false, email: user.email };
-        throw new ErrorHandler(400, 'Your account is inactive. Check your email for the verification link');
+        return { user };
     }
 
     // send OTP

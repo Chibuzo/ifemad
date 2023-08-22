@@ -1,29 +1,33 @@
 extends ../auth-layout
 
 block content
-    .container-fluid.primary-bg
-        .row.pt-4.mt-3
-            .col-md-12.text-center
-                h3.mt-5 Email Verification Status
+    .col-md-12
+        .container-fluid.primary-bg
+            .row.pt-4.mt-3
+                .col-md-12.text-center
+                    h3.mt-5 Email Verification Status
 
-        .row.mb-5
-            .col-md-12.text-center
-                if user_status === 'inactive'
-                    .alert.alert-info.text-center.mt-4
+            .row.mb-5
+                .col-md-12.text-center
+                    if user_status === 'inactive'
+                        .alert.alert-info.text-center.mt-4
 
-                        | Your account is inactive. 
-                        br/ 
-                        | You need to click the verify email button in the email sent to you or 
-                        a(href="#" onclick="resendEmail()") click here  
-                        | to resend the verification email
-                else
-                    .alert.alert-success.text-center.mt-4
+                            | Your account is inactive. 
+                            br/ 
+                            | You need to click the verify email button in the email sent to you or 
+                            | click on the button below to resend the verification email
 
-                        | You have verified your email address! 
-                        br/ 
+                        a.btn.btn-primary(href="#" onclick="resendEmail()") Resend Verification Email
+                        p.mt-4   
+                            a(href='/login') Login
+                    else
+                        .alert.alert-success.text-center.mt-4
 
-                    br
-                    a.btn.btn-primary(href="/login") Click to Login
+                            | You have verified your email address! 
+                            br/ 
+
+                        br
+                        a.btn.btn-primary(href="/login") Click to Login
 
 block scriptBlock
     script. 

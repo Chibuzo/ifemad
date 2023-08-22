@@ -1,21 +1,22 @@
 extends auth-layout 
 
 block content
-    .position-relative.text-center.my-4
-        p.mb-0.fs-4.px-3.d-inline-block.bg-white.text-dark.z-index-5.position-relative
-            | Verify OTP
-        span.border-top.w-100.position-absolute.top-50.start-50.translate-middle
-    form(method="post" action="/verify-otp")
-        if message 
-            .alert.alert-danger #{message} 
-        p OTP: #{otp}
-        .form-floating
-            input#floatingInput.form-control(type='text' name="otp" placeholder='OTP' autofocus)
-            label(for='floatingInput') OTP
-        a#request-otp() Request new OTP code in
-        span#time
+    .col-sm-8.col-md-6.col-xl-9
+        .position-relative.text-center.my-4
+            p.mb-0.fs-4.px-3.d-inline-block.bg-white.text-dark.z-index-5.position-relative
+                | Verify OTP
+            span.border-top.w-100.position-absolute.top-50.start-50.translate-middle
+        form(method="post" action="/verify-otp")
+            if message 
+                .alert.alert-danger #{message} 
+            p OTP: #{otp}
+            .form-floating
+                input#floatingInput.form-control(type='text' name="otp" placeholder='OTP' autofocus)
+                label(for='floatingInput') OTP
+            a#request-otp() Request new OTP code in
+            span#time
 
-        button.w-100.btn.btn-lg.btn-primary(type='submit').mt-3 Verify otp
+            button.w-100.btn.btn-lg.btn-primary(type='submit').mt-3 Verify otp
 
 
 block scriptBlock 

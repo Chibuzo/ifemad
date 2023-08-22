@@ -1,25 +1,25 @@
 extends auth-layout 
 
 block content 
-    //- h2.mb-3.fs-7.fw-bolder Welcome to Ifemad
-    .position-relative.text-center.my-4
-        p.mb-0.fs-4.px-3.d-inline-block.bg-white.text-dark.z-index-5.position-relative
-            | Sign in
-        span.border-top.w-100.position-absolute.top-50.start-50.translate-middle
-    form(method="post" action="/login")
-        .mb-3
-            label.form-label(for='exampleInputEmail1') Email
-            input#exampleInputEmail1.form-control(type='email' name="email" aria-describedby='emailHelp' Required)
-        .mb-4
-            label.form-label(for='exampleInputPassword1') Password
-            input#exampleInputPassword1.form-control(type='password' name="password" Required)
-        .d-flex.align-items-center.justify-content-between.mb-4
-            .form-check
-                //- input#flexCheckChecked.form-check-input.primary(type='checkbox' value='' checked='')
-                //- label.form-check-label.text-dark(for='flexCheckChecked')
-                //-     | Remeber me
-            a.text-primary.fw-medium(href='/reset-password') Forgot Password ?
-        button.btn.btn-primary.w-100.py-8.mb-4.rounded-2(type='submit') Sign In
-        .d-flex.align-items-center.justify-content-center
-            p.fs-4.mb-0.fw-medium New to Ifemad?
-            a.text-primary.fw-medium.ms-2(href='signup') Create an account
+    .col-sm-8.col-md-6.col-xl-9
+        .position-relative.text-center.my-4
+            p.mb-0.fs-4.px-3.d-inline-block.bg-white.text-dark.z-index-5.position-relative
+                | Sign in
+            span.border-top.w-100.position-absolute.top-50.start-50.translate-middle
+        form(method="post" action="/login")
+            .mb-3
+                label.form-label(for='exampleInputEmail1') Email
+                input#exampleInputEmail1.form-control(type='email' name="email" aria-describedby='emailHelp' Required)
+            .mb-4
+                label.form-label(for='exampleInputPassword1') Password
+                input#exampleInputPassword1.form-control(type='password' name="password" Required)
+            .d-flex.align-items-center.justify-content-between.mb-4
+                .form-check
+                    //- input#flexCheckChecked.form-check-input.primary(type='checkbox' value='' checked='')
+                    //- label.form-check-label.text-dark(for='flexCheckChecked')
+                    //-     | Remeber me
+                a.text-primary.fw-medium(href='/reset-password') Forgot Password ?
+            button.btn.btn-primary.w-100.py-8.mb-4.rounded-2(type='submit') Sign In
+            .d-flex.align-items-center.justify-content-center
+                p.fs-4.mb-0.fw-medium New to Ifemad?
+                a.text-primary.fw-medium.ms-2(href='signup') Create an account

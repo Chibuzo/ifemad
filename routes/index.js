@@ -64,6 +64,10 @@ router.post('/signup', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const { user, otp } = await userService.login(req.body);
+        if (user.status == 'inactive') {
+            req.session.temp_email = user.email;
+            return res.render('user/activate-account', { user_status: user.status });
+        }
         req.session.user = user;
         req.session.otp = otp;
         if (req.body.remember_me) {
@@ -111,7 +115,7 @@ router.get('/user/activate-account', (req, res) => {
 
 router.get('/resend-verification-email', async (req, res) => {
     const email = req.session.temp_email || '';
-    const [user] = await userService.find({ where: { email } });
+    const user = await userService.view({ email });
     emailService.sendConfirmationEmail(user);
     res.end();
 });
