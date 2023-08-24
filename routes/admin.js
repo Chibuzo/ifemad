@@ -110,5 +110,20 @@ router.get('/users', authenticateAdmin, async (req, res, next) => {
     }
 });
 
+router.get('/users/profile', authenticateAdmin, async (req, res, next) => {
+    try {
+        const { user_id: userId } = req.query;
+        const [user, { documents, beneficiary }, contributions, payouts] = await Promise.all([
+            userService.view({ id: userId }),
+            userService.fetchUserProfileData(userId),
+            contributionService.list({ where: { userId } }),
+            payoutService.list({ where: { userId } })
+        ]);
+        res.render('admin/user-profile', { user, documents: documents || {}, beneficiary: beneficiary || {}, contributions, payouts });
+    } catch (err) {
+        next(err);
+    }
+});
+
 
 module.exports = router;

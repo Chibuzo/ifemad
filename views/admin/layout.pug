@@ -15,6 +15,7 @@ head
     link(rel='shortcut icon' type='image/png' href='/images/logos/favicon.png')
     // Core Css
     link#themeColors(rel='stylesheet' href='/css/style.min.css')
+    link(rel='stylesheet' href='/css/owl.carousel.min.css')
     block styleBlock
 
 body
@@ -39,11 +40,11 @@ body
                 // Sidebar navigation
                 nav.sidebar-nav.scroll-sidebar(data-simplebar='')
                     ul#sidebarnav
-                        //- li.sidebar-item
-                        //-     a.sidebar-link(href='/admin/dashboard' aria-expanded='false')
-                        //-         span
-                        //-             i.ti.ti-activity-heartbeat
-                        //-         span.hide-menu Dashboard
+                        li.sidebar-item
+                            a.sidebar-link(href='/admin/dashboard' aria-expanded='false')
+                                span
+                                    i.ti.ti-activity-heartbeat
+                                span.hide-menu Dashboard
                         li.sidebar-item
                             a.sidebar-link(href='/admin/users' aria-expanded='false')
                                 span

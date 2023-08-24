@@ -1,0 +1,268 @@
+extends layout 
+
+block styleBlock 
+    style. 
+        .doc {
+            position: relative;
+            border: 1px solid #e8e8e8;
+            border-radius: 5px;
+            background: #f9f9f9
+        }
+
+        .doc .ti {
+            position: absolute;
+            right: 17px;
+            top: 14px;
+            font-size: 18px;
+            cursor: pointer
+        }
+
+        .notie-container {
+            font-size: 1.1rem;
+        }
+
+        .notie-alert {
+            z-index: 1000 !important;
+        }
+
+        .notie-textbox {
+            padding: 10px
+        }
+
+block content 
+
+    .card.bg-light-info.shadow-none.position-relative.overflow-hidden
+        .card-body.px-4.py-3
+            .row.align-items-center
+                .col-9
+                    h4.fw-semibold.mb-8 User Profile
+                    nav(aria-label='breadcrumb')
+                        ol.breadcrumb
+                            li.breadcrumb-item
+                                a.text-muted(href='/admin/dashboard') Home
+                            li.breadcrumb-item
+                                a.text-muted(href='/admin/users') Users
+                            li.breadcrumb-item(aria-current='page') Profile
+                .col-3
+                    .text-center
+                        a(href='/admin/users').btn.btn-dark.float-end
+                            i.ti.ti-caret-left 
+                            | Back to Users
+    .card
+        ul#pills-tab.nav.nav-pills.user-profile-tab(role='tablist')
+            li.nav-item(role='presentation')
+                button#pills-account-tab.nav-link.position-relative.rounded-0.active.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-account' type='button' role='tab' aria-controls='pills-account' aria-selected='true')
+                    i.ti.ti-user-circle.me-2.fs-6
+                    span.d-none.d-md-block Profile
+            li.nav-item(role='presentation')
+                button#pills-notifications-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-notifications' type='button' role='tab' aria-controls='pills-notifications' aria-selected='false')
+                    i.ti.ti-archive.me-2.fs-6
+                    span.d-none.d-md-block Documents
+            li.nav-item(role='presentation')
+                button#pills-bills-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-bills' type='button' role='tab' aria-controls='pills-bills' aria-selected='false')
+                    i.ti.ti-user.me-2.fs-6
+                    span.d-none.d-md-block Next of Kin
+            li.nav-item(role='presentation')
+                button#pills-contribution-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-contribution' type='button' role='tab' aria-controls='pills-contribution' aria-selected='false')
+                    i.ti.ti-file-text.me-2.fs-6
+                    span.d-none.d-md-block Contributions
+            li.nav-item(role='presentation')
+                button#pills-payout-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-payout' type='button' role='tab' aria-controls='pills-payout' aria-selected='false')
+                    i.ti.ti-cash.me-2.fs-6
+                    span.d-none.d-md-block Payouts
+        .card-body
+            #pills-tabContent.tab-content
+                #pills-account.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-account-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .card-body
+                                    h4.fw-semibold.mb-4 Personal Details
+                                    ul.list-unstyled.mb-0
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-briefcase.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{user.firstname} #{user.lastname}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-mail.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{user.email}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-phone.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{user.phone}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-calendar.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{user.dob}
+                                    li.d-flex.align-items-center.gap-3.mb-2
+                                        i.ti.ti-map-pin.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{user.address}
+
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .card-body
+                                    h4.fw-semibold.mb-4 Professional Details
+                                    ul.list-unstyled.mb-0
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        h6.fs-4.fw-semibold.mb-0 Joined force at: 
+                                            span.text-muted #{user.date_joining_force}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        h6.fs-4.fw-semibold.mb-0 Force: 
+                                            span.text-muted #{user.force}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        h6.fs-4.fw-semibold.mb-0 Rank: 
+                                            span.text-muted #{user.currentRank}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        h6.fs-4.fw-semibold.mb-0 Area of Service: 
+                                            span.text-muted #{user.areaOfService}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        h6.fs-4.fw-semibold.mb-0 NIN: 
+                                            span.text-muted #{user.nin}
+
+
+
+                #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .card-body
+                                    h4.fw-semibold.mb-0 Official Documents
+                                    if (documents.appointmentLetter)
+                                        .doc.py-6.px-4.mt-4
+                                            a(href=`${documents.appointmentLetter}` target='_blank') Appointment Letter 
+                                    else
+                                        .doc.py-6.px-4.mt-4
+                                            | #[strong Appointment Letter]: Not provided
+                                    if (documents.forceId)
+                                        .doc.py-6.px-4.mt-4
+                                            a(href=`${documents.forceId}` target='_blank') Force ID
+                                    else
+                                        .doc.py-6.px-4.mt-4
+                                            | #[strong Force ID]: Not provided
+                                    if (documents.birthCertificate)
+                                        .doc.py-6.px-4.mt-4
+                                            a(href=`${documents.birthCertificate}` target='_blank') Birth Certificate
+                                    else
+                                        .doc.py-6.px-4.mt-4
+                                            | #[strong Birth Certificate]: Not provided
+                                    if (documents.proofOfAddress)
+                                        .doc.py-6.px-4.mt-4
+                                            a(href=`${documents.proofOfAddress}` target='_blank') Proof of Address
+                                    else
+                                        .doc.py-6.px-4.mt-4
+                                            | #[strong Proof of Address]: Not provided
+
+
+                #pills-bills.tab-pane.fade(role='tabpanel' aria-labelledby='pills-bills-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .card-body
+                                    h4.fw-semibold.mb-4 Personal Details
+                                    ul.list-unstyled.mb-0
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-briefcase.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.fullname}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-mail.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.email}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-phone.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.phone}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-calendar.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.dob}
+                                    li.d-flex.align-items-center.gap-3.mb-4
+                                        i.ti.ti-user.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.relationship}
+                                    li.d-flex.align-items-center.gap-3.mb-2
+                                        i.ti.ti-map-pin.text-dark.fs-6
+                                        h6.fs-4.fw-semibold.mb-0 #{beneficiary.address}
+
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .card-body
+                                    h4.fw-semibold.mb-4 Account Details
+                                    p #[strong Bank:] #{beneficiary.bank}
+                                    p #[strong Account number:] #{beneficiary.accountNumber}
+                                    p #[strong NIN]: #{beneficiary.nin}
+
+
+                #pills-contribution.tab-pane.fade(role='tabpanel' aria-labelledby='pills-contribution-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .px-4.py-3.border-bottom
+                                    .card-title.fw-semibold.mb-0.lh-sm Contributions
+                                .card-body
+                                    .table-responsive.rounded-2.mb-4
+                                        table.table
+                                            thead
+                                                tr
+                                                    th Date
+                                                    th Reference
+                                                    th Channel
+                                                    th Amount
+                                                    th Status
+
+                                            tbody
+                                                each trnx in contributions
+                                                    tr
+                                                        td= view.formatDate(trnx.createdAt)
+                                                        td= trnx.reference 
+                                                        td= trnx.channel 
+                                                        td= '₦' + view.formatCurrency(trnx.amount) 
+                                                        td
+                                                            if (trnx.status == 'pending') 
+                                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                                    | #{trnx.status}
+                                                            else if (trnx.status == 'success') 
+                                                                span.badge.bg-light-success.text-success.rounded-pill
+                                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                                                    | #{trnx.status}
+                                                            else if (trnx.status == 'failed') 
+                                                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                                                    | #{trnx.status}
+
+                #pills-payout.tab-pane.fade(role='tabpanel' aria-labelledby='pills-payout-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .px-4.py-3.border-bottom
+                                    .card-title.fw-semibold.mb-0.lh-sm Payouts
+                                .card-body
+                                    .table-responsive.rounded-2.mb-4
+                                        table.table
+                                            thead
+                                                tr
+                                                    th Date
+                                                    th Description
+                                                    th Bank
+                                                    th Account No.
+                                                    th Amount
+                                                    th Status
+
+                                            tbody
+                                                each trnx in payouts 
+
+                                                    tr
+                                                        td= view.formatDate(trnx.createdAt)
+                                                        td Withdrawal 
+                                                        td= trnx.bank 
+                                                        td= trnx.account_number
+                                                        td= '₦' + view.formatCurrency(trnx.amount) 
+                                                        td
+                                                            if (trnx.status == 'pending') 
+                                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                                    | #{trnx.status}
+                                                            else if (trnx.status == 'paid') 
+                                                                span.badge.bg-light-success.text-success.rounded-pill
+                                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                                                    | #{trnx.status}
+                                                            else if (trnx.status == 'rejected') 
+                                                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                                                    | #{trnx.status}
+
+
+block scriptBlock 

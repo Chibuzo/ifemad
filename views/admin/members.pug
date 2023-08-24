@@ -36,7 +36,8 @@ block content
                             - let row = user.status === 'inactive' ? 'active' : ''
                             tr(class=`${row}` id=`${user.id}`)
                                 td= view.formatDate(user.createdAt)
-                                td #{user.firstname} #{user.lastname} 
+                                td 
+                                    a(href=`/admin/users/profile?user_id=${user.id}`) #{user.firstname} #{user.lastname} 
                                 td= user.email
                                 td= user.phone 
                                 td= user.force
