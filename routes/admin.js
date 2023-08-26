@@ -28,28 +28,19 @@ router.post('/create', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         req.session.admin = await adminService.login(req.body);
-        res.redirect('/admin/users');
+        res.redirect('/admin/dashboard');
     } catch (err) {
         next(err);
     }
 });
 
 router.get('/dashboard', authenticateAdmin, async (req, res, next) => {
-    // const criteria = {
-    //     where: {
-    //         description: 'withdrawal', status: 'pending'
-    //     },
-    //     attributes: ['id', 'amount', 'status', 'createdAt'],
-    //     include: {
-    //         model: User,
-    //         attributes: ['id', 'fullname']
-    //     },
-    //     order: [
-    //         ['createdAt', 'DESC']
-    //     ]
-    // };
-    // const { transactions: withdrawals } = await walletService.fetchTransactions(criteria);
-    res.render('admin/dashboard', {});
+    try {
+        const data = await adminService.fetchDashboardData();
+        res.render('admin/dashboard', { ...data });
+    } catch (err) {
+        next(err);
+    }
 });
 
 

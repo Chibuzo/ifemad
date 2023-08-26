@@ -43,16 +43,29 @@ block content
                                 td= trnx.bank 
                                 td= trnx.account_number
                                 td= '₦' + view.formatCurrency(trnx.amount) 
-                                td= trnx.status
+                                td
+                                    if (trnx.status == 'pending') 
+                                        span.badge.bg-light-warning.text-warning.rounded-pill
+                                            span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'paid') 
+                                        span.badge.bg-light-success.text-success.rounded-pill
+                                            span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'rejected') 
+                                        span.badge.bg-light-danger.text-danger.rounded-pill
+                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
                                 td.align-center
-                                    .dropdown
-                                        button.btn.btn-sm.btn-secondary.dropdown-toggle#dropdownMenu(type="button" data-bs-toggle="dropdown" aria-expanded="false") Menu
+                                    if (trnx.status != 'paid')
+                                        .dropdown
+                                            button.btn.btn-sm.btn-secondary.dropdown-toggle#dropdownMenu(type="button" data-bs-toggle="dropdown" aria-expanded="false") Menu
 
-                                        ul.dropdown-menu(aria-labelledby="dropdownMenu" data-payout_id=`${trnx.id}`) 
-                                            li  
-                                                a.dropdown-item(href="#" data-action="paid") Confirm 
-                                            li 
-                                                a.dropdown-item(href="#" data-action="rejected") Reject
+                                            ul.dropdown-menu(aria-labelledby="dropdownMenu" data-payout_id=`${trnx.id}`) 
+                                                li  
+                                                    a.dropdown-item(href="#" data-action="paid") Confirm 
+                                                li 
+                                                    a.dropdown-item(href="#" data-action="rejected") Reject
 
 
 block scriptBlock

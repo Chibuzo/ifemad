@@ -1,68 +1,148 @@
 extend layout 
 
 block content
-    .owl-carousel.counter-carousel.owl-theme.owl-rtl.owl-loaded.owl-drag
-        .owl-stage-outer
-            .owl-stage(style='transform: translate3d(1061px, 0px, 0px); transition: all 2s ease 0s; width: 3396px;')
-                .owl-item.cloned(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-warning.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-briefcase.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-warning.mb-1 Clients
-                                    h5.fw-semibold.text-warning.mb-0 3,650
-                .owl-item.cloned(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-info.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-mailbox.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-info.mb-1 Projects
-                                    h5.fw-semibold.text-info.mb-0 356
-                .owl-item.cloned(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-danger.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-favorites.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-danger.mb-1 Events
-                                    h5.fw-semibold.text-danger.mb-0 696
-                .owl-item.cloned(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-success.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-speech-bubble.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-success.mb-1 Payroll
-                                    h5.fw-semibold.text-success.mb-0 $96k
-                .owl-item.cloned(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-info.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-connect.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-info.mb-1 Reports
-                                    h5.fw-semibold.text-info.mb-0 59
-                .owl-item.active(style='width: 182.2px; margin-left: 30px;')
-                    .item
-                        .card.border-0.zoom-in.bg-light-primary.shadow-none
-                            .card-body
-                                .text-center
-                                    img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-user-male.svg' width='50' height='50' alt='')
-                                    p.fw-semibold.fs-3.text-primary.mb-1  Employees 
-                                    h5.fw-semibold.text-primary.mb-0 96
-                        .owl-nav.disabled
-            button.owl-prev(type='button' role='presentation')
-                span(aria-label='Previous') &lsaquo;
-            button.owl-next(type='button' role='presentation')
-                span(aria-label='Next') &rsaquo;
-        .owl-dots
-            button.owl-dot.active(role='button')
-                span
-            button.owl-dot(role='button')
-                span
+    .row
+        .col
+            .item
+                .card.border-0.zoom-in.bg-light-warning.shadow-none
+                    .card-body
+                        .text-center
+                            img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-briefcase.svg' width='50' height='50' alt='')
+                            p.fw-semibold.fs-3.text-warning.mb-1 Active Users
+                            h5.fw-semibold.text-warning.mb-0 #{activeUsers}
+        .col
+            .item
+                .card.border-0.zoom-in.bg-light-info.shadow-none
+                    .card-body
+                        .text-center
+                            img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-mailbox.svg' width='50' height='50' alt='')
+                            p.fw-semibold.fs-3.text-info.mb-1 Total Contributions
+                            h5.fw-semibold.text-info.mb-0 #{view.formatCurrency(totalContribution)}
+        .col
+            .item
+                .card.border-0.zoom-in.bg-light-danger.shadow-none
+                    .card-body
+                        .text-center
+                            img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-favorites.svg' width='50' height='50' alt='')
+                            p.fw-semibold.fs-3.text-danger.mb-1 No of Contributions
+                            h5.fw-semibold.text-danger.mb-0 #{totalNumOfContributions}
+        .col
+            .item
+                .card.border-0.zoom-in.bg-light-success.shadow-none
+                    .card-body
+                        .text-center
+                            img.mb-3(src='https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-speech-bubble.svg' width='50' height='50' alt='')
+                            p.fw-semibold.fs-3.text-success.mb-1 Total Payouts
+                            h5.fw-semibold.text-success.mb-0 #{view.formatCurrency(totalPayouts)}
+
+    .row.mt-3
+        .col.d-flex.align-items-stretch
+            .w-100
+                .d-md-flex.align-items-start.gap-3
+                    div
+                        h6.mb-0 Monthly Contribution
+
+                .mt-2.mb-5
+                    #financial
+
+    .row 
+        .col
+            .card 
+                .card-body
+                    .d-flex.mb-1.align-items-center
+                        div 
+                            h5.mb-0 Contributions
+                    .card-subtitle.mb-3 Recent Contributions
+                    .table-responsive
+                        table.table
+                            thead
+                                tr
+                                    th Date
+                                    th Member
+                                    th Channel
+                                    th Amount
+                                    th Status
+
+                            tbody
+                                each trnx in recentContributions
+                                    tr
+                                        td= view.formatDate(trnx.createdAt)
+                                        td= trnx.User.fullname
+                                        td= trnx.channel 
+                                        td= '₦' + view.formatCurrency(trnx.amount) 
+                                        td
+                                            if (trnx.status == 'pending') 
+                                                span.badge.bg-light-warning.text-warning.rounded-pill
+                                                    span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                                    | #{trnx.status}
+                                            else if (trnx.status == 'success') 
+                                                span.badge.bg-light-success.text-success.rounded-pill
+                                                    span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                                    | #{trnx.status}
+                                            else if (trnx.status == 'failed') 
+                                                span.badge.bg-light-danger.text-danger.rounded-pill
+                                                    span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                                    | #{trnx.status}
+
 
 block scriptBlock 
-    script(src='/js/owl.carousel.min.js')
-    //- script(src='/js/dashboard.js')
+    script(src='/libs/apexcharts/dist/apexcharts.min.js')
+    script. 
+        const chart_data = !{JSON.stringify(chartData)};
+        $(function () {
+            var chart = {
+                series: [
+                    {
+                        name: "Monthl contribution",
+                        data: chart_data.data,
+                    }
+                ],
+                chart: {
+                    toolbar: {
+                        show: false,
+                    },
+                    type: "line",
+                    fontFamily: "DM Sans,sans-serif",
+                    foreColor: "#adb0bb",
+                    height: 200,
+                },
+                colors: ["#fa896b", "#615dff", "#3dd9eb"],
+                dataLabels: {
+                    enabled: false,
+                },
+                legend: {
+                    show: false,
+                },
+                stroke: {
+                    curve: "smooth",
+                    width: 3,
+                },
+                grid: {
+                    borderColor: 'rgba(0,0,0,0.1)' 
+                    ,strokeDashArray: 3,
+                    xaxis: {
+                        lines: {
+                            show: false,
+                        },
+                    },
+                    padding: {
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0,
+                    },
+                },
+                xaxis: {
+                    categories: chart_data.categories,
+                },
+                yaxis: {
+                    tickAmount: 4,
+                },
+                tooltip: {
+                    theme: "dark",
+                },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#financial"), chart);
+            chart.render();
+        });

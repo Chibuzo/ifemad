@@ -37,7 +37,19 @@ block content
                                 td= trnx.channel 
                                 td= '₦' + view.formatCurrency(trnx.amount) 
                                 td= trnx.reference
-                                td= trnx.status
+                                td
+                                    if (trnx.status == 'pending') 
+                                        span.badge.bg-light-warning.text-warning.rounded-pill
+                                            span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'success') 
+                                        span.badge.bg-light-success.text-success.rounded-pill
+                                            span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
+                                    else if (trnx.status == 'failed') 
+                                        span.badge.bg-light-danger.text-danger.rounded-pill
+                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                            | #{trnx.status}
 
 
 

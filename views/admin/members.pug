@@ -42,14 +42,22 @@ block content
                                 td= user.phone 
                                 td= user.force
                                 td= user.currentRank
-                                td= user.status
                                 td
-                                    a(href="/admin/edit-user" style="margin-right: 7px" title="Edit")
-                                        i.fa.fa-edit.fa-lg
-                                    a.delete(href="" style="margin-right: 7px" title="Delete" data-toggle="tooltip")
-                                        i.fa.fa-trash.fa-lg
-                                    a.ban(href="" title="Ban user" data-toggle="tooltip")
-                                        i.fa.fa-ban.fa-lg
+                                    if (user.status == 'inactive') 
+                                        span.badge.bg-light-warning.text-warning.rounded-pill
+                                            span.round-8.bg-warning.rounded-circle.d-inline-block.me-1
+                                            | #{user.status}
+                                    else if (user.status == 'active') 
+                                        span.badge.bg-light-success.text-success.rounded-pill
+                                            span.round-8.bg-success.rounded-circle.d-inline-block.me-1  
+                                            | #{user.status}
+                                    else 
+                                        span.badge.bg-light-danger.text-danger.rounded-pill
+                                            span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
+                                            | #{user.status}
+                                td  
+                                    a.btn.btn-sm.btn-info(href=`/admin/users/profile?user_id=${user.id}`) View
+
 
 
 block scriptBlock 
