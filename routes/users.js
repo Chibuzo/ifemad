@@ -31,6 +31,16 @@ router.get('/profile', async (req, res, next) => {
     }
 });
 
+router.post('/upload-photo', async (req, res, next) => {
+    try {
+        const { id: userId } = req.session.user;
+        await userService.uploadProfilePhoto(req.files.profile_photo, userId);
+        res.redirect('/user/profile');
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.post('/documents', async (req, res, next) => {
     try {
         const userId = req.session.user.id;

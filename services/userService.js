@@ -152,6 +152,16 @@ const fetchUserProfileData = async userId => {
     return { beneficiary, documents }
 }
 
+const uploadProfilePhoto = async (photoFile, userId) => {
+    const allowedFileTypes = ['image/gif', 'image/png', 'image/jpeg'];
+    if (!allowedFileTypes.includes(photoFile.mimetype)) {
+        throw new ErrorHandler(400, 'Unsupported file type');
+    }
+    const key = `profile-photo/${crypto.randomUUID()}${path.extname(photoFile.name)}`;
+    const { Location } = await s3Upload(S3_BUCKET, key, photoFile.data);
+    return User.update({ profilePhoto: Location }, { where: { id: userId } });
+}
+
 const uploadDocuments = async (selectedDocuments, userId) => {
     const errors = [];
     const documentArr = await Promise.all(Object.keys(selectedDocuments).map(async objKey => {
@@ -240,6 +250,7 @@ module.exports = {
     saveBeneficiaries,
     fetchUserProfileData,
     uploadDocuments,
+    uploadProfilePhoto,
     deleteDocument,
     fetchDashboardData
 }

@@ -127,35 +127,25 @@ block content
                                 .card-body.p-4
                                     h5.card-title.fw-semibold Change Profile
                                     p.card-subtitle.mb-4 Use a photograph in uniform
+
+                                    form(method='post' enctype="multipart/form-data" action='/user/upload-photo')#form-photo
+                                        input.form-control.d-none#input-profile-upload(type='file' name='profile_photo')
                                     .text-center
-                                        img.img-fluid.rounded-circle(src='/images/profile/user-6.jpg' alt='' width='120' height='120')
-                                        .d-flex.align-items-center.justify-content-center.my-4.gap-3
-                                            button.btn.btn-primary Upload
-                                            button.btn.btn-outline-danger Reset
-                                        p.mb-0 Allowed JPG, GIF or PNG.
-                        //- .col-lg-6.d-flex.align-items-stretch
-                        //-     .card.w-100.position-relative.overflow-hidden
-                        //-         .card-body.p-4
-                        //-             h5.card-title.fw-semibold Change Password
-                        //-             p.card-subtitle.mb-4
-                        //-                 | To change your password please confirm
-                        //-                 | here
-                        //-             form(method="post" action="/user/")
-                        //-                 .mb-4
-                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
-                        //-                         | Current
-                        //-                         | Password
-                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
-                        //-                 .mb-4
-                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
-                        //-                         | New
-                        //-                         | Password
-                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
-                        //-                 div
-                        //-                     label.form-label.fw-semibold(for='exampleInputPassword1')
-                        //-                         | Confirm
-                        //-                         | Password
-                        //-                     input#exampleInputPassword1.form-control(type='password' value='12345678910')
+                                        if (user.profilePhoto)
+                                            .rounded-circle.px-5.py-3
+                                                img.img-fluid.rounded-circle(src=`${user.profilePhoto}` style='width: 100%')
+
+                                                .d-flex.align-items-center.justify-content-center.my-4.gap-3.pt-4
+                                                    button.btn.btn-primary#btn-upload-photo(type='button') Change Photo
+                                        else
+                                            img.img-fluid.rounded-circle(src='/images/profile/user-6.jpg' alt='' width='120' height='120')
+                                            .d-flex.align-items-center.justify-content-center.my-4.gap-3
+                                                button.btn.btn-primary#btn-upload-photo(type='button') Upload Photo
+
+
+                                            p.mb-0 Allowed JPG, GIF or PNG.
+
+
 
                 #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
                     .row.justify-content-center
@@ -267,6 +257,7 @@ block scriptBlock
         const updateForms = document.getElementsByClassName("form-update");
         const beneficiaryForm = document.getElementById("form-beneficiary");
         const deleteDoc = document.getElementsByClassName("ti-trash");
+        const btnUploadPhoto = document.getElementById("btn-upload-photo");
 
         for (let i = 0; i < updateForms.length; i++) {
             updateForms[i].addEventListener('submit', async function(e) {
@@ -305,6 +296,14 @@ block scriptBlock
                 }
             });
         }
+
+        btnUploadPhoto.addEventListener('click', function() {
+            document.getElementById("input-profile-upload").click();
+        });
+
+        document.getElementById("input-profile-upload").addEventListener('change', function() {
+            document.getElementById("form-photo").submit();
+        });
 
 
         function notify(type = 1, text = 'Success') {
