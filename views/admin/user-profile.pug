@@ -95,7 +95,7 @@ block content
                                         i.ti.ti-map-pin.text-dark.fs-6
                                         h6.fs-4.fw-semibold.mb-0 #{user.address}
 
-                        .col.mb-5
+                        .col
                             .card.shadow-none.border
                                 .card-body
                                     h4.fw-semibold.mb-4 Professional Details
@@ -116,6 +116,18 @@ block content
                                         h6.fs-4.fw-semibold.mb-0 NIN: 
                                             span.text-muted #{user.nin}
 
+                    .row
+                        .col-lg-6.d-flex.align-items-stretch
+                            .card.w-100.position-relative.overflow-hidden
+                                .card-body.p-4
+                                    h5.card-title.fw-semibold User Profile
+                                    .text-center
+                                        if (user.profilePhoto)
+                                            .rounded-circle.px-5.py-3
+                                                img.img-fluid.rounded-circle(src=`${user.profilePhoto}` style='width: 100%')
+
+                                        else 
+                                            p No Photo unploaded yet
 
 
                 #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
