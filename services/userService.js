@@ -113,6 +113,13 @@ const changePassword = async (newPassword, user_id) => {
     return User.update({ password: passwordHash }, { where: { id: user_id } });
 }
 
+const changePin = async ({ pin }, user_id) => {
+    if (!pin) throw new ErrorHandler(400, 'Pin can not be empty');
+    const pinHash = await bcrypt.hash(pin, saltRounds);
+
+    return User.update({ pin: pinHash }, { where: { id: user_id } });
+}
+
 const find = async (criteria = {}) => {
     const { where = {} } = criteria;
     delete criteria.where;
@@ -131,8 +138,19 @@ const updateUser = async (userData, id) => {
     return User.update({ ...userData, date_joining_force: userData.date_joining_force || null }, { where: { id } });
 }
 
-const saveBeneficiaries = async (beneficiaryData, userId) => {
+const saveBeneficiaries = async (beneficiaryData, govtId, userId) => {
     const data = await Beneficiary.findOne({ where: { userId } });
+
+    if (govtId.govtID) {
+        const govtIdFile = govtId.govtID;
+        const allowedFileTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+        if (!allowedFileTypes.includes(govtIdFile.mimetype)) {
+            throw new ErrorHandler(400, 'Unsupported file type');
+        }
+        const key = `user-documents/${crypto.randomUUID()}${path.extname(govtIdFile.name)}`;
+        const { Location } = await s3Upload(S3_BUCKET, key, govtIdFile.data);
+        beneficiaryData.govtID = Location;
+    }
     const [beneficiary, created] = await Beneficiary.findOrCreate({
         where: { userId },
         defaults: beneficiaryData
@@ -193,12 +211,8 @@ const deleteDocument = async (document, userId) => {
     return Documents.update({ [document]: '' }, { where: { userId } });
 }
 
-const fetchDashboardData = async userId => {
-    const [contributions, payouts, [chartdata]] = await Promise.all([
-        Contribution.findAll({ where: { userId }, order: [['createdAt', 'DESC']], raw: true }),
-        Payout.findAll({ where: { userId }, order: [['createdAt', 'DESC']], raw: true }),
-        sequelize.query('SELECT SUM(amount) total, DATE_FORMAT(createdAt, \'%b\') month FROM `contributions` WHERE userId = ? AND status = ? GROUP BY DATE_FORMAT(createdAt, \'%b\') LIMIT 0, 6', { replacements: [userId, 'success'] }),
-    ]);
+const getTotalContribution = async userId => {
+    const contributions = await Contribution.findAll({ where: { userId, status: 'success' }, order: [['createdAt', 'DESC']], raw: true });
 
     let totalNumOfContributions = 0;
     const totalContribution = contributions.reduce((total, con) => {
@@ -208,6 +222,16 @@ const fetchDashboardData = async userId => {
         }
         return total;
     }, 0);
+    return { contributions, totalContribution, totalNumOfContributions };
+}
+
+const fetchDashboardData = async userId => {
+    const [{ contributions, totalContribution, totalNumOfContributions }, payouts, [chartdata]] = await Promise.all([
+        getTotalContribution(userId),
+        Payout.findAll({ where: { userId }, order: [['createdAt', 'DESC']], raw: true }),
+        sequelize.query('SELECT SUM(amount) total, DATE_FORMAT(createdAt, \'%b\') month FROM `contributions` WHERE userId = ? AND status = ? GROUP BY DATE_FORMAT(createdAt, \'%b\') LIMIT 0, 6', { replacements: [userId, 'success'] }),
+    ]);
+
     const totalNumOfPayouts = payouts.length;
 
     // get recents
@@ -247,10 +271,12 @@ module.exports = {
     updateUser,
     verifyPasswordResetLink,
     changePassword,
+    changePin,
     saveBeneficiaries,
     fetchUserProfileData,
     uploadDocuments,
     uploadProfilePhoto,
     deleteDocument,
+    getTotalContribution,
     fetchDashboardData
 }

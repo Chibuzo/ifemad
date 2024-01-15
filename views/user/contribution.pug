@@ -59,16 +59,38 @@ block Modals
                     button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close') 
 
                 .modal-body
-                    .card.text-center
+                    .card
                         .card-header
-                            | #[strong Confirm contribution amount:]
+                            | #[strong Details:]
                         .card-body
-                            p.mb-1 Minimum amount to pay per month: 1,000 NGN
-                                .row.justify-content-md-center
-                                    .col-md-3
-                                        .input-group
-                                            span.input-group-text#inputGroup-sizing-lg NGN
-                                            input.form-control(type="text" id="amount" placeholder="1000" aria-describedby="inputGroup-sizing-lg")
+                            p.mb-3 Minimum amount to pay per month: 1,000 NGN
+                            .row
+                                .col-4
+                                    .input-group.input-grouplg
+                                        span.input-group-text NGN
+                                        input.form-control(type="text" id="amount" placeholder="1000" aria-describedby="inputGroup-sizing-lg")
+                                .col-2 
+                                    button.btn.btn-light#continueBtn Continue
+
+                            .mt-5.d-none#details
+                                // h5 Breakdown 
+                                table.table.table-sm
+                                    tr 
+                                        td Monthly contribution 
+                                        td#amt 
+                                    tr 
+                                        td Annual contribution payable 
+                                        td #{view.formatCurrency(annualPayable)} NGN
+                                    tr 
+                                        td Processing fees (1.5% + 100 NGN)
+                                        td
+                                            span#proc-fees 
+                                            |  NGN
+                                    tr  
+                                        td Total amount payable
+                                        td#payable
+
+
 
                 .modal-footer
                     button.btn.btn-info(type='button' onClick=`createContribution()`) Continue to Payment 
@@ -77,8 +99,20 @@ block scriptBlock
     script(src="https://js.paystack.co/v1/inline.js")
     script. 
 
+        document.getElementById("continueBtn").addEventListener('click', function() {
+            document.getElementById("details").classList.remove('d-none');
+            const amount = +document.getElementById("amount").value;
+            const annual_payable = !{JSON.stringify(annualPayable)};
+            document.getElementById("amt").textContent = amount.toLocaleString('en-US', { style: 'decimal' }) + ' NGN';
+            const procFees = (annual_payable * 0.015) + 100;
+            document.getElementById("proc-fees").textContent = procFees;
+            const totalPayable = parseInt(!{JSON.stringify(annualPayable)}) + procFees;
+            document.getElementById("payable").textContent = totalPayable.toLocaleString('en-US', { style: 'decimal' }) + ' NGN';
+        })
+
         function createContribution() {
             const amount = +document.getElementById("amount").value;
+            const procFees = (amount * 0.015) + 100;
             fetch("/user/contribution", {
                 method: 'POST',
                 headers: {
@@ -87,7 +121,7 @@ block scriptBlock
                 body: JSON.stringify({ amount })
             }).then((d) => { return d.json(); }).then(d => {
                 if (d.status.trim() == 'success') {
-                    payWithPaystack(amount * 100, d.reference);
+                    payWithPaystack((amount + procFees) * 100, d.reference);
                 }
             });
         }

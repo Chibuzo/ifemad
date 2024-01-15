@@ -61,7 +61,7 @@ block content
             //- li.nav-item(role='presentation')
             //-     button#pills-security-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-security' type='button' role='tab' aria-controls='pills-security' aria-selected='false')
             //-         i.ti.ti-lock.me-2.fs-6
-            //-         span.d-none.d-md-block Security
+            //-         span.d-none.d-md-block Security Pin
         .card-body
             #pills-tabContent.tab-content
                 #pills-account.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-account-tab' tabindex='0')
@@ -113,9 +113,22 @@ block content
                                                 input.form-control(type='text' name="nin" value=`${user.nin || ''}` placeholder='NIN')
 
                                         .row.mb-4 
+                                            .col 
+                                                label.form-label.fw-semibold(for='exampleInputPassword1') State
+                                                select.form-select(aria-label='Default select example' name="state")
+                                                    option(value="") - Select state -
+
                                             .col
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Address
-                                                input#exampleInputtext.form-control(type='text' name="address" value=`${user.address || ''}` placeholder='814 Lugbe Street, 120065, FCT')
+                                                input#exampleInputtext.form-control(type='text' name="address" value=`${user.address || ''}`)
+
+                                        .row.mb-4
+                                            .col 
+                                                label.form-label.fw-semibold Security Question
+                                                input.form-control(type="text" name="securityQuestion" value=`${user.securityQuestion || ''}`)
+                                            .col
+                                                label.form-label.fw-semibold Security Answer
+                                                input.form-control(type='text' name="securityAnswer")
 
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.mt-4.gap-3
@@ -144,9 +157,6 @@ block content
 
 
                                             p.mb-0 Allowed JPG, GIF or PNG.
-
-
-
                 #pills-notifications.tab-pane.fade(role='tabpanel' aria-labelledby='pills-notifications-tab' tabindex='0')
                     .row.justify-content-center
                         .col-lg-9
@@ -192,14 +202,13 @@ block content
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.gap-3
                                                 button.btn.btn-primary(type='submit') Save
-                                                button.btn.btn-light-danger.text-danger Cancel
                 #pills-bills.tab-pane.fade(role='tabpanel' aria-labelledby='pills-bills-tab' tabindex='0')
                     .row.justify-content-center
                         .col-lg-9
                             .card
                                 .card-body.p-4
                                     h4.fw-semibold.mb-3 Bio Data
-                                    form(method="post" action="/user/update")#form-beneficiary
+                                    form(method="post" enctype="multipart/form-data" action="/user/beneficiaries")#form-beneficiary
                                         .row.mb-3
                                             .col
                                                 label.form-label.fw-semibold Full name
@@ -234,28 +243,48 @@ block content
                                                 label.form-label.fw-semibold Account Number
                                                 input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber || ''}` placeholder='Account Number')
 
+                                        .row.mb-4
+                                            .col 
+                                                if (beneficiary.govtID)
+                                                    .doc.py-6.px-4.mt-4
+                                                        a(href=`${beneficiary.govtID}` target='_blank') Government ID
+                                                        i.ti.ti-trash#forceId
+                                                else
+                                                    label.form-label.fw-semibold(for='') Government ID
+                                                    input#formFile.form-control(type='file' name='govtID')
+                                            .col
+                                                label.form-label.fw-semibold National Identity Number (NIN)
+                                                input.form-control(type='text' name="nin" value=`${beneficiary.nin || ''}` placeholder='NIN')
+
                                         .col-12
                                             .d-flex.align-items-center.justify-content-end.gap-3
                                                 button(type="submit").btn.btn-primary Save
-                                                button.btn.btn-light-danger.text-danger Cancel
-                #pills-security.tab-pane.fade(role='tabpanel' aria-labelledby='pills-security-tab' tabindex='0')
-                    .row
-                        .col-lg-8
-                            .card
-                                .card-body.p-4
-                                    h4.fw-semibold.mb-3 Two-factor Authentication
-                                    .d-flex.align-items-center.justify-content-between.pb-7
-                                        p.mb-0
-                                            | Lorem ipsum, dolor sit amet consectetur adipisicing
-                                            | elit.
-                                            | Corporis sapiente sunt earum officiis laboriosam ut.
-                                        button.btn.btn-primary Enable
+                //- #pills-security.tab-pane.fade(role='tabpanel' aria-labelledby='pills-security-tab' tabindex='0')
+                //-     .row
+                //-         .col-lg-8
+                //-             .card
+                //-                 .card-body.p-4
+                //-                     h4.fw-semibold.mb-2 Security PIN
+                //-                     p.mb-4 Create security Pin
 
+                //-                     form(method="post" action="/user/setPin")#form-pin
+                //-                         .row.mb-5
+                //-                             .col
+                //-                                 label.form-label.fw-semibold Enter Pin
+                //-                                 input.form-control#pin(type='password' name="pin" placeholder='Pin' required)
+                //-                             .col
+                //-                                 label.form-label.fw-semibold Confirm Pin
+                //-                                 input.form-control#confirm-pin(type='password' placeholder='Confirm Pin' required)
+
+                //-                         .row 
+                //-                             .col-12
+                //-                                 .d-flex.align-items-center.justify-content-end.gap-3
+                //-                                     button(type="submit").btn.btn-primary Save Pin
 block scriptBlock 
     script.
 
         const updateForms = document.getElementsByClassName("form-update");
-        const beneficiaryForm = document.getElementById("form-beneficiary");
+        const pinForm = document.getElementById("form-pin");
         const deleteDoc = document.getElementsByClassName("ti-trash");
         const btnUploadPhoto = document.getElementById("btn-upload-photo");
 
@@ -273,13 +302,19 @@ block scriptBlock
             });
         }
 
-        beneficiaryForm.addEventListener('submit', async function(e) {
+        pinForm.addEventListener('submit', async function(e) {
             e.preventDefault();
+            const pin = document.getElementById("pin").value;
+            const confirmPin = document.getElementById("confirm-pin").value;
+            if (pin != confirmPin) {
+                notify(3, 'Pin doesn\'t match!');
+                return;
+            }
             const data = new FormData(this);
             const formData = serialize(data);
-            const res = await postForm("/user/beneficiaries", formData);
+            const res = await postForm("/user/security-pin", formData);
             if (res.status.trim() == 'success') {
-                notify(1, 'Details saved successfully')
+                notify(1, 'Pin saved successfully')
             } else {
                 notify(3, 'Operation could not be completed at the moment')
             }

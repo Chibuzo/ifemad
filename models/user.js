@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         dob: DataTypes.DATE,
         address: DataTypes.STRING,
+        state: DataTypes.STRING,
         force: DataTypes.STRING(20),
         areaOfService: DataTypes.STRING(20),
         currentRank: DataTypes.STRING(20),
@@ -44,6 +45,9 @@ module.exports = (sequelize, DataTypes) => {
         bank: DataTypes.STRING(50),
         accountNumber: DataTypes.STRING(10),
         annualAmtPayable: DataTypes.INTEGER,
+        securityQuestion: DataTypes.STRING,
+        securityAnswer: DataTypes.STRING,
+        pin: DataTypes.STRING,
         status: {
             type: Sequelize.ENUM('inactive', 'active', 'disabled'),
             defaultValue: 'inactive'

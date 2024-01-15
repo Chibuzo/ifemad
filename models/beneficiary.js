@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         address: DataTypes.STRING,
         relationship: DataTypes.STRING(20),
         bank: DataTypes.STRING(50),
-        accountNumber: DataTypes.STRING(10)
+        accountNumber: DataTypes.STRING(10),
+        govtID: DataTypes.STRING
     }, {
         timestamps: true,
         tableName: 'beneficiaries'

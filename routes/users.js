@@ -4,6 +4,7 @@ const contributionService = require('../services/contributionService');
 const userService = require('../services/userService');
 const payoutService = require('../services/payoutService');
 const banks = require('../config/bank_codes.json');
+const { ANNUAL_PAYABLE } = require('../config/constants');
 
 
 /* GET users listing. */
@@ -75,8 +76,9 @@ router.post('/contribution', async (req, res, next) => {
 router.get('/contributions', async (req, res, next) => {
     try {
         const user = req.session.user;
-        const contributions = await contributionService.list({ where: { userId: user.id } });
-        res.render('user/contribution', { user, contributions, publicKey: process.env.PUBLIC_KEY });
+        const { totalContribution, contributions } = await userService.getTotalContribution(user.id);
+        const annualPayable = ANNUAL_PAYABLE - totalContribution;
+        res.render('user/contribution', { user, contributions, annualPayable, publicKey: process.env.PUBLIC_KEY });
     } catch (err) {
         next(err);
     }
@@ -113,11 +115,21 @@ router.post('/update', async (req, res, next) => {
     }
 });
 
+router.post('/security-pin', async (req, res, next) => {
+    try {
+        const user_id = req.session.user.id;
+        await userService.changePin({ ...req.body }, user_id);
+        res.status(200).json({ status: 'success' });
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.post('/beneficiaries', async (req, res, next) => {
     try {
         const user_id = req.session.user.id;
-        await userService.saveBeneficiaries({ ...req.body }, user_id);
-        res.status(200).json({ status: 'success' });
+        await userService.saveBeneficiaries({ ...req.body }, req.files, user_id);
+        res.redirect('/user/profile');
     } catch (err) {
         next(err);
     }
