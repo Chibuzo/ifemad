@@ -212,7 +212,11 @@ const deleteDocument = async (document, userId) => {
 }
 
 const getTotalContribution = async userId => {
-    const contributions = await Contribution.findAll({ where: { userId, status: 'success' }, order: [['createdAt', 'DESC']], raw: true });
+    const contributions = await Contribution.findAll({
+        where: { userId, status: 'success' },
+        order: [['createdAt', 'DESC']],
+        raw: true
+    });
 
     let totalNumOfContributions = 0;
     const totalContribution = contributions.reduce((total, con) => {

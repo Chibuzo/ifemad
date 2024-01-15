@@ -76,57 +76,58 @@ block content
                                         | here
                                     form(method="post" action="/user/update").form-update
                                         .row.mb-4
-                                            .col
+                                            .col.md-4
                                                 label.form-label.fw-semibold First Name
                                                 input.form-control(type='text' name="firstname" value=`${user.firstname || ''}` placeholder='John' disabled)
-                                            .col
+                                            .col-md-4
                                                 label.form-label.fw-semibold Last Name
                                                 input.form-control(type='text' name="lastname" value=`${user.lastname || ''}` placeholder='Doe' disabled)
-                                            .col
+                                            .col-md-4
                                                 label.form-label.fw-semibold Middle Name
                                                 input.form-control(type='text' name="middlename" value=`${user.middlename || ''}` placeholder='Optional')
 
                                         .row.mb-4
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Email
                                                 input.form-control(type='email' name="email" value=`${user.email || ''}`)
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Phone
                                                 input.form-control(type='text' value=`${user.phone || ''}`)
 
                                         .row.mb-4
-                                            .col 
+                                            .col-md-6 
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Force
                                                 select.form-select(aria-label='Default select example' name="force")
                                                     option(value="") - Force -
                                                     option(value="army") Army
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Current Rank
                                                 input.form-control(type='text' name="currentRank" value=`${user.currentRank || ''}` placeholder='Captain')
 
                                         .row.mb-4
-                                            .col 
+                                            .col-md-6 
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Date of Joining Force
                                                 input.form-control(type="date" name="date_joining_force" value=`${user.date_joining_force || null}`)
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold National Identity Number (NIN)
                                                 input.form-control(type='text' name="nin" value=`${user.nin || ''}` placeholder='NIN')
 
                                         .row.mb-4 
-                                            .col 
+                                            .col-md-6
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') State
                                                 select.form-select(aria-label='Default select example' name="state")
                                                     option(value="") - Select state -
-
-                                            .col
+                                                        each state in states 
+                                                            option(value=`${state.state_name}`) #{state.state_name}
+                                            .col-md-6
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Address
                                                 input#exampleInputtext.form-control(type='text' name="address" value=`${user.address || ''}`)
 
                                         .row.mb-4
-                                            .col 
+                                            .col-md-6 
                                                 label.form-label.fw-semibold Security Question
                                                 input.form-control(type="text" name="securityQuestion" value=`${user.securityQuestion || ''}`)
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Security Answer
                                                 input.form-control(type='text' name="securityAnswer")
 
@@ -207,7 +208,7 @@ block content
                         .col-lg-9
                             .card
                                 .card-body.p-4
-                                    h4.fw-semibold.mb-3 Bio Data
+                                    h4.fw-semibold.mb-3 Beneficiary
                                     form(method="post" enctype="multipart/form-data" action="/user/beneficiaries")#form-beneficiary
                                         .row.mb-3
                                             .col
@@ -215,20 +216,31 @@ block content
                                                 input.form-control(type='text' name='fullname' value=`${beneficiary.fullname || ''}` placeholder='Full name')
 
                                         .row.mb-3
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Email
                                                 input.form-control(type='email' name="email" value=`${beneficiary.email || ''}` placeholder='Email')
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Phone
                                                 input.form-control(type='text' name='phone' value=`${beneficiary.phone || ''}` placeholder='Phone')
 
                                         .row.mb-3
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Date of Birth
                                                 input.form-control(type='date' name="dob" value=`${beneficiary.dob || ''}` placeholder='Date of birth')
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Relationship
-                                                input.form-control(type='text' name='relationship' value=`${beneficiary.relationship || ''}` placeholder='wife')
+                                                select.form-control(name="relationship")
+                                                    if beneficiary.relationship 
+                                                        option(value=`${beneficiary.relationship}`) #{beneficiary.relationship}
+                                                    else 
+                                                        option(value="") -- Relationship --
+                                                    option(value="Spouse") Spouse
+                                                    option(value="Brother") Brother
+                                                    option(value="Sister") Sister
+                                                    option(value="Mother") Mother
+                                                    option(value="Father") Father
+                                                    option(value="Son") Son
+                                                    option(value="Daughter") Daughter
 
                                         .row.mb-3 
                                             .col
@@ -236,15 +248,15 @@ block content
                                                 input.form-control(type='text' name='address' value=`${beneficiary.address || ''}` placeholder='Address')
 
                                         .row.mb-4
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Bank
                                                 input.form-control(type='' name="bank" value=`${beneficiary.bank || ''}` placeholder='')
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold Account Number
                                                 input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber || ''}` placeholder='Account Number')
 
                                         .row.mb-4
-                                            .col 
+                                            .col-md-6 
                                                 if (beneficiary.govtID)
                                                     .doc.py-6.px-4.mt-4
                                                         a(href=`${beneficiary.govtID}` target='_blank') Government ID
@@ -252,7 +264,7 @@ block content
                                                 else
                                                     label.form-label.fw-semibold(for='') Government ID
                                                     input#formFile.form-control(type='file' name='govtID')
-                                            .col
+                                            .col-md-6
                                                 label.form-label.fw-semibold National Identity Number (NIN)
                                                 input.form-control(type='text' name="nin" value=`${beneficiary.nin || ''}` placeholder='NIN')
 

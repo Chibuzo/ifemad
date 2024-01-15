@@ -4,6 +4,7 @@ const contributionService = require('../services/contributionService');
 const userService = require('../services/userService');
 const payoutService = require('../services/payoutService');
 const banks = require('../config/bank_codes.json');
+const states = require('../config/states.json');
 const { ANNUAL_PAYABLE } = require('../config/constants');
 
 
@@ -26,7 +27,7 @@ router.get('/profile', async (req, res, next) => {
     try {
         const user = await userService.view({ id: req.session.user.id });
         const { beneficiary, documents } = await userService.fetchUserProfileData(user.id);
-        res.render('user/profile', { user, documents: documents || {}, beneficiary: beneficiary || {} });
+        res.render('user/profile', { user, documents: documents || {}, beneficiary: beneficiary || {}, states });
     } catch (err) {
         next(err);
     }

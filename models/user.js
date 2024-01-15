@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         securityAnswer: DataTypes.STRING,
         pin: DataTypes.STRING,
         status: {
-            type: Sequelize.ENUM('inactive', 'active', 'disabled'),
+            type: Sequelize.ENUM('inactive', 'active', 'verified', 'disabled'),
             defaultValue: 'inactive'
         },
         deleted: {
