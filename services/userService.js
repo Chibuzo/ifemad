@@ -135,7 +135,10 @@ const find = async (criteria = {}) => {
 }
 
 const updateUser = async (userData, id) => {
-    return User.update({ ...userData, date_joining_force: userData.date_joining_force || null }, { where: { id } });
+    if (!userData.status && !userData.date_joining_force) {
+        userData.date_joining_force = null;
+    }
+    return User.update({ ...userData }, { where: { id } });
 }
 
 const saveBeneficiaries = async (beneficiaryData, govtId, userId) => {

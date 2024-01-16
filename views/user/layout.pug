@@ -84,6 +84,12 @@ body
 
         // Main wrapper
         .body-wrapper
+            if user.status != 'verified'
+                .alert.alert-warning.sticky-top.text-center
+                    div
+                        | Your account has not been verified. Ensure that you submit all the require data and documents.
+                        br
+                        | You will not be able to request for payout until your account is verified.
             // Header Start
             header.app-header
                 nav.navbar.navbar-expand-lg.navbar-light

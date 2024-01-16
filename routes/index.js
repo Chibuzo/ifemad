@@ -164,7 +164,8 @@ router.post('/reset-password', async (req, res, next) => {
 
 router.post('/update-user', authenticateAdmin, async (req, res, next) => {
     try {
-        await userService.updateUser(req.body);
+        const { status, userId } = req.body;
+        await userService.updateUser({ status }, userId);
         res.json({ status: true });
     } catch (err) {
         next(err);

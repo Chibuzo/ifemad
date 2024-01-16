@@ -70,6 +70,10 @@ block content
                 button#pills-payout-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-payout' type='button' role='tab' aria-controls='pills-payout' aria-selected='false')
                     i.ti.ti-cash.me-2.fs-6
                     span.d-none.d-md-block Payouts
+            li.nav-item(role='presentation')
+                button#pills-status-tab.nav-link.position-relative.rounded-0.d-flex.align-items-center.justify-content-center.bg-transparent.fs-3.py-4(data-bs-toggle='pill' data-bs-target='#pills-status' type='button' role='tab' aria-controls='pills-status' aria-selected='false')
+                    i.ti.ti-user-cog.me-2.fs-6
+                    span.d-none.d-md-block Status
         .card-body
             #pills-tabContent.tab-content
                 #pills-account.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-account-tab' tabindex='0')
@@ -275,5 +279,48 @@ block content
                                                                     span.round-8.bg-danger.rounded-circle.d-inline-block.me-1  
                                                                     | #{trnx.status}
 
+                #pills-status.tab-pane.fade(role='tabpanel' aria-labelledby='pills-status-tab' tabindex='0')
+                    .row
+                        .col.mb-5
+                            .card.shadow-none.border
+                                .px-4.py-3
+                                    .card-title.fw-semibold.mb-0.lh-sm Account Status
+                                .card-body
+                                    .alert.alert-info 
+                                        | Restrict or re-enable user access  for payouts
+
+                                    if user.status == 'verified'
+                                        button.btn.btn-danger.change-status#disable
+                                            i.ti.ti-user-x  
+                                            |  Disable payouts 
+                                    else    
+                                        button.btn.btn-success.change-status#verify
+                                            i.ti.ti-checkbox 
+                                            | Verify Account
 
 block scriptBlock 
+    script. 
+        const userId = !{JSON.stringify(user.id)};
+        const changeStatus = document.getElementsByClassName("change-status");
+
+        for (let i = 0; i < changeStatus.length; i++) {
+            changeStatus[i].addEventListener('click', async function() {
+                const action = this.id;
+                if (!confirm(`Are you sure you want to ${action} this account?`)) {
+                    return;
+                }
+                const res = await fetch("/update-user", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ 
+                        status: action == 'verify' ? 'verified' : 'disabled',
+                        userId
+                    })
+                });
+                const status = res.json();
+                console.log({status})
+                location.href = '/admin/users'
+            })
+        }
