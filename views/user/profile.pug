@@ -97,9 +97,10 @@ block content
                                         .row.mb-4
                                             .col-md-6 
                                                 label.form-label.fw-semibold(for='exampleInputPassword1') Force
-                                                select.form-select(aria-label='Default select example' name="force")
-                                                    option(value="") - Force -
-                                                    option(value="army") Army
+                                                input.form-control(type='text' name="force" value=`${user.force || ''}` placeholder='Army')
+                                                //- select.form-select(aria-label='Default select example' name="force")
+                                                //-     option(value="") - Force -
+                                                //-     option(value="army") Army
                                             .col-md-6
                                                 label.form-label.fw-semibold Current Rank
                                                 input.form-control(type='text' name="currentRank" value=`${user.currentRank || ''}` placeholder='Captain')
@@ -256,14 +257,14 @@ block content
                                                 input.form-control(type='text' name='accountNumber' value=`${beneficiary.accountNumber || ''}` placeholder='Account Number')
 
                                         .row.mb-4
-                                            .col-md-6 
-                                                if (beneficiary.govtID)
-                                                    .doc.py-6.px-4.mt-4
-                                                        a(href=`${beneficiary.govtID}` target='_blank') Government ID
-                                                        i.ti.ti-trash#forceId
-                                                else
-                                                    label.form-label.fw-semibold(for='') Government ID
-                                                    input#formFile.form-control(type='file' name='govtID')
+                                            //- .col-md-6 
+                                            //-     if (beneficiary.govtID)
+                                            //-         .doc.py-6.px-4.mt-4
+                                            //-             a(href=`${beneficiary.govtID}` target='_blank') Government ID
+                                            //-             i.ti.ti-trash#forceId
+                                            //-     else
+                                            //-         label.form-label.fw-semibold(for='') Government ID
+                                            //-         input#formFile.form-control(type='file' name='govtID')
                                             .col-md-6
                                                 label.form-label.fw-semibold National Identity Number (NIN)
                                                 input.form-control(type='text' name="nin" value=`${beneficiary.nin || ''}` placeholder='NIN')
@@ -314,23 +315,23 @@ block scriptBlock
             });
         }
 
-        pinForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const pin = document.getElementById("pin").value;
-            const confirmPin = document.getElementById("confirm-pin").value;
-            if (pin != confirmPin) {
-                notify(3, 'Pin doesn\'t match!');
-                return;
-            }
-            const data = new FormData(this);
-            const formData = serialize(data);
-            const res = await postForm("/user/security-pin", formData);
-            if (res.status.trim() == 'success') {
-                notify(1, 'Pin saved successfully')
-            } else {
-                notify(3, 'Operation could not be completed at the moment')
-            }
-        });
+        //- pinForm.addEventListener('submit', async function(e) {
+        //-     e.preventDefault();
+        //-     const pin = document.getElementById("pin").value;
+        //-     const confirmPin = document.getElementById("confirm-pin").value;
+        //-     if (pin != confirmPin) {
+        //-         notify(3, 'Pin doesn\'t match!');
+        //-         return;
+        //-     }
+        //-     const data = new FormData(this);
+        //-     const formData = serialize(data);
+        //-     const res = await postForm("/user/security-pin", formData);
+        //-     if (res.status.trim() == 'success') {
+        //-         notify(1, 'Pin saved successfully')
+        //-     } else {
+        //-         notify(3, 'Operation could not be completed at the moment')
+        //-     }
+        //- });
 
         for (let i = 0; i < deleteDoc.length; i++) {
             deleteDoc[i].addEventListener('click', async function(e) {
