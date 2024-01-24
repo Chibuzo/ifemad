@@ -121,7 +121,7 @@ block scriptBlock
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ amount })
+                body: JSON.stringify({ totalPayable })
             }).then((d) => { return d.json(); }).then(d => {
                 if (d.status.trim() == 'success') {
                     payWithPaystack(totalPayable * 100, d.reference);
