@@ -80,11 +80,12 @@ block Modals
                                         td#amt 
                                     tr 
                                         td Annual contribution payable 
-                                        td #{view.formatCurrency(annualPayable)} NGN
+                                        td 
+                                            span#annual_payable
                                     tr 
-                                        td Processing fees (1.5% + 100 NGN)
+                                        td Processing fees
                                         td
-                                            span#proc-fees 
+                                            span#proc-fees 3000
                                             |  NGN
                                     tr  
                                         td Total amount payable
@@ -99,20 +100,22 @@ block scriptBlock
     script(src="https://js.paystack.co/v1/inline.js")
     script. 
 
+        const procFees = 3000;
+        let totalPayable = 0;
+
         document.getElementById("continueBtn").addEventListener('click', function() {
             document.getElementById("details").classList.remove('d-none');
             const amount = +document.getElementById("amount").value;
-            const annual_payable = !{JSON.stringify(annualPayable)};
+            const annual_payable = amount * 12;
             document.getElementById("amt").textContent = amount.toLocaleString('en-US', { style: 'decimal' }) + ' NGN';
-            const procFees = (annual_payable * 0.015) + 100;
+            document.getElementById("annual_payable").textContent = annual_payable.toLocaleString('en-US', { style: 'decimal' }) + ' NGN';
+            //- const procFees = (annual_payable * 0.015) + 100;
             document.getElementById("proc-fees").textContent = procFees;
-            const totalPayable = parseInt(!{JSON.stringify(annualPayable)}) + procFees;
+            totalPayable = annual_payable + procFees;
             document.getElementById("payable").textContent = totalPayable.toLocaleString('en-US', { style: 'decimal' }) + ' NGN';
         })
 
         function createContribution() {
-            const amount = +document.getElementById("amount").value;
-            const procFees = (amount * 0.015) + 100;
             fetch("/user/contribution", {
                 method: 'POST',
                 headers: {
@@ -121,7 +124,7 @@ block scriptBlock
                 body: JSON.stringify({ amount })
             }).then((d) => { return d.json(); }).then(d => {
                 if (d.status.trim() == 'success') {
-                    payWithPaystack((amount + procFees) * 100, d.reference);
+                    payWithPaystack(totalPayable * 100, d.reference);
                 }
             });
         }

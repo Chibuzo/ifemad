@@ -72,7 +72,11 @@ body
                 .fixed-profile.p-3.bg-light-secondary.rounded.sidebar-ad.mt-3
                     .hstack.gap-3
                         .john-img
-                            img.rounded-circle(src='/images/profile/user-6.jpg' width='40' height='40' alt='')
+                            if (user.profilePhoto)
+                                .rounded-circle.px-5.py-3
+                                    img.img-fluid.rounded-circle(src=`${user.profilePhoto}` style='width: 100%')
+                            else
+                                img.rounded-circle(src='/images/profile/user-6.jpg' width='40' height='40' alt='')
                         .john-title
                             h6.mb-0.fs-4.fw-semibold Mathew
                             span.fs-2.text-dark Designer
@@ -118,7 +122,10 @@ body
                                             .py-3.px-7.pb-0
                                                 h5.mb-0.fs-5.fw-semibold User Profile
                                             .d-flex.align-items-center.py-9.mx-7.border-bottom
-                                                img.rounded-circle(src='/images/profile/user-6.jpg' width='80' height='80' alt='')
+                                                if (user.profilePhoto)
+                                                    img.img-fluid.rounded-circle(src=`${user.profilePhoto}` style='width: 30%')
+                                                else
+                                                    img.rounded-circle(src='/images/profile/user-6.jpg' width='80' height='80' alt='')
                                                 .ms-3
                                                     h5.mb-1.fs-3 #{user.firstname} #{user.lastname}
                                                     span.mb-1.d-block.text-dark #{user.currentRank}
